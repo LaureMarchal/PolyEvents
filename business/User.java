@@ -20,7 +20,7 @@ public class User {
         } else if (password.equals("")) {
             throw new LoginException("NO_PASSWORD", "The password can't be empty");
         } else if (potentialUser == null) {
-            throw new LoginException("UNKNOW_USER", "The user doesn't exist");
+            throw new LoginException("UNKNOWN_USER", "The user doesn't exist");
         } else if (!potentialUser.getPassword().equals(Util.getInstance().hashString(password))) {
             throw new LoginException("WRONG_PASSWORD", "The password typed is wrong");
         } else {

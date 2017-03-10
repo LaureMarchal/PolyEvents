@@ -21,7 +21,7 @@ public class LoginController {
     private TextField passwordField;
 
     public LoginController() {
-        this.facade = new Facade();
+        this.facade = Facade.getInstance();
     }
 
     public void onLogin() {

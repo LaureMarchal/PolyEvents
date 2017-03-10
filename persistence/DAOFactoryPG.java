@@ -7,9 +7,14 @@ public class DAOFactoryPG extends DAOFactory {
 
 
     @Override
-    public UserDAO createUserDAO() {
+    public UserDAO get(String daoToCreate) {
 
-        return new UserDAOPG();
+        switch (daoToCreate){
+            case "userDAO":
+                return UserDAO.getInstance();
+            default:
+                return null;
+        }
 
     }
 }

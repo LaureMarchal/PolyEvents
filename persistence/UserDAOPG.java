@@ -8,8 +8,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserDAOPG extends UserDAO {
+/**
+ * PostgreSQL DAO for the user model
+ */
+public class UserDAOPG implements UserDAO {
 
+    @Override
     public User read(String pseudo) {
         try {
             String query = "SELECT * FROM \"User\" WHERE pseudo = ?";
@@ -28,4 +32,5 @@ public class UserDAOPG extends UserDAO {
             return null;
         }
     }
+
 }

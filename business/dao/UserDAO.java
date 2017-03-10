@@ -1,22 +1,18 @@
 package business.dao;
 
 import business.model.User;
-import persistence.UserDAOPG;
 
-public abstract class UserDAO {
+/**
+ * Abstract DAO for the user model
+ */
+public interface UserDAO {
 
-    private static UserDAO userDAO;
-
-    protected UserDAO() {
-    }
-
-    public static UserDAO getInstance() {
-        if (userDAO == null) {
-            userDAO = new UserDAOPG();
-        }
-        return userDAO;
-    }
-
-    public abstract User read(String pseudo);
+    /**
+     * Get a user according to his pseudo
+     *
+     * @param pseudo The pseudo of the user
+     * @return The user according to the pseudo, or null if no one matching
+     */
+    User read(String pseudo);
 
 }

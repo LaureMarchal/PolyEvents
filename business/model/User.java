@@ -1,6 +1,9 @@
-package business;
+package business.model;
 
+import business.Util;
+import business.dao.DAOFactory;
 import exception.LoginException;
+import persistence.DAOFactoryPG;
 
 public class User {
 
@@ -13,13 +16,14 @@ public class User {
     }
 
     public static User login(String pseudo, String password) throws LoginException {
-        User potentialUser = DAOFactory.createUserDAO().read(pseudo);
+        DAOFactory daoFactory = new DAOFactoryPG();
+        User potentialUser = daoFactory.get("userDAO").read(pseudo);
         if (pseudo.equals("")) {
             throw new LoginException("NO_PSEUDO", "The pseudo can't be empty");
         } else if (password.equals("")) {
             throw new LoginException("NO_PASSWORD", "The password can't be empty");
         } else if (potentialUser == null) {
-            throw new LoginException("UNKNOWN_USER", "The user doesn't exist");
+            throw new LoginException("UNKNOWN_USER", "The pseudo or the password is wrong");
         } else if (!potentialUser.getPassword().equals(Util.getInstance().hashString(password))) {
             throw new LoginException("WRONG_PASSWORD", "The password typed is wrong");
         } else {
@@ -28,19 +32,8 @@ public class User {
 
     }
 
-    public String getPseudo() {
-        return pseudo;
-    }
-
-    public void setPseudo(String pseudo) {
-        this.pseudo = pseudo;
-    }
-
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

@@ -1,6 +1,6 @@
 package api;
 
-import business.User;
+import business.model.User;
 import exception.LoginException;
 
 public class Facade {

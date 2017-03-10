@@ -1,32 +1,23 @@
-package business;
+package persistence;
 
-import db.Connector;
-import db.UserDAOPG;
+import business.dao.UserDAO;
+import business.model.User;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public abstract class UserDAO extends Connector {
-
-    private static UserDAO instance;
-
-    protected UserDAO() {
-    }
-
-    public static UserDAO getInstance() {
-        if (instance == null) {
-            instance = new UserDAOPG();
-        }
-        return instance;
-    }
+public class UserDAOPG extends UserDAO {
 
     public User read(String pseudo) {
         try {
             String query = "SELECT * FROM \"User\" WHERE pseudo = ?";
-            PreparedStatement ps = this.getConnection().prepareStatement(query);
+            Connection connection = Connector.getInstance().getConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, pseudo);
             ResultSet rs = ps.executeQuery();
+            connection.close();
             if (!rs.next()) {
                 return null;
             } else {

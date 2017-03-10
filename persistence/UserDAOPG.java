@@ -28,5 +28,4 @@ public class UserDAOPG extends UserDAO {
             return null;
         }
     }
-
 }

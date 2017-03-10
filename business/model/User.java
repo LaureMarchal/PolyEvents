@@ -17,7 +17,7 @@ public class User {
 
     public static User login(String pseudo, String password) throws LoginException {
         DAOFactory daoFactory = new DAOFactoryPG();
-        User potentialUser = daoFactory.get("userDAO").read(pseudo);
+        User potentialUser = daoFactory.getUserDAO().read(pseudo);
         if (pseudo.equals("")) {
             throw new LoginException("NO_PSEUDO", "The pseudo can't be empty");
         } else if (password.equals("")) {

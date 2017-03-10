@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>api</OriginalElement>
+  <nodes>
+    <node x="-15.5" y="797.5">ui.Launcher</node>
+    <node x="276.0" y="290.0">business.dao.DAOFactory</node>
+    <node x="279.0" y="170.5">business.dao.UserDAO</node>
+    <node x="249.0" y="-3.0">exception.LoginException</node>
+    <node x="-0.5" y="571.0">ui.login.LoginController</node>
+    <node x="665.5" y="-1.0">persistence.ConnectorPG</node>
+    <node x="-21.0" y="-30.0">business.model.User</node>
+    <node x="293.0" y="570.5">api.Facade</node>
+    <node x="681.5" y="330.0">persistence.Connector</node>
+    <node x="-1.0" y="170.5">persistence.UserDAOPG</node>
+    <node x="584.5" y="570.5">business.Util</node>
+    <node x="-8.0" y="330.5">persistence.DAOFactoryPG</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="business.model.User" target="exception.LoginException">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="persistence.UserDAOPG" target="business.dao.UserDAO">
+      <point x="81.0" y="0.0" />
+      <point x="-81.0" y="0.0" />
+    </edge>
+    <edge source="persistence.DAOFactoryPG" target="business.dao.DAOFactory">
+      <point x="88.0" y="0.0" />
+      <point x="-124.0" y="0.0" />
+    </edge>
+    <edge source="persistence.UserDAOPG" target="business.model.User">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="business.dao.DAOFactory" target="persistence.DAOFactoryPG">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="persistence.DAOFactoryPG" target="persistence.UserDAOPG">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="persistence.Connector" target="persistence.ConnectorPG">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="persistence.ConnectorPG" target="persistence.Connector">
+      <point x="-134.5" y="0.0" />
+      <point x="600.0" y="120.0" />
+      <point x="600.0" y="400.0" />
+      <point x="-118.5" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.4347634763476348" x="440.4253542510121" y="344.5792004048583" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

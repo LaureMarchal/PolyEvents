@@ -1,8 +1,8 @@
 package business.model;
 
 import business.Util;
+import business.dao.DAOFactory;
 import exception.LoginException;
-import persistence.DAOFactoryPG;
 
 /**
  * Model to represent an user
@@ -39,7 +39,7 @@ public class User {
      * @throws LoginException If there is a problem of login (missing field, unknown user, wrong password)
      */
     public static User login(String pseudo, String password) throws LoginException {
-        User potentialUser = DAOFactoryPG.getInstance().getUserDAO().read(pseudo);
+        User potentialUser = DAOFactory.getInstance().getUserDAO().read(pseudo);
         if (pseudo.equals("")) {
             throw new LoginException("The pseudo can't be empty");
         } else if (password.equals("")) {

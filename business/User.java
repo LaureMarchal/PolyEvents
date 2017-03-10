@@ -1,6 +1,5 @@
 package business;
 
-import db.UserDAO;
 import exception.LoginException;
 
 public class User {
@@ -14,7 +13,7 @@ public class User {
     }
 
     public static User login(String pseudo, String password) throws LoginException {
-        User potentialUser = UserDAO.getInstance().read(pseudo);
+        User potentialUser = DAOFactory.createUserDAO().read(pseudo);
         if (pseudo.equals("")) {
             throw new LoginException("NO_PSEUDO", "The pseudo can't be empty");
         } else if (password.equals("")) {

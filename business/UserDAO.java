@@ -1,20 +1,22 @@
-package db;
+package business;
 
-import business.User;
+import db.Connector;
+import db.UserDAOPG;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserDAO extends Connector {
+public abstract class UserDAO extends Connector {
 
     private static UserDAO instance;
 
-    private UserDAO() {
+    protected UserDAO() {
     }
 
     public static UserDAO getInstance() {
         if (instance == null) {
-            instance = new UserDAO();
+            instance = new UserDAOPG();
         }
         return instance;
     }

@@ -33,4 +33,19 @@ public class UserDAOPG implements UserDAO {
         }
     }
 
+    @Override
+    public User create(String pseudo, String firstname, String lastname, String password, String mail) {
+        return null;
+    }
+
+    @Override
+    public User update(User user) {
+        return null;
+    }
+
+    @Override
+    public User delete(User user) {
+        return null;
+    }
+
 }

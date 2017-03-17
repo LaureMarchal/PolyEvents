@@ -1,5 +1,7 @@
 package api;
 
+import business.Util;
+import business.dao.DAOFactory;
 import business.model.User;
 import exception.LoginException;
 
@@ -40,7 +42,18 @@ public class Facade {
      * @throws LoginException If there is a problem of login (missing field, unknown user, wrong password)
      */
     public User login(String pseudo, String password) throws LoginException {
-        return User.login(pseudo, password);
+        User potentialUser = DAOFactory.getInstance().getUserDAO().read(pseudo);
+        if (pseudo.equals("")) {
+            throw new LoginException("The pseudo can't be empty");
+        } else if (password.equals("")) {
+            throw new LoginException("The password can't be empty");
+        } else if (potentialUser == null) {
+            throw new LoginException("The pseudo or the password is wrong");
+        } else if (!potentialUser.getPassword().equals(Util.getInstance().hashString(password))) {
+            throw new LoginException("The password typed is wrong");
+        } else {
+            return potentialUser;
+        }
     }
 
 }

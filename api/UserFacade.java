@@ -34,7 +34,7 @@ public class UserFacade {
         return null;
     }
 
-    public User setUser(User user){
+    public User updateUser(User user){
         return user;
     }
 

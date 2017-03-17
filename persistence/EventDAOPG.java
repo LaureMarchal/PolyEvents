@@ -4,7 +4,7 @@ import business.dao.EventDAO;
 import business.model.Event;
 
 /**
- * PostgreSQL DAO for the user model
+ * PostgreSQL DAO for the event model
  */
 public class EventDAOPG implements EventDAO{
     @Override

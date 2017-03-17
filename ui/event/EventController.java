@@ -8,6 +8,6 @@ import business.model.Event;
  */
 public class EventController {
 
-    public void onReport(Event event){
+    public void onReport(){
     }
 }

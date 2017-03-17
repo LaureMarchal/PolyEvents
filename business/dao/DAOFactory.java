@@ -1,5 +1,6 @@
 package business.dao;
 
+import business.model.ProviderReview;
 import persistence.DAOFactoryPG;
 
 /**
@@ -38,5 +39,7 @@ public abstract class DAOFactory {
     public abstract UserDAO getUserDAO();
 
     public abstract EventDAO getEventDAO();
+
+    public abstract ProviderReviewDAO getProviderReviewDAO();
 
 }

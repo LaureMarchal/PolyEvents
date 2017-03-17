@@ -1,6 +1,4 @@
-package ui.register;
-
-import api.UserFacade;
+package ui.registration;
 
 /**
  * Controller for the registration interface

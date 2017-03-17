@@ -1,4 +1,4 @@
-package persistence;
+package persistence.connector;
 
 import java.sql.Connection;
 
@@ -23,7 +23,7 @@ public abstract class Connector {
      *
      * @return An instance of Connector
      */
-    protected static Connector getInstance() {
+    public static Connector getInstance() {
         if (instance == null) {
             instance = new ConnectorPG();
         }

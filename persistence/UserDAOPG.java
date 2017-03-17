@@ -2,6 +2,7 @@ package persistence;
 
 import business.dao.UserDAO;
 import business.model.User;
+import persistence.connector.Connector;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

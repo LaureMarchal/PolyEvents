@@ -1,6 +1,7 @@
 package persistence;
 
 import business.dao.DAOFactory;
+import business.dao.EventDAO;
 import business.dao.UserDAO;
 
 /**
@@ -12,5 +13,8 @@ public class DAOFactoryPG extends DAOFactory {
     public UserDAO getUserDAO() {
         return new UserDAOPG();
     }
+
+    @Override
+    public EventDAO getEventDAO(){ return null; }
 
 }

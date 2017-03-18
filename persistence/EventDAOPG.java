@@ -1,12 +1,14 @@
 package persistence;
 
-import business.dao.EventDAO;
-import business.model.Event;
+import bl.dao.EventDAO;
+import bl.model.Event;
+
+import java.util.List;
 
 /**
  * PostgreSQL DAO for the event model
  */
-public class EventDAOPG implements EventDAO {
+public class EventDAOPG extends EventDAO {
     @Override
     public Event create(Event event) {
         return null;
@@ -19,6 +21,11 @@ public class EventDAOPG implements EventDAO {
 
     @Override
     public Event update(Event event) {
+        return null;
+    }
+
+    @Override
+    public List<Event> search(String title, String tag) {
         return null;
     }
 }

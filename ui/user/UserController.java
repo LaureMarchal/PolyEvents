@@ -1,6 +1,6 @@
 package ui.user;
 
-import business.model.User;
+import bl.model.User;
 
 /**
  * Controller for the user interface

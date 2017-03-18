@@ -6,6 +6,10 @@ public class EventController {
 
     }
 
+    public void onEdit() {
+
+    }
+
     public void onDelete() {
 
     }
@@ -15,6 +19,10 @@ public class EventController {
     }
 
     public void onAddReview() {
+
+    }
+
+    public void onAddMessage() {
 
     }
 

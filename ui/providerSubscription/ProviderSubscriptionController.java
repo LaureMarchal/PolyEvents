@@ -1,10 +1,14 @@
 package ui.providerSubscription;
 
-import business.model.Provider;
+import bl.model.Provider;
 
 public class ProviderSubscriptionController {
 
     public void onSubscribe(Provider provider) {
+
+    }
+
+    public void onUnsubscribe(Provider provider) {
 
     }
 

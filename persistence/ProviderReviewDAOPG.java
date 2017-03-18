@@ -1,17 +1,17 @@
 package persistence;
 
-import business.dao.ProviderReviewDAO;
-import business.model.Provider;
-import business.model.ProviderReview;
-import business.model.User;
+import bl.dao.ProviderReviewDAO;
+import bl.model.Consumer;
+import bl.model.Provider;
+import bl.model.ProviderReview;
 
 /**
  * PostgreSQL DAO for the provider review model
  */
-public class ProviderReviewDAOPG implements ProviderReviewDAO {
+public class ProviderReviewDAOPG extends ProviderReviewDAO {
 
     @Override
-    public ProviderReview create(Provider provider, User user, ProviderReview providerReview) {
+    public ProviderReview create(Provider provider, Consumer consumer, ProviderReview providerReview) {
         return null;
     }
 }

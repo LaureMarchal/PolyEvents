@@ -1,7 +1,7 @@
 package ui.login;
 
-import api.LoginFacade;
-import exception.LoginException;
+import bl.exception.LoginException;
+import bl.facade.UserFacade;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -35,12 +35,16 @@ public class LoginController {
      */
     public void onLogin() {
         try {
-            LoginFacade.getInstance().login(pseudoField.getText(), passwordField.getText());
+            UserFacade.getInstance().login(pseudoField.getText(), passwordField.getText());
             this.messageLabel.setText("Good password !");
             this.messageLabel.setTextFill(Color.GREEN);
         } catch (LoginException e1) {
             this.messageLabel.setText(e1.getErrorText());
             this.messageLabel.setTextFill(Color.RED);
         }
+    }
+
+    public void onRegister() {
+
     }
 }

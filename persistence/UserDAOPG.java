@@ -1,7 +1,7 @@
 package persistence;
 
-import business.dao.UserDAO;
-import business.model.User;
+import bl.dao.UserDAO;
+import bl.model.User;
 import persistence.connector.Connector;
 
 import java.sql.Connection;
@@ -12,7 +12,7 @@ import java.sql.SQLException;
 /**
  * PostgreSQL DAO for the user model
  */
-public class UserDAOPG implements UserDAO {
+public class UserDAOPG extends UserDAO {
 
     @Override
     public User read(String pseudo) {
@@ -26,7 +26,7 @@ public class UserDAOPG implements UserDAO {
             if (!rs.next()) {
                 return null;
             } else {
-                return new User(rs.getString("pseudo"), rs.getString("password"));
+                return new User(rs.getString("pseudo"), rs.getString("password"), "", "", null);
             }
         } catch (SQLException e) {
             e.printStackTrace();

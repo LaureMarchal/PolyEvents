@@ -1,8 +1,5 @@
 package ui.provider;
 
-import api.ProviderFacade;
-import business.model.Provider;
-
 /**
  * Controller for the provider interface
  */

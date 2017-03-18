@@ -1,14 +1,19 @@
 package persistence;
 
-import business.dao.ProviderSubscriptionDAO;
-import business.model.ProviderSubscription;
-import business.model.User;
+import bl.dao.ProviderSubscriptionDAO;
+import bl.model.ProviderSubscription;
+import bl.model.User;
 
-public class ProviderSubscriptionDAOPG implements ProviderSubscriptionDAO {
+public class ProviderSubscriptionDAOPG extends ProviderSubscriptionDAO {
 
     @Override
     public User create(ProviderSubscription providerSubscription) {
         return null;
+    }
+
+    @Override
+    public void delete(ProviderSubscription providerSubscription) {
+
     }
 
 }

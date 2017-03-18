@@ -5,7 +5,16 @@ package ui.registration;
  */
 public class RegistrationController {
 
-    public void onRegister(){
+    public void onEditStatus() {
+
+    }
+
+    public void onCancel() {
+
+    }
+
+    public void onLoad() {
+
     }
 
 }

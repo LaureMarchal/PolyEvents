@@ -1,66 +1,370 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Diagram>
   <ID>JAVA</ID>
-  <OriginalElement>api</OriginalElement>
+  <OriginalElement />
   <nodes>
-    <node x="-15.5" y="797.5">ui.Launcher</node>
-    <node x="276.0" y="290.0">business.dao.DAOFactory</node>
-    <node x="279.0" y="170.5">business.dao.UserDAO</node>
-    <node x="249.0" y="-3.0">exception.LoginException</node>
-    <node x="-0.5" y="571.0">ui.login.LoginController</node>
-    <node x="665.5" y="-1.0">persistence.ConnectorPG</node>
-    <node x="-21.0" y="-30.0">business.model.User</node>
-    <node x="293.0" y="570.5">api.Facade</node>
-    <node x="681.5" y="330.0">persistence.Connector</node>
-    <node x="-1.0" y="170.5">persistence.UserDAOPG</node>
-    <node x="584.5" y="570.5">business.Util</node>
-    <node x="-8.0" y="330.5">persistence.DAOFactoryPG</node>
+    <node x="4762.23169642857" y="619.5">persistence.RegistrationDAOPG</node>
+    <node x="3814.23169642857" y="333.5">bl.dao.EventDAO</node>
+    <node x="2476.0" y="2155.0">bl.facade.NotificationFacade</node>
+    <node x="4762.23169642857" y="333.5">bl.dao.RegistrationDAO</node>
+    <node x="3814.23169642857" y="619.5">persistence.EventDAOPG</node>
+    <node x="729.0" y="2155.0">bl.facade.SubscriptionFacade</node>
+    <node x="3353.23169642857" y="372.5">bl.dao.ProviderReviewDAO</node>
+    <node x="5102.23169642857" y="359.5">bl.dao.ProviderSubscriptionDAO</node>
+    <node x="4482.23169642857" y="658.5">persistence.NotificationDAOPG</node>
+    <node x="479.0" y="2632.0">ui.providerSubscription.ProviderSubscriptionController</node>
+    <node x="1908.162928713151" y="1532.5">bl.model.Registration</node>
+    <node x="4482.23169642857" y="372.5">bl.dao.NotificationDAO</node>
+    <node x="1765.0" y="2632.0">ui.provider.ProviderController</node>
+    <node x="2747.73169642857" y="619.5">persistence.UserDAOPG</node>
+    <node x="1524.0" y="2155.0">bl.facade.UserFacade</node>
+    <node x="2810.0" y="2155.0">bl.facade.ProviderFacade</node>
+    <node x="1972.148363095237" y="580.0">bl.model.Message</node>
+    <node x="5411.23169642857" y="359.5">bl.dao.TagSubscriptionDAO</node>
+    <node x="1503.148363095237" y="658.5">bl.model.Administrator</node>
+    <node x="1021.0" y="2632.0">ui.Launcher</node>
+    <node x="2170.0" y="2155.0">ui.login.LoginController</node>
+    <node x="5411.23169642857" y="645.5">persistence.TagSubscriptionDAOPG</node>
+    <node x="16.0" y="2155.0">persistence.connector.Connector</node>
+    <node x="1128.0" y="2155.0">bl.facade.RegistrationFacade</node>
+    <node x="0.0" y="2345.0">persistence.connector.ConnectorPG</node>
+    <node x="314.0" y="2155.0">bl.facade.EventFacade</node>
+    <node x="3353.23169642857" y="658.5">persistence.ProviderReviewDAOPG</node>
+    <node x="5102.23169642857" y="645.5">persistence.ProviderSubscriptionDAOPG</node>
+    <node x="2590.73169642857" y="119.0">bl.model.EventReview</node>
+    <node x="3045.23169642857" y="372.5">bl.dao.MessageDAO</node>
+    <node x="4072.23169642857" y="658.5">persistence.EventReviewDAOPG</node>
+    <node x="2310.503822987528" y="0.0">bl.model.Notifiable</node>
+    <node x="269.1483630952371" y="645.0">bl.model.Tag</node>
+    <node x="1519.0" y="2632.0">ui.tagSubscription.TagSubscriptionController</node>
+    <node x="1011.6629287131509" y="889.0">bl.model.Event</node>
+    <node x="4072.23169642857" y="372.5">bl.dao.EventReviewDAO</node>
+    <node x="1367.7101013321978" y="307.0">bl.model.User</node>
+    <node x="4113.55746882086" y="1467.0">bl.dao.DAOFactory</node>
+    <node x="1257.0" y="2632.0">ui.notification.NotificationController</node>
+    <node x="0.0" y="2632.0">ui.registration.RegistrationController</node>
+    <node x="260.0" y="2632.0">ui.event.EventListController</node>
+    <node x="4117.557468820861" y="1019.5">persistence.FactoryDAOPG</node>
+    <node x="770.0" y="2632.0">ui.user.UserController</node>
+    <node x="1439.7101013321978" y="119.0">bl.model.Notification</node>
+    <node x="152.89836309523707" y="1584.5">bl.model.TagSubscription</node>
+    <node x="0.0" y="1894.0">bl.model.Consumer</node>
+    <node x="202.50382298752766" y="119.0">bl.model.ProviderReview</node>
+    <node x="1873.0" y="2155.0">ui.event.EventController</node>
+    <node x="436.1483630952373" y="567.0">bl.model.Provider</node>
+    <node x="3045.23169642857" y="658.5">persistence.MessageDAOPG</node>
+    <node x="110.50382298752766" y="333.0">bl.model.ProviderSubscription</node>
+    <node x="2803.23169642857" y="333.5">bl.dao.UserDAO</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="business.model.User" target="exception.LoginException">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
+    <edge source="persistence.FactoryDAOPG" target="persistence.EventReviewDAOPG">
+      <point x="-4.547473508864641E-13" y="-133.5" />
+      <point x="4317.55746882086" y="829.0" />
+      <point x="4267.23169642857" y="829.0" />
+      <point x="0.0" y="29.5" />
     </edge>
-    <edge source="persistence.UserDAOPG" target="business.dao.UserDAO">
-      <point x="81.0" y="0.0" />
-      <point x="-81.0" y="0.0" />
+    <edge source="persistence.FactoryDAOPG" target="persistence.ProviderReviewDAOPG">
+      <point x="-88.88888888888914" y="-133.5" />
+      <point x="4228.668579931971" y="849.0" />
+      <point x="3573.73169642857" y="849.0" />
+      <point x="0.0" y="29.5" />
     </edge>
-    <edge source="persistence.DAOFactoryPG" target="business.dao.DAOFactory">
-      <point x="88.0" y="0.0" />
-      <point x="-124.0" y="0.0" />
+    <edge source="bl.model.Provider" target="bl.model.ProviderSubscription">
+      <point x="-349.0000000000002" y="-121.0" />
+      <point x="610.6483630952371" y="527.0" />
+      <point x="419.25382298752766" y="527.0" />
+      <point x="61.75" y="69.0" />
     </edge>
-    <edge source="persistence.UserDAOPG" target="business.model.User">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
+    <edge source="persistence.FactoryDAOPG" target="persistence.ProviderSubscriptionDAOPG">
+      <point x="133.33333333333258" y="-133.5" />
+      <point x="4450.890802154193" y="859.0" />
+      <point x="5246.73169642857" y="859.0" />
+      <point x="0.0" y="42.5" />
     </edge>
-    <edge source="business.dao.DAOFactory" target="persistence.DAOFactoryPG">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
+    <edge source="persistence.FactoryDAOPG" target="persistence.TagSubscriptionDAOPG">
+      <point x="177.77777777777692" y="-133.5" />
+      <point x="4495.335246598637" y="869.0" />
+      <point x="5540.73169642857" y="869.0" />
+      <point x="0.0" y="42.5" />
     </edge>
-    <edge source="persistence.DAOFactoryPG" target="persistence.UserDAOPG">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
+    <edge source="persistence.NotificationDAOPG" target="bl.dao.NotificationDAO">
+      <point x="0.0" y="-29.5" />
+      <point x="0.0" y="29.5" />
     </edge>
-    <edge source="persistence.Connector" target="persistence.ConnectorPG">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
+    <edge source="bl.model.ProviderSubscription" target="bl.model.Consumer">
+      <point x="-61.75" y="69.0" />
+      <point x="295.75382298752766" y="527.0" />
+      <point x="17.960101332198064" y="527.0" />
+      <point x="17.960101332198064" y="1864.0" />
+      <point x="243.85714285714312" y="1864.0" />
+      <point x="-325.1428571428569" y="-108.0" />
     </edge>
-    <edge source="persistence.ConnectorPG" target="persistence.Connector">
-      <point x="-134.5" y="0.0" />
-      <point x="600.0" y="120.0" />
-      <point x="600.0" y="400.0" />
-      <point x="-118.5" y="0.0" />
+    <edge source="bl.model.TagSubscription" target="bl.model.Consumer">
+      <point x="76.5" y="56.0" />
+      <point x="382.3983630952371" y="1834.0" />
+      <point x="731.5714285714287" y="1834.0" />
+      <point x="162.57142857142867" y="-108.0" />
+    </edge>
+    <edge source="bl.model.EventReview" target="bl.model.Notifiable">
+      <point x="0.0" y="-69.0" />
+      <point x="2737.23169642857" y="79.0" />
+      <point x="2488.337156320861" y="79.0" />
+      <point x="80.83333333333326" y="29.5" />
+    </edge>
+    <edge source="bl.model.ProviderSubscription" target="bl.model.Provider">
+      <point x="185.25" y="69.0" />
+      <point x="542.7538229875277" y="517.0" />
+      <point x="959.6483630952371" y="517.0" />
+      <point x="-2.2737367544323206E-13" y="-121.0" />
+    </edge>
+    <edge source="bl.model.Consumer" target="bl.model.ProviderSubscription">
+      <point x="-487.7142857142858" y="-108.0" />
+      <point x="81.28571428571422" y="1874.0" />
+      <point x="6.9601013321980645" y="1874.0" />
+      <point x="6.9601013321980645" y="517.0" />
+      <point x="172.25382298752766" y="517.0" />
+      <point x="-185.25" y="69.0" />
+    </edge>
+    <edge source="bl.model.Consumer" target="bl.model.TagSubscription">
+      <point x="0.0" y="-108.0" />
+      <point x="569.0" y="1844.0" />
+      <point x="229.39836309523707" y="1844.0" />
+      <point x="-76.5" y="56.0" />
+    </edge>
+    <edge source="persistence.FactoryDAOPG" target="persistence.MessageDAOPG">
+      <point x="-133.33333333333394" y="-133.5" />
+      <point x="4184.224135487527" y="859.0" />
+      <point x="3189.23169642857" y="859.0" />
+      <point x="0.0" y="29.5" />
+    </edge>
+    <edge source="bl.model.Administrator" target="bl.model.User">
+      <point x="0.0" y="-29.5" />
+      <point x="1727.648363095237" y="547.0" />
+      <point x="1614.2101013321978" y="547.0" />
+      <point x="0.0" y="95.0" />
+    </edge>
+    <edge source="bl.model.Message" target="bl.model.Notifiable">
+      <point x="126.75" y="-108.0" />
+      <point x="2352.398363095237" y="99.0" />
+      <point x="2391.337156320861" y="99.0" />
+      <point x="-16.166666666666742" y="29.5" />
+    </edge>
+    <edge source="bl.model.Provider" target="bl.model.Event">
+      <point x="261.7499999999998" y="121.0" />
+      <point x="1221.398363095237" y="849.0" />
+      <point x="1562.0795953798176" y="849.0" />
+      <point x="-110.08333333333326" y="-264.0" />
+    </edge>
+    <edge source="bl.model.Registration" target="bl.model.Notifiable">
+      <point x="68.625" y="-108.0" />
+      <point x="2251.287928713151" y="1437.0" />
+      <point x="2580.23169642857" y="1437.0" />
+      <point x="2580.23169642857" y="89.0" />
+      <point x="2456.003822987528" y="89.0" />
+      <point x="48.5" y="29.5" />
+    </edge>
+    <edge source="bl.model.Event" target="bl.model.Provider">
+      <point x="-330.25" y="-264.0" />
+      <point x="1341.912928713151" y="859.0" />
+      <point x="697.8983630952373" y="859.0" />
+      <point x="-261.75" y="121.0" />
+    </edge>
+    <edge source="bl.model.User" target="bl.model.Notification">
+      <point x="0.0" y="-95.0" />
+      <point x="0.0" y="69.0" />
+    </edge>
+    <edge source="bl.model.Message" target="bl.model.User">
+      <point x="-126.75" y="-108.0" />
+      <point x="2098.898363095237" y="537.0" />
+      <point x="1712.8101013321977" y="537.0" />
+      <point x="98.59999999999991" y="95.0" />
+    </edge>
+    <edge source="persistence.ProviderReviewDAOPG" target="bl.dao.ProviderReviewDAO">
+      <point x="0.0" y="-29.5" />
+      <point x="0.0" y="29.5" />
+    </edge>
+    <edge source="bl.model.Consumer" target="bl.model.User">
+      <point x="-162.57142857142844" y="-108.0" />
+      <point x="406.42857142857156" y="1854.0" />
+      <point x="142.39836309523707" y="1854.0" />
+      <point x="142.39836309523707" y="537.0" />
+      <point x="1417.0101013321978" y="537.0" />
+      <point x="-197.20000000000005" y="95.0" />
+    </edge>
+    <edge source="persistence.FactoryDAOPG" target="persistence.NotificationDAOPG">
+      <point x="44.44444444444389" y="-133.5" />
+      <point x="4362.001913265304" y="839.0" />
+      <point x="4612.23169642857" y="839.0" />
+      <point x="0.0" y="29.5" />
+    </edge>
+    <edge source="persistence.TagSubscriptionDAOPG" target="bl.dao.TagSubscriptionDAO">
+      <point x="0.0" y="-42.5" />
+      <point x="0.0" y="42.5" />
+    </edge>
+    <edge source="bl.model.Notification" target="bl.model.Notifiable">
+      <point x="0.0" y="-69.0" />
+      <point x="1614.2101013321978" y="89.0" />
+      <point x="2359.003822987528" y="89.0" />
+      <point x="-48.5" y="29.5" />
+    </edge>
+    <edge source="bl.dao.DAOFactory" target="persistence.FactoryDAOPG">
+      <point x="-102.0" y="-173.5" />
+      <point x="4215.55746882086" y="1447.0" />
+      <point x="4217.557468820861" y="1447.0" />
+      <point x="-100.0" y="133.5" />
+    </edge>
+    <edge source="persistence.UserDAOPG" target="bl.dao.UserDAO">
+      <point x="55.5" y="-68.5" />
+      <point x="0.0" y="68.5" />
+    </edge>
+    <edge source="persistence.FactoryDAOPG" target="persistence.UserDAOPG">
+      <point x="-177.77777777777828" y="-133.5" />
+      <point x="4139.7796910430825" y="869.0" />
+      <point x="2858.73169642857" y="869.0" />
+      <point x="0.0" y="68.5" />
+    </edge>
+    <edge source="persistence.FactoryDAOPG" target="persistence.RegistrationDAOPG">
+      <point x="88.88888888888823" y="-133.5" />
+      <point x="4406.446357709749" y="849.0" />
+      <point x="4922.23169642857" y="849.0" />
+      <point x="0.0" y="68.5" />
+    </edge>
+    <edge source="bl.model.Event" target="bl.model.Tag">
+      <point x="-550.4166666666665" y="-264.0" />
+      <point x="1121.7462620464844" y="869.0" />
+      <point x="379.3983630952371" y="869.0" />
+      <point x="36.75" y="43.0" />
+    </edge>
+    <edge source="persistence.connector.Connector" target="persistence.connector.ConnectorPG">
+      <point x="59.25" y="70.0" />
+      <point x="193.75" y="2320.0" />
+      <point x="201.75" y="2320.0" />
+      <point x="67.25" y="-121.0" />
+    </edge>
+    <edge source="persistence.MessageDAOPG" target="bl.dao.MessageDAO">
+      <point x="0.0" y="-29.5" />
+      <point x="0.0" y="29.5" />
+    </edge>
+    <edge source="persistence.UserDAOPG" target="bl.model.User">
+      <point x="-55.5" y="-68.5" />
+      <point x="2803.23169642857" y="527.0" />
+      <point x="1811.410101332198" y="527.0" />
+      <point x="197.20000000000027" y="95.0" />
+    </edge>
+    <edge source="persistence.FactoryDAOPG" target="persistence.EventDAOPG">
+      <point x="-44.4444444444448" y="-133.5" />
+      <point x="4273.1130243764155" y="839.0" />
+      <point x="3933.23169642857" y="839.0" />
+      <point x="0.0" y="68.5" />
+    </edge>
+    <edge source="bl.model.Registration" target="bl.model.Consumer">
+      <point x="137.25" y="108.0" />
+      <point x="2319.912928713151" y="1874.0" />
+      <point x="1056.7142857142858" y="1874.0" />
+      <point x="487.7142857142858" y="-108.0" />
+    </edge>
+    <edge source="bl.model.ProviderSubscription" target="bl.model.ProviderReview">
+      <point x="0.0" y="-69.0" />
+      <point x="0.0" y="69.0" />
+    </edge>
+    <edge source="bl.model.Event" target="bl.model.Notifiable">
+      <point x="550.4166666666665" y="-264.0" />
+      <point x="2222.5795953798174" y="869.0" />
+      <point x="2569.23169642857" y="869.0" />
+      <point x="2569.23169642857" y="99.0" />
+      <point x="2423.6704896541946" y="99.0" />
+      <point x="16.166666666666742" y="29.5" />
+    </edge>
+    <edge source="bl.model.Provider" target="bl.model.User">
+      <point x="348.9999999999998" y="-121.0" />
+      <point x="1308.648363095237" y="547.0" />
+      <point x="1515.610101332198" y="547.0" />
+      <point x="-98.59999999999991" y="95.0" />
+    </edge>
+    <edge source="bl.model.Registration" target="bl.model.Event">
+      <point x="-205.875" y="-108.0" />
+      <point x="1976.787928713151" y="1447.0" />
+      <point x="1341.912928713151" y="1447.0" />
+      <point x="-330.25" y="264.0" />
+    </edge>
+    <edge source="persistence.connector.ConnectorPG" target="persistence.connector.Connector">
+      <point x="-67.25" y="-121.0" />
+      <point x="67.25" y="2320.0" />
+      <point x="75.25" y="2320.0" />
+      <point x="-59.25" y="70.0" />
+    </edge>
+    <edge source="bl.model.TagSubscription" target="bl.model.Tag">
+      <point x="0.0" y="-56.0" />
+      <point x="-36.75" y="43.0" />
+    </edge>
+    <edge source="bl.model.Message" target="bl.model.Event">
+      <point x="126.75" y="108.0" />
+      <point x="2352.398363095237" y="859.0" />
+      <point x="2002.412928713151" y="859.0" />
+      <point x="330.25" y="-264.0" />
+    </edge>
+    <edge source="bl.model.Consumer" target="bl.model.Registration">
+      <point x="325.1428571428572" y="-108.0" />
+      <point x="894.1428571428573" y="1864.0" />
+      <point x="2045.412928713151" y="1864.0" />
+      <point x="-137.25" y="108.0" />
+    </edge>
+    <edge source="persistence.RegistrationDAOPG" target="bl.dao.RegistrationDAO">
+      <point x="0.0" y="-68.5" />
+      <point x="0.0" y="68.5" />
+    </edge>
+    <edge source="bl.model.Event" target="bl.model.Message">
+      <point x="110.08333333333348" y="-264.0" />
+      <point x="1782.2462620464844" y="849.0" />
+      <point x="2098.898363095237" y="849.0" />
+      <point x="-126.75" y="108.0" />
+    </edge>
+    <edge source="persistence.EventReviewDAOPG" target="bl.dao.EventReviewDAO">
+      <point x="0.0" y="-29.5" />
+      <point x="0.0" y="29.5" />
+    </edge>
+    <edge source="bl.model.Registration" target="bl.model.EventReview">
+      <point x="205.875" y="-108.0" />
+      <point x="2388.537928713151" y="1447.0" />
+      <point x="2737.23169642857" y="1447.0" />
+      <point x="0.0" y="69.0" />
+    </edge>
+    <edge source="persistence.EventDAOPG" target="bl.dao.EventDAO">
+      <point x="0.0" y="-68.5" />
+      <point x="0.0" y="68.5" />
+    </edge>
+    <edge source="persistence.ProviderSubscriptionDAOPG" target="bl.dao.ProviderSubscriptionDAO">
+      <point x="0.0" y="-42.5" />
+      <point x="0.0" y="42.5" />
+    </edge>
+    <edge source="persistence.FactoryDAOPG" target="bl.dao.DAOFactory">
+      <point x="99.99999999999955" y="133.5" />
+      <point x="4417.55746882086" y="1447.0" />
+      <point x="4419.55746882086" y="1447.0" />
+      <point x="102.0" y="-173.5" />
+    </edge>
+    <edge source="bl.model.ProviderReview" target="bl.model.Notifiable">
+      <point x="0.0" y="-69.0" />
+      <point x="357.50382298752766" y="79.0" />
+      <point x="2326.6704896541946" y="79.0" />
+      <point x="-80.83333333333326" y="29.5" />
+    </edge>
+    <edge source="bl.model.Event" target="bl.model.Registration">
+      <point x="330.25" y="264.0" />
+      <point x="2002.412928713151" y="1447.0" />
+      <point x="2114.037928713151" y="1447.0" />
+      <point x="-68.625" y="-108.0" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.4347634763476348" x="440.4253542510121" y="344.5792004048583" />
+  <settings layout="Hierarchic Group" zoom="0.272008434370058" x="2835.5" y="1239.2936046511627" />
   <SelectedNodes />
   <Categories>
     <Category>Fields</Category>
-    <Category>Constructors</Category>
-    <Category>Methods</Category>
-    <Category>Properties</Category>
     <Category>Inner Classes</Category>
+    <Category>Constructors</Category>
+    <Category>Properties</Category>
+    <Category>Methods</Category>
   </Categories>
   <SCOPE>All</SCOPE>
   <VISIBILITY>private</VISIBILITY>

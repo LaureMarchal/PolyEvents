@@ -8,27 +8,27 @@ import exception.LoginException;
 /**
  * Entry point to the business behaviour
  */
-public class Facade {
+public class LoginFacade {
 
     /**
      * Singleton instance
      */
-    private static Facade instance;
+    private static LoginFacade instance;
 
     /**
      * Empty constructor for singleton
      */
-    private Facade() {
+    private LoginFacade() {
     }
 
     /**
-     * Get the unique instance of the Facade
+     * Get the unique instance of the LoginFacade
      *
-     * @return An instance of Facade
+     * @return An instance of LoginFacade
      */
-    public static Facade getInstance() {
+    public static LoginFacade getInstance() {
         if (instance == null) {
-            instance = new Facade();
+            instance = new LoginFacade();
         }
         return instance;
     }

@@ -2,6 +2,7 @@ package persistence;
 
 import business.dao.UserDAO;
 import business.model.User;
+import persistence.connector.Connector;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -31,6 +32,21 @@ public class UserDAOPG implements UserDAO {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public User create(User user) {
+        return null;
+    }
+
+    @Override
+    public User update(User user) {
+        return null;
+    }
+
+    @Override
+    public boolean delete(User user) {
+        return true;
     }
 
 }

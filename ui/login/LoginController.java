@@ -1,6 +1,6 @@
 package ui.login;
 
-import api.Facade;
+import api.LoginFacade;
 import exception.LoginException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -35,7 +35,7 @@ public class LoginController {
      */
     public void onLogin() {
         try {
-            Facade.getInstance().login(pseudoField.getText(), passwordField.getText());
+            LoginFacade.getInstance().login(pseudoField.getText(), passwordField.getText());
             this.messageLabel.setText("Good password !");
             this.messageLabel.setTextFill(Color.GREEN);
         } catch (LoginException e1) {

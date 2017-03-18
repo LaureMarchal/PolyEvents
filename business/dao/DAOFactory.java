@@ -1,6 +1,6 @@
 package business.dao;
 
-import persistence.DAOFactoryPG;
+import persistence.FactoryDAOPG;
 
 /**
  * Abstract factory to make DAO
@@ -25,7 +25,7 @@ public abstract class DAOFactory {
      */
     public static DAOFactory getInstance() {
         if (instance == null) {
-            instance = new DAOFactoryPG();
+            instance = new FactoryDAOPG();
         }
         return instance;
     }
@@ -36,5 +36,9 @@ public abstract class DAOFactory {
      * @return An instance of UserDAO
      */
     public abstract UserDAO getUserDAO();
+
+    public abstract EventDAO getEventDAO();
+
+    public abstract ProviderReviewDAO getProviderReviewDAO();
 
 }

@@ -8,7 +8,7 @@ import business.dao.UserDAO;
 /**
  * Factory to make PostgreSQL DAO for models
  */
-public class DAOFactoryPG extends DAOFactory {
+public class FactoryDAOPG extends DAOFactory {
 
     @Override
     public UserDAO getUserDAO() {
@@ -16,9 +16,13 @@ public class DAOFactoryPG extends DAOFactory {
     }
 
     @Override
-    public EventDAO getEventDAO(){ return null; }
+    public EventDAO getEventDAO() {
+        return null;
+    }
 
     @Override
-    public ProviderReviewDAO getProviderReviewDAO() { return null;  }
+    public ProviderReviewDAO getProviderReviewDAO() {
+        return null;
+    }
 
 }

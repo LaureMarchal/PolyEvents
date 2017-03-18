@@ -1,13 +1,21 @@
 package ui.event;
 
-import api.EventFacade;
-import business.model.Event;
-
-/**
- * Controller for the registration interface
- */
 public class EventController {
 
-    public void onReport(){
+    public void onCreate() {
+
     }
+
+    public void onDelete() {
+
+    }
+
+    public void onReport() {
+
+    }
+
+    public void onAddReview() {
+
+    }
+
 }

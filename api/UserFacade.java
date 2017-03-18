@@ -30,15 +30,15 @@ public class UserFacade {
         return instance;
     }
 
-    public User register(String pseudo,String firstname,String lastname,String password,String mail){
+    public User register(User user) {
         return null;
     }
 
-    public User updateUser(User user){
+    public User updateUser(User user) {
         return user;
     }
 
-    public User deleteUser(User user){
-        return user;
+    public boolean deleteUser(User user) {
+        return true;
     }
 }

@@ -1,6 +1,5 @@
 package ui.user;
 
-import api.UserFacade;
 import business.model.User;
 
 /**
@@ -13,4 +12,5 @@ public class UserController {
 
     public void onDelete(User user){
     }
+
 }

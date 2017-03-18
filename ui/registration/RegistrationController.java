@@ -7,4 +7,5 @@ public class RegistrationController {
 
     public void onRegister(){
     }
+
 }

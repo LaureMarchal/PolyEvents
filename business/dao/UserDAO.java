@@ -15,10 +15,10 @@ public interface UserDAO {
      */
     User read(String pseudo);
 
-    User create(String pseudo,String firstname,String lastname,String password,String mail);
+    User create(User user);
 
     User update(User user);
 
-    User delete(User user);
+    boolean delete(User user);
 
 }

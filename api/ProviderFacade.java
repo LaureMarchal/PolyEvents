@@ -1,7 +1,8 @@
 package api;
 
-import business.model.ProviderReview;
 import business.model.Provider;
+import business.model.ProviderReview;
+import business.model.User;
 
 /**
  * Entry point to the business behaviour
@@ -31,7 +32,7 @@ public class ProviderFacade {
         return instance;
     }
 
-    public ProviderReview reviewProvider(Provider provider){
+    public ProviderReview postReview(Provider provider, User user, ProviderReview providerReview) {
         return null;
     }
 

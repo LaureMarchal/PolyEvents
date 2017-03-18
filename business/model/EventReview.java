@@ -1,11 +1,11 @@
 package business.model;
 
-public class ProviderReview implements Notifiable {
+public class EventReview implements Notifiable {
 
     private String content;
     private String rate;
 
-    public ProviderReview(String content, String rate) {
+    public EventReview(String content, String rate) {
         this.content = content;
         this.rate = rate;
     }
@@ -28,6 +28,7 @@ public class ProviderReview implements Notifiable {
 
     @Override
     public String getNotificationText() {
-        return "A review has been written about you.";
+        return "A review has been written about one of your event.";
     }
+
 }

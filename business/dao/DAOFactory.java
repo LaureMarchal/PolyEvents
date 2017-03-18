@@ -1,7 +1,6 @@
 package business.dao;
 
-import business.model.ProviderReview;
-import persistence.DAOFactoryPG;
+import persistence.FactoryDAOPG;
 
 /**
  * Abstract factory to make DAO
@@ -26,7 +25,7 @@ public abstract class DAOFactory {
      */
     public static DAOFactory getInstance() {
         if (instance == null) {
-            instance = new DAOFactoryPG();
+            instance = new FactoryDAOPG();
         }
         return instance;
     }

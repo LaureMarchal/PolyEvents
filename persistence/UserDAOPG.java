@@ -35,7 +35,7 @@ public class UserDAOPG implements UserDAO {
     }
 
     @Override
-    public User create(String pseudo, String firstname, String lastname, String password, String mail) {
+    public User create(User user) {
         return null;
     }
 
@@ -45,8 +45,8 @@ public class UserDAOPG implements UserDAO {
     }
 
     @Override
-    public User delete(User user) {
-        return null;
+    public boolean delete(User user) {
+        return true;
     }
 
 }

@@ -30,7 +30,15 @@ public class EventFacade {
         return instance;
     }
 
-    public Event report(Event event){
+    public Event create(Event event) {
+        return event;
+    }
+
+    public boolean delete(Event event) {
+        return true;
+    }
+
+    public Event report(Event event) {
         return event;
     }
 }

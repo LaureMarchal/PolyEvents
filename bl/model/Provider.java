@@ -12,8 +12,8 @@ public class Provider extends User {
     private List<Event> events;
     private List<ProviderSubscription> subscribers;
 
-    public Provider(String pseudo, String password, String email, List<Notification> notifications, String name, String description, String phone, String website, String officeLocation, List<Event> events, List<ProviderSubscription> subscribers) {
-        super(pseudo, password, email, Role.PROVIDER, notifications);
+    public Provider(String pseudo, String password, String email, String name, String description, String phone, String website, String officeLocation, List<Event> events, List<ProviderSubscription> subscribers) {
+        super(pseudo, password, email, Role.PROVIDER);
         this.name = name;
         this.description = description;
         this.phone = phone;
@@ -21,6 +21,15 @@ public class Provider extends User {
         this.officeLocation = officeLocation;
         this.events = events;
         this.subscribers = subscribers;
+    }
+
+    public Provider(String pseudo, String password, String email, String name, String description, String phone, String website, String officeLocation) {
+        super(pseudo, password, email, Role.PROVIDER);
+        this.name = name;
+        this.description = description;
+        this.phone = phone;
+        this.website = website;
+        this.officeLocation = officeLocation;
     }
 
     public String getName() {

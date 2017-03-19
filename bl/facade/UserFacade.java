@@ -4,6 +4,8 @@ import bl.Util;
 import bl.dao.DAOFactory;
 import bl.exception.LoginException;
 import bl.exception.SignInException;
+import bl.model.Consumer;
+import bl.model.Provider;
 import bl.model.User;
 
 /**
@@ -72,7 +74,8 @@ public class UserFacade {
         } else if (lastName.equals("")) {
             throw new SignInException("The last name can't be empty");
         }
-        return potentialUser;
+        Consumer consumer = new Consumer(pseudo, Util.getInstance().hashString(password), email, firstName, lastName);
+        return DAOFactory.getInstance().createUserDAO().create(consumer);
     }
 
     public User registerProvider(String pseudo, String password, String email, String name, String description, String phoneNumber, String website, String officeLocation) throws SignInException {
@@ -92,7 +95,8 @@ public class UserFacade {
         } else if (!phoneNumber.equals("") && (phoneNumber.length() != 10 || !phoneNumber.matches("-?\\d+(\\.\\d+)?"))) {
             throw new SignInException("The phone number is incorrect (it needs 10 numbers)");
         }
-        return potentialUser;
+        Provider provider = new Provider(pseudo, Util.getInstance().hashString(password), email, name, description, phoneNumber, website, officeLocation);
+        return DAOFactory.getInstance().createUserDAO().create(provider);
     }
 
     public User updateUser(User user) {

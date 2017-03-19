@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import ui.Controller;
+import ui.View;
 
 /**
  * Controller for the login interface
@@ -46,6 +47,6 @@ public class LoginController {
     }
 
     public void onRegister() {
-        Controller.getInstance().goTo("signin/signinView");
+        Controller.getInstance().goTo(View.SIGN_IN);
     }
 }

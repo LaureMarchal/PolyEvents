@@ -28,15 +28,15 @@ public class Controller {
         this.stage = stage;
     }
 
-    public void goTo(String viewName) {
+    public void goTo(View view) {
         if (stage != null) {
             try {
-                Parent root = FXMLLoader.load(getClass().getResource("../ui/" + viewName + ".fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("../ui/" + view.toString() + ".fxml"));
                 stage.setTitle(APP_NAME);
                 stage.setScene(new Scene(root, APP_WIDTH, APP_HEIGHT));
                 stage.show();
             } catch (IOException e) {
-                System.err.println("The view " + "../ui/" + viewName + ".fxml" + " doesn't exist.");
+                System.err.println("The view " + "../ui/" + view.toString() + ".fxml" + " doesn't exist.");
                 e.printStackTrace();
             }
         }

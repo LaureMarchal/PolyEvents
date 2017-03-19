@@ -1,13 +1,21 @@
-package ui.signin;
+package ui.signIn;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import ui.Controller;
+import ui.View;
 
 /**
  * Controller for the login interface
  */
-public class SigninController {
+public class SignInController {
+
+    /**
+     * The field to write the pseudo
+     */
+    @FXML
+    private TextField pseudoField;
 
     @FXML
     private VBox consumerForm;
@@ -26,7 +34,11 @@ public class SigninController {
     }
 
     public void onCancel() {
-        Controller.getInstance().goTo("login/loginView");
+        Controller.getInstance().goTo(View.LOGIN);
+    }
+
+    public void onSubmit() {
+
     }
 
 }

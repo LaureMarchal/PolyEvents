@@ -49,7 +49,7 @@
                         <Insets bottom="5.0"/>
                     </VBox.margin>
                 </PasswordField>
-                <TextField fx:id="pseudoField1" alignment="CENTER" layoutX="310.0" layoutY="160.0" maxWidth="-Infinity"
+                <TextField fx:id="emailField" alignment="CENTER" layoutX="310.0" layoutY="160.0" maxWidth="-Infinity"
                            prefWidth="200.0" promptText="Email (*)"/>
                 <Label fx:id="messageLabel1" text="Choose your role">
                     <VBox.margin>
@@ -86,9 +86,9 @@
                                 <VBox fx:id="consumerForm" alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0"
                                       spacing="5.0">
                                     <children>
-                                        <TextField fx:id="pseudoField2" alignment="CENTER" maxWidth="-Infinity"
+                                        <TextField fx:id="firstnameField" alignment="CENTER" maxWidth="-Infinity"
                                                    prefWidth="200.0" promptText="Firstname (*)"/>
-                                        <TextField fx:id="pseudoField21" alignment="CENTER" maxWidth="-Infinity"
+                                        <TextField fx:id="lastnameField" alignment="CENTER" maxWidth="-Infinity"
                                                    prefWidth="200.0" promptText="Lastname (*)"/>
                                     </children>
                                     <padding>
@@ -121,19 +121,17 @@
                                 <VBox fx:id="providerForm" alignment="CENTER_LEFT" disable="true" prefHeight="200.0"
                                       prefWidth="100.0" spacing="5.0">
                                     <children>
-                                        <TextField fx:id="pseudoField211" alignment="CENTER" layoutX="310.0"
-                                                   layoutY="105.0" maxWidth="-Infinity" prefWidth="200.0"
-                                                   promptText="Name (*)"/>
-                                        <TextField fx:id="pseudoField2111" alignment="CENTER" layoutX="310.0"
+                                        <TextField fx:id="nameField" alignment="CENTER" layoutX="310.0" layoutY="105.0"
+                                                   maxWidth="-Infinity" prefWidth="200.0" promptText="Name (*)"/>
+                                        <TextField fx:id="descriptionField" alignment="CENTER" layoutX="310.0"
                                                    layoutY="118.0" maxWidth="-Infinity" prefWidth="200.0"
                                                    promptText="Description (*)"/>
-                                        <TextField fx:id="pseudoField21111" alignment="CENTER" layoutX="310.0"
-                                                   layoutY="131.0" maxWidth="-Infinity" prefWidth="200.0"
-                                                   promptText="Phone"/>
-                                        <TextField fx:id="pseudoField211111" alignment="CENTER" layoutX="310.0"
+                                        <TextField fx:id="phoneField" alignment="CENTER" layoutX="310.0" layoutY="131.0"
+                                                   maxWidth="-Infinity" prefWidth="200.0" promptText="Phone"/>
+                                        <TextField fx:id="websiteField" alignment="CENTER" layoutX="310.0"
                                                    layoutY="144.0" maxWidth="-Infinity" prefWidth="200.0"
                                                    promptText="Website"/>
-                                        <TextField fx:id="pseudoField2111111" alignment="CENTER" layoutX="310.0"
+                                        <TextField fx:id="officeLocationField" alignment="CENTER" layoutX="310.0"
                                                    layoutY="157.0" maxWidth="-Infinity" prefWidth="200.0"
                                                    promptText="Office location"/>
                                     </children>
@@ -159,7 +157,7 @@
                             </HBox.margin>
                         </Button>
                         <Button defaultButton="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false"
-                                text="Submit"/>
+                                onAction="#onSubmit" text="Submit"/>
                     </children>
                 </HBox>
             </children>

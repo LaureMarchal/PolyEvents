@@ -40,8 +40,8 @@ public class LoginController {
             UserFacade.getInstance().login(pseudoField.getText(), passwordField.getText());
             this.messageLabel.setText("Good password !");
             this.messageLabel.setTextFill(Color.GREEN);
-        } catch (LoginException e1) {
-            this.messageLabel.setText(e1.getErrorText());
+        } catch (LoginException e) {
+            this.messageLabel.setText(e.getErrorText());
             this.messageLabel.setTextFill(Color.RED);
         }
     }

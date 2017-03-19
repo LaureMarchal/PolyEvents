@@ -1,6 +1,7 @@
 package persistence;
 
 import bl.dao.UserDAO;
+import bl.model.Role;
 import bl.model.User;
 import persistence.connector.Connector;
 
@@ -26,7 +27,7 @@ public class UserDAOPG extends UserDAO {
             if (!rs.next()) {
                 return null;
             } else {
-                return new User(rs.getString("pseudo"), rs.getString("password"), "", "", null);
+                return new User(rs.getString("pseudo"), rs.getString("password"), rs.getString("email"), Role.valueOf(rs.getString("role")));
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -3,6 +3,7 @@ package bl.facade;
 import bl.Util;
 import bl.dao.DAOFactory;
 import bl.exception.LoginException;
+import bl.exception.SignInException;
 import bl.model.User;
 
 /**
@@ -56,8 +57,42 @@ public class UserFacade {
         }
     }
 
-    public User register(User user) {
-        return null;
+    public User registerConsumer(String pseudo, String password, String email, String firstName, String lastName) throws SignInException {
+        User potentialUser = DAOFactory.getInstance().createUserDAO().read(pseudo);
+        if (pseudo.equals("")) {
+            throw new SignInException("The pseudo can't be empty");
+        } else if (potentialUser != null) {
+            throw new SignInException("The pseudo is already used");
+        } else if (password.equals("")) {
+            throw new SignInException("The password can't be empty");
+        } else if (email.equals("")) {
+            throw new SignInException("The email can't be empty");
+        } else if (firstName.equals("")) {
+            throw new SignInException("The first name can't be empty");
+        } else if (lastName.equals("")) {
+            throw new SignInException("The last name can't be empty");
+        }
+        return potentialUser;
+    }
+
+    public User registerProvider(String pseudo, String password, String email, String name, String description, String phoneNumber, String website, String officeLocation) throws SignInException {
+        User potentialUser = DAOFactory.getInstance().createUserDAO().read(pseudo);
+        if (pseudo.equals("")) {
+            throw new SignInException("The pseudo can't be empty");
+        } else if (potentialUser != null) {
+            throw new SignInException("The pseudo is already used");
+        } else if (password.equals("")) {
+            throw new SignInException("The password can't be empty");
+        } else if (email.equals("")) {
+            throw new SignInException("The email can't be empty");
+        } else if (name.equals("")) {
+            throw new SignInException("The name can't be empty");
+        } else if (description.equals("")) {
+            throw new SignInException("The description can't be empty");
+        } else if (!phoneNumber.equals("") && (phoneNumber.length() != 10 || !phoneNumber.matches("-?\\d+(\\.\\d+)?"))) {
+            throw new SignInException("The phone number is incorrect (it needs 10 numbers)");
+        }
+        return potentialUser;
     }
 
     public User updateUser(User user) {

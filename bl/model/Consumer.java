@@ -11,14 +11,20 @@ public class Consumer extends User {
     private List<TagSubscription> tagSubscriptions;
     private List<Registration> registrations;
 
-    public Consumer(String pseudo, String password, String email, String role, List<Notification> notifications, String firstName, String lastName, String comments, List<ProviderSubscription> providerSubscription, List<TagSubscription> tagSubscriptions, List<Registration> registrations) {
-        super(pseudo, password, email, role, notifications);
+    public Consumer(String pseudo, String password, String email, String firstName, String lastName, String comments, List<ProviderSubscription> providerSubscription, List<TagSubscription> tagSubscriptions, List<Registration> registrations) {
+        super(pseudo, password, email, Role.CONSUMER);
         this.firstName = firstName;
         this.lastName = lastName;
         this.comments = comments;
         this.providerSubscription = providerSubscription;
         this.tagSubscriptions = tagSubscriptions;
         this.registrations = registrations;
+    }
+
+    public Consumer(String pseudo, String password, String email, String firstName, String lastName) {
+        super(pseudo, password, email, Role.CONSUMER);
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public String getComments() {

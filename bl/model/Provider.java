@@ -12,8 +12,8 @@ public class Provider extends User {
     private List<Event> events;
     private List<ProviderSubscription> subscribers;
 
-    public Provider(String pseudo, String password, String email, String role, List<Notification> notifications, String name, String description, String phone, String website, String officeLocation, List<Event> events, List<ProviderSubscription> subscribers) {
-        super(pseudo, password, email, role, notifications);
+    public Provider(String pseudo, String password, String email, List<Notification> notifications, String name, String description, String phone, String website, String officeLocation, List<Event> events, List<ProviderSubscription> subscribers) {
+        super(pseudo, password, email, Role.PROVIDER, notifications);
         this.name = name;
         this.description = description;
         this.phone = phone;

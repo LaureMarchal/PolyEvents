@@ -3,9 +3,9 @@ package bl.model;
 public class EventReview implements Notifiable {
 
     private String content;
-    private String rate;
+    private int rate;
 
-    public EventReview(String content, String rate) {
+    public EventReview(String content, int rate) {
         this.content = content;
         this.rate = rate;
     }
@@ -18,11 +18,11 @@ public class EventReview implements Notifiable {
         this.content = content;
     }
 
-    public String getRate() {
+    public int getRate() {
         return rate;
     }
 
-    public void setRate(String rate) {
+    public void setRate(int rate) {
         this.rate = rate;
     }
 

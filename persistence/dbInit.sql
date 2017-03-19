@@ -60,26 +60,26 @@ CREATE TABLE "User" (
 
 CREATE TABLE Provider (
   name           VARCHAR(30) NOT NULL,
-  description    TEXT,
+  description    TEXT        NOT NULL,
   phone          VARCHAR(10),
   website        VARCHAR(100),
   officeLocation TEXT,
-  userID         VARCHAR(30),
+  userID         VARCHAR(30) NOT NULL,
   PRIMARY KEY (userID),
   FOREIGN KEY (userID) REFERENCES "User" (pseudo)
 );
 
 CREATE TABLE Administrator (
-  userID VARCHAR(30),
+  userID VARCHAR(30) NOT NULL,
   PRIMARY KEY (userID),
   FOREIGN KEY (userID) REFERENCES "User" (pseudo)
 );
 
 CREATE TABLE Consumer (
-  firstName VARCHAR(30),
-  lastName  VARCHAR(30),
+  firstName VARCHAR(30) NOT NULL,
+  lastName  VARCHAR(30) NOT NULL,
   comments  TEXT,
-  userID    VARCHAR(30),
+  userID    VARCHAR(30) NOT NULL,
   PRIMARY KEY (userID),
   FOREIGN KEY (userID) REFERENCES "User" (pseudo)
 );

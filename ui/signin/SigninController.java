@@ -1,8 +1,7 @@
 package ui.signin;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import ui.Controller;
 
 /**
@@ -10,26 +9,20 @@ import ui.Controller;
  */
 public class SigninController {
 
-    /**
-     * The label to show a message to the user (like a login error)
-     */
     @FXML
-    private Label messageLabel;
+    private VBox consumerForm;
 
-    /**
-     * The field to write the pseudo
-     */
     @FXML
-    private TextField pseudoField;
+    private VBox providerForm;
 
-    /**
-     * The field to write the password
-     */
-    @FXML
-    private TextField passwordField;
+    public void onConsumerSelected() {
+        consumerForm.setDisable(false);
+        providerForm.setDisable(true);
+    }
 
     public void onProviderSelected() {
-        System.out.println("Provider selected");
+        consumerForm.setDisable(true);
+        providerForm.setDisable(false);
     }
 
     public void onCancel() {

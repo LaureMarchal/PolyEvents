@@ -61,15 +61,19 @@
                 </Label>
                 <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="40.0">
                     <children>
-                        <VBox fx:id="consumerForm" alignment="TOP_RIGHT" prefHeight="400.0">
+                        <VBox alignment="TOP_RIGHT" prefHeight="400.0">
                             <children>
-                                <RadioButton mnemonicParsing="false" selected="true" text="Consumer">
+                                <RadioButton mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT"
+                                             onAction="#onConsumerSelected" selected="true" text="Consumer">
                                     <toggleGroup>
                                         <ToggleGroup fx:id="role"/>
                                     </toggleGroup>
                                     <font>
                                         <Font size="16.0"/>
                                     </font>
+                                    <VBox.margin>
+                                        <Insets bottom="5.0"/>
+                                    </VBox.margin>
                                 </RadioButton>
                                 <Label fx:id="messageLabel2" alignment="TOP_RIGHT" contentDisplay="CENTER"
                                        prefHeight="14.0" prefWidth="370.0"
@@ -79,7 +83,8 @@
                                         <Font name="System Italic" size="13.0"/>
                                     </font>
                                 </Label>
-                                <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+                                <VBox fx:id="consumerForm" alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0"
+                                      spacing="5.0">
                                     <children>
                                         <TextField fx:id="pseudoField2" alignment="CENTER" maxWidth="-Infinity"
                                                    prefWidth="200.0" promptText="Firstname (*)"/>
@@ -96,15 +101,16 @@
                             </HBox.margin>
                         </VBox>
                         <Separator orientation="VERTICAL" prefHeight="200.0"/>
-                        <VBox fx:id="providerForm" disable="true" layoutX="166.0" layoutY="10.0" prefHeight="400.0">
+                        <VBox layoutX="166.0" layoutY="10.0" prefHeight="400.0">
                             <children>
-                                <RadioButton mnemonicParsing="false" onAction="#onProviderSelected" text="Provider">
-                                    <toggleGroup>
-                                        <ToggleGroup fx:id="role1"/>
-                                    </toggleGroup>
+                                <RadioButton mnemonicParsing="false" onAction="#onProviderSelected" text="Provider"
+                                             toggleGroup="$role">
                                     <font>
                                         <Font size="16.0"/>
                                     </font>
+                                    <VBox.margin>
+                                        <Insets bottom="5.0"/>
+                                    </VBox.margin>
                                 </RadioButton>
                                 <Label fx:id="messageLabel21" alignment="TOP_LEFT" prefHeight="14.0" prefWidth="370.0"
                                        text="You create and manage you own events.">
@@ -112,7 +118,8 @@
                                         <Font name="System Italic" size="13.0"/>
                                     </font>
                                 </Label>
-                                <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+                                <VBox fx:id="providerForm" alignment="CENTER_LEFT" disable="true" prefHeight="200.0"
+                                      prefWidth="100.0" spacing="5.0">
                                     <children>
                                         <TextField fx:id="pseudoField211" alignment="CENTER" layoutX="310.0"
                                                    layoutY="105.0" maxWidth="-Infinity" prefWidth="200.0"

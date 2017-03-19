@@ -2,6 +2,7 @@ package ui.signIn;
 
 import bl.exception.SignInException;
 import bl.facade.UserFacade;
+import bl.model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -76,13 +77,16 @@ public class SignInController {
 
     public void onSubmit() {
         try {
+            User user;
             if (!consumerForm.isDisabled()) {
-                UserFacade.getInstance().registerConsumer(pseudoField.getText(), passwordField.getText(), emailField.getText(), firstnameField.getText(), lastnameField.getText());
+                user = UserFacade.getInstance().registerConsumer(pseudoField.getText(), passwordField.getText(), emailField.getText(), firstnameField.getText(), lastnameField.getText());
             } else {
-                UserFacade.getInstance().registerProvider(pseudoField.getText(), passwordField.getText(), emailField.getText(), nameField.getText(), descriptionField.getText(), phoneField.getText(), websiteField.getText(), officeLocationField.getText());
+                user = UserFacade.getInstance().registerProvider(pseudoField.getText(), passwordField.getText(), emailField.getText(), nameField.getText(), descriptionField.getText(), phoneField.getText(), websiteField.getText(), officeLocationField.getText());
             }
-            messageLabel.setText("You are registered !");
-            messageLabel.setTextFill(Color.GREEN);
+            messageLabel.setText("");
+            messageLabel.setTextFill(Color.BLACK);
+            Controller.getInstance().showInfoAlert("You are now registered as " + user.getPseudo() + " ! Please, try to login.");
+            Controller.getInstance().goTo(View.LOGIN);
         } catch (SignInException e) {
             messageLabel.setText(e.getErrorText());
             messageLabel.setTextFill(Color.RED);

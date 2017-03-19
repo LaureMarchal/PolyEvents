@@ -1,6 +1,8 @@
 package persistence;
 
 import bl.dao.UserDAO;
+import bl.model.Consumer;
+import bl.model.Provider;
 import bl.model.Role;
 import bl.model.User;
 import persistence.connector.Connector;
@@ -47,7 +49,7 @@ public class UserDAOPG extends UserDAO {
             ps.setString(4, user.getRole().name());
             ps.execute();
             connection.close();
-            return user;
+            return createAssociatedRole(user);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -62,6 +64,47 @@ public class UserDAOPG extends UserDAO {
     @Override
     public boolean delete(User user) {
         return true;
+    }
+
+    public User createAssociatedRole(User user) {
+        try {
+            String query;
+            PreparedStatement ps;
+            Connection connection = Connector.getInstance().getConnection();
+            switch (user.getRole()) {
+                case CONSUMER:
+                    query = "INSERT INTO Consumer (firstName, lastName, comments, userID) VALUES (?, ?, ?, ?)";
+                    ps = connection.prepareStatement(query);
+                    ps.setString(1, ((Consumer) user).getFirstName());
+                    ps.setString(2, ((Consumer) user).getLastName());
+                    ps.setString(3, ((Consumer) user).getComments());
+                    ps.setString(4, user.getPseudo());
+                    ps.execute();
+                    break;
+                case PROVIDER:
+                    query = "INSERT INTO Provider (name, description, phone, website, officeLocation, userID) VALUES (?, ?, ?, ?, ?, ?)";
+                    ps = connection.prepareStatement(query);
+                    ps.setString(1, ((Provider) user).getName());
+                    ps.setString(2, ((Provider) user).getDescription());
+                    ps.setString(3, ((Provider) user).getPhone());
+                    ps.setString(4, ((Provider) user).getWebsite());
+                    ps.setString(5, ((Provider) user).getOfficeLocation());
+                    ps.setString(6, user.getPseudo());
+                    ps.execute();
+                    break;
+                case ADMINISTRATOR:
+                    query = "INSERT INTO administrator (userID) VALUES (?)";
+                    ps = connection.prepareStatement(query);
+                    ps.setString(1, user.getPseudo());
+                    ps.execute();
+                    break;
+            }
+            connection.close();
+            return user;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

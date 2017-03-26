@@ -4,6 +4,7 @@ import bl.model.Consumer;
 import bl.model.Event;
 import bl.model.EventReview;
 import bl.model.Message;
+import bl.dao.DAOFactory;
 
 import java.util.List;
 
@@ -36,7 +37,8 @@ public class EventFacade {
     }
 
     public Event create(Event event) {
-        return event;
+        Event potentialEvent = DAOFactory.getInstance().createEventDAO().create(event);
+        return potentialEvent;
     }
 
     public Event update(Event event) {

@@ -14,11 +14,11 @@ public class ConnectorPG extends Connector {
      * Don't show in a public repository
      */
     private final static String JDBC = "postgresql";
-    private final static String HOST = "ec2-54-247-92-185.eu-west-1.compute.amazonaws.com";
+    private final static String HOST = "ec2-54-247-82-87.eu-west-1.compute.amazonaws.com";
     private final static String PORT = "5432";
-    private final static String DATABASE = "df0nkq6bthnr4h";
-    private final static String USER = "gqwrbquxnetqam";
-    private final static String PASSWORD = "e38e84444b98048d6fd2e214b1214d99d166823849206d570c9d1e837b0d4584";
+    private final static String DATABASE = "dfupganb0rggik";
+    private final static String USER = "icgvjargopicqc";
+    private final static String PASSWORD = "be1b94bc52f730f74a2bf306d68d8fb3dc94f755fca93c98635705020966a1fb";
     private final static String SSL_FOOTER = "?sslmode=require";
 
     @Override

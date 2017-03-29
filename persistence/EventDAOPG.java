@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -71,7 +72,24 @@ public class EventDAOPG extends EventDAO {
 
     @Override
     public List<Event> search(String title, String tag) {
-        return null;
+        List<Event> eventSearchResult = new ArrayList<Event>();
+        try{
+            String query = "SELECT Event.id FROM Event, Event_tags WHERE Event.id = Event_tags.eventID AND Event.title LIKE ? AND Event_tags.name = ?";
+            Connection connection = Connector.getInstance().getConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, ("?"+title+"?"));
+            ps.setString(1, tag);
+            ResultSet rs = ps.executeQuery(query);
+            while(rs.next()){
+                // Not sure, could be this.getOne(rs.getInt("Event.id"));
+                Event event = this.getOne(rs.getInt("id"));
+                eventSearchResult.add(event);
+            }
+            return eventSearchResult;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public  Event getOne(int id){
@@ -120,7 +138,7 @@ public class EventDAOPG extends EventDAO {
             ResultSet rsID = ps.executeQuery(queryID);
             connection.close();
             event.setId(rs.getInt("id"));
-           return event;
+            return event;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

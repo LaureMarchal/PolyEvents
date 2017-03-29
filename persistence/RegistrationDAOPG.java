@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.*;
 import java.text.SimpleDateFormat;
 
@@ -23,12 +24,19 @@ public class RegistrationDAOPG extends RegistrationDAO {
                 PreparedStatement ps = connection.prepareStatement(query);
                 ps.setString(1, registration.getConsumer().getPseudo());
                 ps.setInt(2, registration.getEvent().getId());
-                ps.setString(3, new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()));
+                String postTime = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+                ps.setString(3, postTime);
                 ps.setString(4, registration.getStatus());
                 ps.execute();
                 connection.close();
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
+                Date date = formatter.parse(postTime);
+                registration.setCreationTime(date);
                 return registration;
             } catch (SQLException e) {
+                e.printStackTrace();
+                return null;
+            } catch (ParseException e) {
                 e.printStackTrace();
                 return null;
             }
@@ -80,11 +88,7 @@ public class RegistrationDAOPG extends RegistrationDAO {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, event.getId());
             ResultSet rs = ps.executeQuery(query);
-            while (rs.next()) {
-                //TODO
-                String userid = rs.getString("USER_ID");
-                String username = rs.getString("USERNAME");
-            }
+           //TODO
             return registrations;
         } catch (SQLException e) {
             e.printStackTrace();

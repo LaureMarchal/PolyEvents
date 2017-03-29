@@ -140,9 +140,20 @@ public class EventController {
         //get the user logged
         Provider provider = (Provider) Controller.getInstance().userLogged;
         //create an event
-        Event event = new Event(0, titleField.getText(), subtitleField.getText(), locationField.getText(), descriptionField.getText(),
-        time, deadline, durationField.getText(), restriction, Integer.getInteger(placesField.getText()), price,  Integer.getInteger(delayPayementField.getText()), "AVAILABLE",
-        provider, null, listTags, null);
+        Event event = new Event(-1,
+                titleField.getText(),
+                subtitleField.getText(),
+                locationField.getText(),
+                descriptionField.getText(),
+                time,
+                deadline,
+                durationField.getText(),
+                restriction,
+                Integer.getInteger(placesField.getText()),
+                price,
+                Integer.getInteger(delayPayementField.getText()),
+                "AVAILABLE",
+                (Provider)Controller.userLogged);
         EventFacade.getInstance().create(event);
     }
 

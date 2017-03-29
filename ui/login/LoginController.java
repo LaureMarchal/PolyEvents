@@ -38,8 +38,9 @@ public class LoginController {
     public void onLogin() {
         try {
             UserFacade.getInstance().login(pseudoField.getText(), passwordField.getText());
-            this.messageLabel.setText("Good password !");
-            this.messageLabel.setTextFill(Color.GREEN);
+            Controller.getInstance().goTo(View.MAIN);
+            /*this.messageLabel.setText("Good password !");
+            this.messageLabel.setTextFill(Color.GREEN);*/
         } catch (LoginException e) {
             this.messageLabel.setText(e.getErrorText());
             this.messageLabel.setTextFill(Color.RED);

@@ -25,7 +25,7 @@ public class EventDAOPG extends EventDAO {
             String query = "INSERT INTO \"Event\" (id,title,subTitle, place, description, beginningTime, registrationDeadline, duration, \"constraints\", placesNumber, price, delayToPay, status, provider) VALUES (?, ?, ?, ?,?, ?, ?, ?,?, ?, ?, ?, ?,?)";
             Connection connection = Connector.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, String.valueOf(event.getId()));
+            ps.setInt(1, event.getId());
             ps.setString(2, event.getTitle());
             ps.setString(3, event.getSubTitle());
             ps.setString(4, event.getPlace());
@@ -34,9 +34,9 @@ public class EventDAOPG extends EventDAO {
             ps.setString(7, String.valueOf(event.getRegistrationDeadline()));
             ps.setString(8, event.getDuration());
             ps.setString(9, event.getConstraints());
-            ps.setString(10, String.valueOf(event.getPlacesNumber()));
-            ps.setString(11, String.valueOf(event.getPrice()));
-            ps.setString(12, String.valueOf(event.getDelayToPay()));
+            ps.setInt(10, event.getPlacesNumber());
+            ps.setFloat(11, event.getPrice());
+            ps.setInt(12, event.getDelayToPay());
             ps.setString(13, event.getStatus());
             ps.setString(14, event.getProvider().getPseudo());
             ps.execute();
@@ -50,7 +50,18 @@ public class EventDAOPG extends EventDAO {
 
     @Override
     public boolean delete(Event event) {
-        return false;
+        try {
+            String query = "DELETE FROM Event WHERE eventID = ?";
+            Connection connection = Connector.getInstance().getConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, event.getId());
+            ps.execute();
+            connection.close();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override

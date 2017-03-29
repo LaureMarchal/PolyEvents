@@ -10,8 +10,10 @@ public class Message implements Notifiable {
     private User writer;
     private Event event;
     private List<Message> children;
+    private int id;
 
-    public Message(String content, Date postTime, User writer, Event event, List<Message> children) {
+    public Message(int id, String content, Date postTime, User writer, Event event, List<Message> children) {
+        this.id = id;
         this.content = content;
         this.postTime = postTime;
         this.writer = writer;
@@ -21,6 +23,14 @@ public class Message implements Notifiable {
 
     public String getContent() {
         return content;
+    }
+
+    public void setID(int id) {
+        this.id = id;
+    }
+
+    public int getID() {
+        return this.id;
     }
 
     public void setContent(String content) {

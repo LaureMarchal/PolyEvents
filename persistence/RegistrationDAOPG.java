@@ -22,7 +22,7 @@ public class RegistrationDAOPG extends RegistrationDAO {
                 Connection connection = Connector.getInstance().getConnection();
                 PreparedStatement ps = connection.prepareStatement(query);
                 ps.setString(1, registration.getConsumer().getPseudo());
-                ps.setString(2, String.valueOf(registration.getEvent().getId()));
+                ps.setInt(2, registration.getEvent().getId());
                 ps.setString(3, new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()));
                 ps.setString(4, registration.getStatus());
                 ps.execute();
@@ -41,7 +41,7 @@ public class RegistrationDAOPG extends RegistrationDAO {
             Connection connection = Connector.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, registration.getConsumer().getPseudo());
-            ps.setString(2, String.valueOf(registration.getEvent().getId()));
+            ps.setInt(2, registration.getEvent().getId());
             ps.execute();
             connection.close();
             return true;
@@ -60,7 +60,7 @@ public class RegistrationDAOPG extends RegistrationDAO {
             ps.setString(1, new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()));
             ps.setString(2, registration.getStatus());
             ps.setString(3, registration.getConsumer().getPseudo());
-            ps.setString(4, String.valueOf(registration.getEvent().getId()));
+            ps.setInt(4, registration.getEvent().getId());
             ps.execute();
             connection.close();
             return registration;
@@ -78,7 +78,7 @@ public class RegistrationDAOPG extends RegistrationDAO {
             String query = "SELECT customerID FROM Registration WHERE eventID = ?";
             Connection connection = Connector.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, String.valueOf(event.getId()));
+            ps.setInt(1, event.getId());
             ResultSet rs = ps.executeQuery(query);
             while (rs.next()) {
                 //TODO
@@ -99,7 +99,7 @@ public class RegistrationDAOPG extends RegistrationDAO {
             String query = "SELECT * FROM Registration WHERE eventID = ? AND userID = ?";
             Connection connection = Connector.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, String.valueOf(eventID));
+            ps.setInt(1, eventID);
             ps.setString(2, userID);
             ResultSet rs = ps.executeQuery(query);
             //TODO getOne() in UserDAO

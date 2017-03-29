@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
+import bl.model.User;
 import ui.Controller;
 import ui.View;
 
@@ -37,10 +38,9 @@ public class LoginController {
      */
     public void onLogin() {
         try {
-            UserFacade.getInstance().login(pseudoField.getText(), passwordField.getText());
+            User userLogged = UserFacade.getInstance().login(pseudoField.getText(), passwordField.getText());
+            Controller.getInstance().userLogged = userLogged;
             Controller.getInstance().goTo(View.MAIN);
-            /*this.messageLabel.setText("Good password !");
-            this.messageLabel.setTextFill(Color.GREEN);*/
         } catch (LoginException e) {
             this.messageLabel.setText(e.getErrorText());
             this.messageLabel.setTextFill(Color.RED);

@@ -5,6 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
+import bl.model.User;
 
 import java.io.IOException;
 
@@ -17,6 +18,7 @@ public class Controller {
     private static Controller instance = new Controller();
 
     private Stage stage;
+    public static User userLogged;
 
     private Controller() {
     }
@@ -28,6 +30,7 @@ public class Controller {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
+
 
     public void goTo(View view) {
         if (stage != null) {

@@ -26,7 +26,7 @@ public class Event implements Notifiable {
     private List<Tag> tags;
     private List<Message> messages;
 
-    public Event(int id, String title, String subTitle, String place, String description, Date beginningTime, Date registrationDeadline, String duration, String constraints, int placesNumber, float price, int delayToPay, String status, Provider provider, List<Registration> registrations, List<Tag> tags, List<Message> messages) {
+    public Event(int id, String title, String subTitle, String place, String description, Date beginningTime, Date registrationDeadline, String duration, String constraints, int placesNumber, float price, int delayToPay, String status, Provider provider) {
         this.id = id;
         this.title = title;
         this.subTitle = subTitle;
@@ -41,9 +41,6 @@ public class Event implements Notifiable {
         this.delayToPay = delayToPay;
         this.status = status;
         this.provider = provider;
-        this.registrations = registrations;
-        this.tags = tags;
-        this.messages = messages;
     }
 
     public int getId() {
@@ -156,30 +153,6 @@ public class Event implements Notifiable {
 
     public void setProvider(Provider provider) {
         this.provider = provider;
-    }
-
-    public List<Registration> getRegistrations() {
-        return registrations;
-    }
-
-    public void setRegistrations(List<Registration> registrations) {
-        this.registrations = registrations;
-    }
-
-    public List<Tag> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<Tag> tags) {
-        this.tags = tags;
-    }
-
-    public List<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
     }
 
     @Override

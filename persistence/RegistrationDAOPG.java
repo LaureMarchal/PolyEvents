@@ -79,17 +79,47 @@ public class RegistrationDAOPG extends RegistrationDAO {
     }
 
     @Override
-    public List<Registration> findAll(Event event) {
+    public List<Registration> findAllForEvent(Event event) {
 
         try {
             List<Registration> registrations = new ArrayList<Registration>();
-            String query = "SELECT customerID FROM Registration WHERE eventID = ?";
+            String query = "SELECT * FROM Registration WHERE eventID = ?";
             Connection connection = Connector.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, event.getId());
             ResultSet rs = ps.executeQuery(query);
             while(rs.next()){
+                //TODO needs to be changed once ConsumerDOAPG.getOne(userID) is done
                 Consumer consumer =  (Consumer)FactoryDAOPG.getInstance().createUserDAO().read(rs.getString("userID"));
+                String status = rs.getString("status");
+                java.util.Date creationDate = rs.getTimestamp("creation_time");
+                EventReview eventReview = FactoryDAOPG.getInstance().createEventReviewDAO().getReviewByEventID(rs.getInt("eventID"),
+                        rs.getString("userID"));
+                Registration registration =  new Registration(event,
+                        consumer,
+                        creationDate,
+                        status,
+                        eventReview);
+                registrations.add(registration);
+            }
+            return registrations;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<Registration> findAllForConsumer(Consumer consumer) {
+
+        try {
+            List<Registration> registrations = new ArrayList<Registration>();
+            String query = "SELECT * FROM Registration WHERE consumerID = ?";
+            Connection connection = Connector.getInstance().getConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, consumer.getPseudo());
+            ResultSet rs = ps.executeQuery(query);
+            while(rs.next()){
+                Event event =  FactoryDAOPG.getInstance().createEventDAO().getOne(rs.getInt("consumerID"));
                 String status = rs.getString("status");
                 java.util.Date creationDate = rs.getTimestamp("creation_time");
                 EventReview eventReview = FactoryDAOPG.getInstance().createEventReviewDAO().getReviewByEventID(rs.getInt("eventID"),

@@ -1,5 +1,6 @@
 package bl.dao;
 
+import bl.model.Consumer;
 import bl.model.Event;
 import bl.model.Registration;
 
@@ -13,8 +14,10 @@ public abstract class RegistrationDAO {
 
     public abstract Registration update(Registration registration);
 
-    public abstract List<Registration> findAll(Event event);
+    public abstract List<Registration> findAllForEvent(Event event);
 
     public abstract Registration getOne(String userID, int eventID);
+
+    public abstract List<Registration> findAllForConsumer(Consumer consumer);
 
 }

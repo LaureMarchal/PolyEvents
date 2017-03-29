@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,25 +24,28 @@ public class EventDAOPG extends EventDAO {
     @Override
     public Event create(Event event) {
         try {
-            String query = "INSERT INTO \"Event\" (id,title,subTitle, place, description, beginningTime, registrationDeadline, duration, \"constraints\", placesNumber, price, delayToPay, status, provider) VALUES (?, ?, ?, ?,?, ?, ?, ?,?, ?, ?, ?, ?,?)";
+            String query = "INSERT INTO \"Event\" (title,subTitle, place, description, beginningTime, registrationDeadline, duration, \"constraints\", placesNumber, price, delayToPay, status, provider) VALUES (?, ?, ?,?, ?, ?, ?,?, ?, ?, ?, ?,?)";
             Connection connection = Connector.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setInt(1, event.getId());
-            ps.setString(2, event.getTitle());
-            ps.setString(3, event.getSubTitle());
-            ps.setString(4, event.getPlace());
-            ps.setString(5, event.getDescription());
-            ps.setString(6, String.valueOf(event.getBeginningTime()));
-            ps.setString(7, String.valueOf(event.getRegistrationDeadline()));
-            ps.setString(8, event.getDuration());
-            ps.setString(9, event.getConstraints());
-            ps.setInt(10, event.getPlacesNumber());
-            ps.setFloat(11, event.getPrice());
-            ps.setInt(12, event.getDelayToPay());
-            ps.setString(13, event.getStatus());
-            ps.setString(14, event.getProvider().getPseudo());
+            ps.setString(1, event.getTitle());
+            ps.setString(2, event.getSubTitle());
+            ps.setString(3, event.getPlace());
+            ps.setString(4, event.getDescription());
+            ps.setString(5, String.valueOf(event.getBeginningTime()));
+            ps.setString(6, String.valueOf(event.getRegistrationDeadline()));
+            ps.setString(7, event.getDuration());
+            ps.setString(8, event.getConstraints());
+            ps.setInt(9, event.getPlacesNumber());
+            ps.setFloat(10, event.getPrice());
+            ps.setInt(11, event.getDelayToPay());
+            ps.setString(12, event.getStatus());
+            ps.setString(13, event.getProvider().getPseudo());
             ps.execute();
+            String queryID = "SELECT id FROM Message WHERE id=LAST_INSERT_ID()";
+            PreparedStatement psID = connection.prepareStatement(queryID);
+            ResultSet rs = psID.executeQuery(queryID);
             connection.close();
+            event.setId(rs.getInt("id"));
             return event;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -55,7 +59,20 @@ public class EventDAOPG extends EventDAO {
             String query = "DELETE FROM Event WHERE eventID = ?";
             Connection connection = Connector.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setInt(1, event.getId());
+            ps.setString(1, event.getTitle());
+            ps.setString(2, event.getSubTitle());
+            ps.setString(3, event.getPlace());
+            ps.setString(4, event.getDescription());
+            ps.setString(5, String.valueOf(event.getBeginningTime()));
+            ps.setString(6, String.valueOf(event.getRegistrationDeadline()));
+            ps.setString(7, event.getDuration());
+            ps.setString(8, event.getConstraints());
+            ps.setInt(9, event.getPlacesNumber());
+            ps.setFloat(10, event.getPrice());
+            ps.setInt(11, event.getDelayToPay());
+            ps.setString(12, event.getStatus());
+            ps.setString(13, event.getProvider().getPseudo());
+            ps.setInt(14, event.getId());
             ps.execute();
             connection.close();
             return true;
@@ -67,7 +84,32 @@ public class EventDAOPG extends EventDAO {
 
     @Override
     public Event update(Event event) {
-        return null;
+        try {
+            String query = "UPDATE Event SET title = ? ," +
+                    "subTitle = ? ," +
+                    "place = ? ," +
+                    "description = ? ," +
+                    "beginningTime = ? ," +
+                    "registrationDeadline = ? ," +
+                    "duration = ? ," +
+                    "\"constraints\" = ? ," +
+                    "placesNumber = ? ," +
+                    "price = ? ," +
+                    "delayToPay = ? ," +
+                    "status = ? ," +
+                    "provider = ? " +
+                    "WHERE  eventID = ?";
+            Connection connection = Connector.getInstance().getConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+
+            ps.setInt(1, event.getId());
+            ps.execute();
+            connection.close();
+            return event;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override

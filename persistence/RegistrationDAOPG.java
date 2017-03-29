@@ -62,7 +62,7 @@ public class RegistrationDAOPG extends RegistrationDAO {
     @Override
     public Registration update(Registration registration) {
         try {
-            String query = "UPDATE Registration SET creation_time = ? status = ? WHERE consumerID = ? AND eventID = ?";
+            String query = "UPDATE Registration SET creation_time = ? , status = ? WHERE consumerID = ? AND eventID = ?";
             Connection connection = Connector.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()));
@@ -88,7 +88,19 @@ public class RegistrationDAOPG extends RegistrationDAO {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, event.getId());
             ResultSet rs = ps.executeQuery(query);
-           //TODO
+            while(rs.next()){
+                Consumer consumer =  (Consumer)FactoryDAOPG.getInstance().createUserDAO().read(rs.getString("userID"));
+                String status = rs.getString("status");
+                java.util.Date creationDate = rs.getTimestamp("creation_time");
+                EventReview eventReview = FactoryDAOPG.getInstance().createEventReviewDAO().getReviewByEventID(rs.getInt("eventID"),
+                        rs.getString("userID"));
+                Registration registration =  new Registration(event,
+                        consumer,
+                        creationDate,
+                        status,
+                        eventReview);
+                registrations.add(registration);
+            }
             return registrations;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -106,7 +118,7 @@ public class RegistrationDAOPG extends RegistrationDAO {
             ps.setInt(1, eventID);
             ps.setString(2, userID);
             ResultSet rs = ps.executeQuery(query);
-            //TODO getOne() in UserDAO
+            // Sets the newly found registration.
             Consumer consumer =  (Consumer)FactoryDAOPG.getInstance().createUserDAO().read(rs.getString("userID"));
             Event event = FactoryDAOPG.getInstance().createEventDAO().getOne(rs.getInt("eventID"));
             String status = rs.getString("status");

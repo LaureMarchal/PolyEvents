@@ -29,7 +29,7 @@ public class MessageDAOPG extends MessageDAO {
             message.setPostTime(null);
             String queryID = "SELECT id FROM Message WHERE id=LAST_INSERT_ID()";
             PreparedStatement psID = connection.prepareStatement(queryID);
-            ResultSet rs = ps.executeQuery(queryID);
+            ResultSet rs = psID.executeQuery(queryID);
             connection.close();
             message.setID(rs.getInt("id"));
             return message;

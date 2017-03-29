@@ -1,12 +1,18 @@
 package persistence;
 
+import bl.dao.DAOFactory;
 import bl.dao.EventDAO;
 import bl.model.Event;
+import bl.model.Provider;
+import bl.model.Registration;
+import bl.model.Tag;
+import bl.model.Message;
 import persistence.connector.Connector;
-
+import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -55,5 +61,53 @@ public class EventDAOPG extends EventDAO {
     @Override
     public List<Event> search(String title, String tag) {
         return null;
+    }
+
+    public  Event getOne(int id){
+        try {
+            String query = "SELECT * FROM Event WHERE eventID = ?";
+            Connection connection = Connector.getInstance().getConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, String.valueOf(id));
+            ResultSet rs = ps.executeQuery(query);
+            int eventID = id;
+            String title = rs.getString("title");
+            String subTitle = rs.getString("subtitle");
+            String place = rs.getString("location");
+            String description = rs.getString("descriotion");
+            java.util.Date beginningTime = rs.getTimestamp("begining_time");
+            java.util.Date registrationDeadline =  rs.getTimestamp("registration_deadline");
+            String duration = String.valueOf(rs.getFloat("duration"));
+            String constraints = rs.getString("event_constraints");
+            String status = rs.getString("status");
+            int placesNumber = rs.getInt("max_number_of_places");
+            float price =  rs.getFloat("price");
+            int delayToPay = rs.getInt("delay_to_pay");
+            Provider provider = (Provider)DAOFactory.getInstance().createUserDAO().read(rs.getString("providerID"));
+            List<Registration> registrations = null;
+            List<Tag> tags = null;
+            List<Message> messages = null;
+            Event event = new Event(eventID,
+                    title,
+                    subTitle,
+                    place,
+                    description,
+                    beginningTime,
+                    registrationDeadline,
+                    duration,
+                    constraints,
+                    placesNumber,
+                    price,
+                    delayToPay,
+                    status,
+                    provider,
+                    registrations,
+                    tags,
+                    messages);
+           return event;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

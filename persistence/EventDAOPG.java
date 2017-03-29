@@ -115,6 +115,11 @@ public class EventDAOPG extends EventDAO {
                     registrations,
                     tags,
                     messages);
+            String queryID = "SELECT id FROM Message WHERE id=LAST_INSERT_ID()";
+            PreparedStatement psID = connection.prepareStatement(queryID);
+            ResultSet rsID = ps.executeQuery(queryID);
+            connection.close();
+            event.setId(rs.getInt("id"));
            return event;
         } catch (SQLException e) {
             e.printStackTrace();

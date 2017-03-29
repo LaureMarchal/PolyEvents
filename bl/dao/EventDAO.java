@@ -14,4 +14,6 @@ public abstract class EventDAO {
 
     public abstract List<Event> search(String title, String tag);
 
+    public abstract Event getOne(int id);
+
 }

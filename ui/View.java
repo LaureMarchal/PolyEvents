@@ -4,7 +4,8 @@ public enum View {
 
     LOGIN("login/loginView"),
     SIGN_IN("signIn/signInView"),
-    MAIN("event/MainView");
+    MAIN("event/MainView"),
+    CREATE_EVENT("event/createEventView");
 
     private final String text;
 

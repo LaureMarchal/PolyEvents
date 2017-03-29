@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.event.EventListController">
    <top>
       <VBox prefHeight="26.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -61,10 +61,10 @@
                            </font>
                         </Button>
                         <ScrollBar layoutX="578.0" layoutY="102.0" orientation="VERTICAL" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="100.0" />
-                        <TableView fx:id="eventsTable" layoutX="30.0" layoutY="88.0" maxHeight="-Infinity" prefHeight="230.0" prefWidth="200.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="95.0">
+                        <TableView fx:id="eventsTable" layoutX="30.0" layoutY="88.0" maxHeight="-Infinity" prefHeight="230.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="95.0">
                           <columns>
                             <TableColumn fx:id="beginnigDateEvent" prefWidth="100.0" text="Beginnig Date" />
-                            <TableColumn fx:id="titleEvent" prefWidth="145.0" text="Title of the event" />
+                            <TableColumn fx:id="titleEvent" prefWidth="200.0" text="Title of the event" />
                               <TableColumn fx:id="registrationDateEvent" prefWidth="130.0" text="Registration ends in" />
                               <TableColumn fx:id="placesEvent" prefWidth="120.0" text="Places remaining" />
                               <TableColumn fx:id="priceEvent" prefWidth="75.0" text="Price" />

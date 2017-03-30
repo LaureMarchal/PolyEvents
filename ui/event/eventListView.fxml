@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8" fx:controller="ui.event.EventListController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" minHeight="0.0" minWidth="0.0" prefHeight="477.0" prefWidth="652.0" xmlns="http://javafx.com/javafx/8" fx:controller="ui.event.EventListController">
     <children>
         <TextField fx:id="searchField" layoutX="14.0" layoutY="14.0" maxWidth="-Infinity" prefHeight="27.0" prefWidth="580.0" promptText="Search by title or tag..." AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="10.0" />
         <Label fx:id="pricingLabel" layoutX="14.0" layoutY="46.0" text="Pricing" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="55.0">
@@ -55,7 +55,7 @@
         </TableView>
         <Button fx:id="addEventButton" layoutX="530.0" layoutY="88.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onAdd" prefWidth="120.0" text="Add an Event" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="97.0" />
         <Button layoutX="546.0" layoutY="10.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onSearch" prefWidth="70.0" text="Search" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="10.0" />
-        <Separator layoutX="-3.0" layoutY="38.0" prefHeight="9.0" prefWidth="608.0" />
-        <Separator layoutX="-4.0" layoutY="94.0" prefHeight="4.0" prefWidth="609.0" />
+        <Separator layoutX="-3.0" layoutY="38.0" prefHeight="9.0" prefWidth="608.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="38.0" />
+        <Separator layoutX="-4.0" layoutY="94.0" prefHeight="4.0" prefWidth="609.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="93.0" />
     </children>
 </AnchorPane>

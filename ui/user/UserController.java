@@ -146,10 +146,6 @@ public class UserController {
 
     }
 
-    public void onDelete(ActionEvent actionEvent) {
-
-    }
-
     public void onCancel(ActionEvent actionEvent) {
         initialize();
         AlertHelper.getInstance().showInfoAlert("Your updates have been cancelled.");

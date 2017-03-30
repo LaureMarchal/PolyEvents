@@ -135,7 +135,4 @@ public class UserFacade {
         return DAOFactory.getInstance().createUserDAO().update(user);
     }
 
-    public boolean deleteUser(User user) {
-        return true;
-    }
 }

@@ -1,12 +1,12 @@
 package ui.login;
 
-import bl.exception.LoginException;
+import bl.exception.UserException;
 import bl.facade.UserFacade;
+import bl.model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
-import bl.model.User;
 import ui.Controller;
 import ui.View;
 
@@ -39,15 +39,15 @@ public class LoginController {
     public void onLogin() {
         try {
             User userLogged = UserFacade.getInstance().login(pseudoField.getText(), passwordField.getText());
-            Controller.getInstance().userLogged = userLogged;
+            Controller.getInstance().setUserLogged(userLogged);
             Controller.getInstance().goTo(View.MAIN);
-        } catch (LoginException e) {
+        } catch (UserException e) {
             this.messageLabel.setText(e.getErrorText());
             this.messageLabel.setTextFill(Color.RED);
         }
     }
 
     public void onRegister() {
-        Controller.getInstance().goTo(View.SIGN_IN);
+        Controller.getInstance().goTo(View.SIGN_UP);
     }
 }

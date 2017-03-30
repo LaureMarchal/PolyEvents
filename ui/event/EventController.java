@@ -1,169 +1,266 @@
 package ui.event;
 
 import bl.facade.EventFacade;
-import bl.model.*;
+import bl.facade.RegistrationFacade;
+import bl.model.Consumer;
+import bl.model.Event;
+import bl.model.Registration;
+import bl.model.Role;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import ui.Controller;
+import ui.OnInit;
+import ui.View;
+import ui.helper.AlertHelper;
 
-import java.lang.reflect.Array;
-import java.util.*;
-import java.util.List;
+import java.util.Date;
+
 
 /**
- * Controller for the event's creation interface
+ * Controller for the event interface
  */
-public class EventController {
+public class EventController implements OnInit{
 
     /**
-     * The field to write the title
+     * The event to see
+     */
+    private Event currentEvent;
+
+    /**
+     * The label for event's title
      */
     @FXML
-    private TextField titleField;
+    private Label titleLabel;
 
     /**
-     * The field to write the subtitle
+     * The label for event's subtitle
      */
     @FXML
-    private TextField subtitleField;
+    private Label subtitleLabel;
 
     /**
-     * The field to write the location
+     * The label for event's decsription
      */
     @FXML
-    private TextField locationField;
+    private Label descriptionLabel;
 
     /**
-     * The field to write the description
+     * The label for event's duration
      */
     @FXML
-    private TextField descriptionField;
+    private Label durationLabel;
 
     /**
-     * The field to write the duration
+     * The label for event's conditions
      */
     @FXML
-    private TextField durationField;
+    private Label conditionsLabel;
+
 
     /**
-     * The picker to write the date
+     * The label for event's tags
      */
     @FXML
-    private DatePicker datePicker;
+    private Label tagsLabel;
 
     /**
-     * The field to write the beginning time
+     * The label for event's number of Places Left
      */
     @FXML
-    private TextField beginningTimeField;
+    private Label numberPlacesLeftLabel;
 
     /**
-     * The picker to write the deadline to register
+     * The label for event's time To Register
      */
     @FXML
-    private DatePicker registerDeadlinePicker;
+    private Label timeToRegisterLabel;
+
 
     /**
-     * The field to write the number of places
+     * The label for event's time Beginning
      */
     @FXML
-    private TextField placesField;
+    private Label timeBeginningLabel;
 
     /**
-     * The field to write the price
+     * The label for event's location
      */
     @FXML
-    private TextField priceField;
+    private Label locationLabel;
 
     /**
-     * The field to write the delay to pay
+     * The label for event's price
      */
     @FXML
-    private TextField delayPayementField;
+    private Label priceLabel;
 
     /**
-     * The field to write the list of tags
+     * The label for event's delay of Payement
      */
     @FXML
-    private TextField tagsField;
+    private Label delayPayementLabel;
+
+    //For consumers
 
     /**
-     * The Box to write the restriction on students
+     * The button to register to this event
      */
     @FXML
-    private CheckBox studentsRestrictionBox;
+    private Button registerButton;
 
     /**
-     * The Box to write the restriction on teachers
+     * The button to report this event
      */
     @FXML
-    private CheckBox teachersRestrictionBox;
+    private Button reportButton;
 
     /**
-     * The Box to write the restriction on BDE Members
+     * The button to add a review to this event
      */
     @FXML
-    private CheckBox bDEMembersRestrictionBox;
+    private Button addReviewButton;
+
+    //For provider
 
     /**
-     * On "Submit" button click, try to create the event with the tuple of fields provided
+     * The button to update the event
      */
-    public void onCreate() {
-        //assign event date
-        String date = datePicker.toString()+beginningTimeField.getText();
-        Date time = new Date(date);
-        //assign deadline registration
-        Date deadline = new Date(registerDeadlinePicker.toString());
-        //assign the price
-        Float price = Float.valueOf(priceField.getText());
-        //assign tag
-        List<Tag> listTags = new ArrayList<>();
-        //TODO split not ok be careful about spaces
-        String[] tags = tagsField.getText().split("#");
-        for (String t : tags ){
-            Tag tag = new Tag(t);
-            listTags.add(tag);
+    @FXML
+    private Button updateButton;
+
+    /**
+     * The button to manage the event
+     */
+    @FXML
+    private Button manageButton;
+
+    /**
+     * The button to delete the event
+     */
+    @FXML
+    private Button deleteButton;
+
+    /**
+     * The button to cancel the event
+     */
+    @FXML
+    private Button cancelButton;
+
+    /**
+     * The method initialize allows to hide some buttons in function of the user logged
+     */
+    @FXML
+    public void initialize(){
+        //assign all the label
+        this.titleLabel.setText(this.currentEvent.getTitle());
+        this.subtitleLabel.setText(this.currentEvent.getSubTitle());
+        this.descriptionLabel.setText(this.currentEvent.getDescription());
+        this.durationLabel.setText(this.currentEvent.getDuration());
+        this.delayPayementLabel.setText(String.valueOf(this.currentEvent.getDelayToPay()));
+        this.conditionsLabel.setText(this.currentEvent.getConstraints());
+        this.priceLabel.setText(String.valueOf(this.currentEvent.getPrice()));
+        int nbRegistration = this.currentEvent.getRegistrations().size();
+        this.numberPlacesLeftLabel.setText(String.valueOf(this.currentEvent.getPlacesNumber()- (nbRegistration)));
+        this.locationLabel.setText(this.currentEvent.getPlace());
+        this.tagsLabel.setText(this.currentEvent.getTags().toString());
+        this.timeBeginningLabel.setText(String.valueOf(this.currentEvent.getBeginningTime()));
+        this.timeToRegisterLabel.setText( String.valueOf(this.currentEvent.getRegistrationDeadline()));
+
+        if(Controller.getInstance().getUserLogged()==this.currentEvent.getProvider()){
+            addReviewButton.setDisable(true);
+            manageButton.setDisable(false);
         }
-        //assign eventcontraints
-        String restriction = "";
-        if (studentsRestrictionBox.isSelected()){
-            restriction = restriction+studentsRestrictionBox.getText();
+        if(Controller.getInstance().getUserLogged().getRole()== Role.CONSUMER){
+            cancelButton.setDisable(true);
+            deleteButton.setDisable(true);
+            manageButton.setDisable(true);
+            updateButton.setDisable(true);
+            reportButton.setDisable(false);
+            registerButton.setDisable(false);
+            manageButton.setDisable(true);
+        } else{
+            cancelButton.setDisable(false);
+            deleteButton.setDisable(false);
+            manageButton.setDisable(false);
+            updateButton.setDisable(false);
+            reportButton.setDisable(true);
+            registerButton.setDisable(true);
+            manageButton.setDisable(true);
         }
-        if (teachersRestrictionBox.isSelected()){
-            restriction = restriction+teachersRestrictionBox.getText();
-        }
-        if (bDEMembersRestrictionBox.isSelected()){
-            restriction = restriction+bDEMembersRestrictionBox.getText();
-        }
-        //get the user logged
-        Provider provider = (Provider) Controller.getInstance().userLogged;
-        //create an event
-        Event event = new Event(0, titleField.getText(), subtitleField.getText(), locationField.getText(), descriptionField.getText(),
-        time, deadline, durationField.getText(), restriction, Integer.getInteger(placesField.getText()), price,  Integer.getInteger(delayPayementField.getText()), "AVAILABLE",
-        provider, null, listTags, null);
-        EventFacade.getInstance().create(event);
     }
 
+
+    /**
+     * On "Edit" button click, go to the edition interface
+     */
     public void onEdit() {
-
+        Controller.getInstance().goTo(View.UPDATE_EVENT,this.currentEvent);
     }
 
+    /**
+     * On "Cancel" button click, set the status of the event to cancelled
+     */
+    public void onCancel() {
+        this.currentEvent.setStatus("Cancelled");
+        //TODO send notification to all consumers registered
+    }
+    /**
+     * On "Delete" button click, delete the event and go back to main view
+     */
     public void onDelete() {
-
+        //Controller.getInstance().showInfoAlert("Do you really want to delete this event ?");
+        EventFacade.getInstance().delete(this.currentEvent);
+        Controller.getInstance().goTo(View.MAIN);
     }
-
+    /**
+     * On "Report" button click, go to the reportation interface
+     */
     public void onReport() {
 
     }
-
+    /**
+     * On "new" button click, go to the review interface
+     */
     public void onAddReview() {
 
     }
-
+    /**
+     * On "New" button click, go to the add messages interface
+     */
     public void onAddMessage() {
 
     }
 
+    /**
+     * On "Manage" button click, go to the list of the event's consumers
+     */
+    public void onManage() {
+        //TODO go to
+    }
+
+    /**
+     * On "Register" button click, go to the registration interface
+     */
+    public void onRegister() {
+        RegistrationFacade.getInstance().create(
+                new Registration(currentEvent,
+                        (Consumer)Controller.getInstance().getUserLogged(),
+                        new Date(),
+                        "WAITING_PAYMENT",
+                        null));
+
+    }
+
+    /**
+     * On "Return" button click, return to the main view
+     */
+    public void onReturn() {
+        Controller.getInstance().goTo(View.MAIN);
+    }
+
+    @Override
+    public void onInit(Object data) {
+        this.currentEvent = (Event) data;
+    }
 }

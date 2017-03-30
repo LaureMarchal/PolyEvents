@@ -42,10 +42,12 @@ public class EventFacade {
     }
 
     public Event update(Event event) {
-        return event;
+        Event potentialEvent = DAOFactory.getInstance().createEventDAO().update(event);
+        return potentialEvent;
     }
 
-    public boolean delete(Event event) {
+    public boolean delete(Event event){
+        DAOFactory.getInstance().createEventDAO().delete(event);
         return true;
     }
 
@@ -61,8 +63,14 @@ public class EventFacade {
         return null;
     }
 
-    public List<Event> search(String title, String tag) {
-        return null;
+    public List<Event> search(String title, String tag){
+        List<Event> events = DAOFactory.getInstance().createEventDAO().search(title,tag);
+        return events;
+    }
+
+    public List<Event> getAllEvent() {
+        List<Event> events = DAOFactory.getInstance().createEventDAO().getAllEvent();
+        return events;
     }
 
 }

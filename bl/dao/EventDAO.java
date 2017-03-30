@@ -1,6 +1,7 @@
 package bl.dao;
 
 import bl.model.Event;
+import bl.model.Tag;
 
 import java.util.List;
 
@@ -16,4 +17,7 @@ public abstract class EventDAO {
 
     public abstract Event getOne(int id);
 
+    public abstract List<Event> getAllEventForTag(Tag tag);
+
+    public abstract List<Event> getAllEvent();
 }

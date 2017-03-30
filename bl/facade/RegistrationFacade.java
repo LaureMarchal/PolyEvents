@@ -1,5 +1,6 @@
 package bl.facade;
 
+import bl.dao.DAOFactory;
 import bl.model.Event;
 import bl.model.Registration;
 
@@ -27,7 +28,8 @@ public class RegistrationFacade {
     }
 
     public Registration create(Registration registration) {
-        return null;
+        Registration reg = DAOFactory.getInstance().createRegistrationDAO().create(registration);
+        return reg;
     }
 
     public boolean cancel(Registration registration) {

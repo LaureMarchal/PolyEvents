@@ -3,9 +3,12 @@ package ui;
 public enum View {
 
     LOGIN("login/loginView"),
-    SIGN_IN("signIn/signInView"),
-    MAIN("event/MainView"),
-    CREATE_EVENT("event/createEventView");
+    SIGN_UP("signUp/signUpView"),
+    MAIN("mainView"),
+    CREATE_EVENT("event/createEventView"),
+    SEE_EVENT("event/eventView"),
+    UPDATE_EVENT("event/updateEventView"),
+    SEE_PROVIDER("provider/providerView");
 
     private final String text;
 

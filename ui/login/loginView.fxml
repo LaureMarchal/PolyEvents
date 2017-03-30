@@ -4,8 +4,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-            minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.112"
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+            prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="ui.login.LoginController">
    <top>
       <VBox alignment="CENTER" BorderPane.alignment="CENTER">
@@ -44,7 +44,7 @@
                </VBox.margin></PasswordField>
              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                  <children>
-                     <Button mnemonicParsing="false" onAction="#onRegister" text="Sign in">
+                     <Button mnemonicParsing="false" onAction="#onRegister" text="Sign up">
                          <HBox.margin>
                              <Insets right="10.0"/>
                          </HBox.margin>

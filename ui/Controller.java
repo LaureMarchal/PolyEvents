@@ -1,11 +1,10 @@
 package ui;
 
+import bl.model.User;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.stage.Stage;
-import bl.model.User;
 
 import java.io.IOException;
 
@@ -13,12 +12,12 @@ public class Controller {
 
     private static final String APP_NAME = "PolyEvents";
     private static final int APP_WIDTH = 800;
-    private static final int APP_HEIGHT = 600;
+    private static final int APP_HEIGHT = 650;
 
     private static Controller instance = new Controller();
 
     private Stage stage;
-    public static User userLogged;
+    private User userLogged;
 
     private Controller() {
     }
@@ -46,11 +45,29 @@ public class Controller {
         }
     }
 
-    public void showInfoAlert(String text) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information");
-        alert.setHeaderText(null);
-        alert.setContentText(text);
-        alert.showAndWait();
+    public void goTo(View view, Object data) {
+        if (stage != null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../ui/" + view.toString() + ".fxml"));
+                Parent root = loader.load();
+                OnInit controller = loader.getController();
+                controller.onInit(data);
+                stage.setTitle(APP_NAME);
+                stage.setScene(new Scene(root, APP_WIDTH, APP_HEIGHT));
+                stage.show();
+            } catch (IOException e) {
+                System.err.println("The view " + "../ui/" + view.toString() + ".fxml" + " doesn't exist.");
+                e.printStackTrace();
+            }
+        }
     }
+
+    public User getUserLogged() {
+        return userLogged;
+    }
+
+    public void setUserLogged(User userLogged) {
+        this.userLogged = userLogged;
+    }
+
 }

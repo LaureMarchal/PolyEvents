@@ -5,13 +5,13 @@ import java.util.List;
 /**
  * Model to represent an user
  */
-public class User {
+public abstract class User {
 
-    private String pseudo;
-    private String password;
-    private String email;
-    private Role role;
-    private List<Notification> notifications;
+    protected String pseudo;
+    protected String password;
+    protected String email;
+    protected Role role;
+    protected List<Notification> notifications;
 
     public User(String pseudo, String password, String email, Role role, List<Notification> notifications) {
         this.pseudo = pseudo;
@@ -67,5 +67,7 @@ public class User {
     public void setNotifications(List<Notification> notifications) {
         this.notifications = notifications;
     }
+
+    public abstract User clone();
 
 }

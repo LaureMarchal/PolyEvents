@@ -9,16 +9,16 @@ public class Message implements Notifiable {
     private Date postTime;
     private User writer;
     private Event event;
-    private List<Message> children;
+    private int parentID;
     private int id;
 
-    public Message(int id, String content, Date postTime, User writer, Event event, List<Message> children) {
+    public Message(int id, String content, Date postTime, User writer, Event event, int parentID) {
         this.id = id;
         this.content = content;
         this.postTime = postTime;
         this.writer = writer;
         this.event = event;
-        this.children = children;
+        this.parentID = parentID;
     }
 
     public String getContent() {
@@ -61,12 +61,12 @@ public class Message implements Notifiable {
         this.event = event;
     }
 
-    public List<Message> getChildren() {
-        return children;
+    public int getParentID() {
+        return parentID;
     }
 
-    public void setChildren(List<Message> children) {
-        this.children = children;
+    public void setParentID(int parentID) {
+        this.parentID = parentID;
     }
 
     @Override

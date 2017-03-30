@@ -1,9 +1,6 @@
 package ui.helper;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 /**
  * Created by Tom Somerville Roberts on 30/03/2017.
@@ -11,19 +8,23 @@ import javafx.beans.property.StringProperty;
 public class PropertyConverter {
     private static PropertyConverter ourInstance = new PropertyConverter();
 
-    public static PropertyConverter getInstance() {
-        return ourInstance;
+    private PropertyConverter() {
     }
 
-    private PropertyConverter() {
+    public static PropertyConverter getInstance() {
+        return ourInstance;
     }
 
     public StringProperty convert(String input){
         return new SimpleStringProperty(input);
     }
 
-    public IntegerProperty convert(int input){
+    public IntegerProperty convert(Integer input){
         return new SimpleIntegerProperty(input);
+    }
+
+    public FloatProperty convert(Float input){
+        return new SimpleFloatProperty(input);
     }
 
 }

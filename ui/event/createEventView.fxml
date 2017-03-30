@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" fx:controller="ui.event.EventCreationController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="703.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.event.EventCreationController">
    <top>
       <VBox prefHeight="24.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -97,8 +97,9 @@
               <TextField fx:id="placesField" layoutX="128.0" layoutY="230.0" promptText="Number of places" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="236.0" />
               <TextField fx:id="priceField" layoutX="371.0" layoutY="230.0" maxWidth="-Infinity" prefWidth="100.0" promptText="Price (*)" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="236.0" />
               <TextField fx:id="delayPayementField" layoutX="287.0" layoutY="269.0" maxWidth="-Infinity" prefWidth="200.0" promptText="Delay to pay (in days)" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="270.0" />
-              <TextField fx:id="beginningTimeField" layoutX="92.0" layoutY="182.0" maxWidth="-Infinity" prefWidth="130.0" promptText="Beginning hour (*)" AnchorPane.leftAnchor="86.0" AnchorPane.topAnchor="182.0" />
-              <DatePicker fx:id="registerDeadlinePicker" layoutX="218.0" layoutY="182.0" maxWidth="-Infinity" prefWidth="180.0" promptText="Deadline to register(*)" AnchorPane.leftAnchor="222.0" AnchorPane.topAnchor="182.0" />
+              <TextField fx:id="beginningTimeHourField" layoutX="92.0" layoutY="182.0" maxWidth="-Infinity" prefWidth="125.0" promptText="Beginning hour (*)" AnchorPane.leftAnchor="86.0" AnchorPane.topAnchor="182.0" />
+              <DatePicker fx:id="registerDeadlinePicker" layoutX="218.0" layoutY="182.0" maxWidth="-Infinity" prefWidth="180.0" promptText="Deadline to register(*)" AnchorPane.rightAnchor="195.0" AnchorPane.topAnchor="182.0" />
+            <TextField fx:id="beginningTimeMinField" layoutX="183.0" layoutY="182.0" maxHeight="-Infinity" prefWidth="120.0" promptText="Beginning min (*)" AnchorPane.leftAnchor="210.0" AnchorPane.topAnchor="182.0" />
           </children>
        </AnchorPane>
    </center>

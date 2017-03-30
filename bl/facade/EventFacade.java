@@ -5,6 +5,7 @@ import bl.model.Consumer;
 import bl.model.Event;
 import bl.model.EventReview;
 import bl.model.Message;
+import bl.dao.DAOFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +62,8 @@ public class EventFacade {
     }
 
     public Message addMessage(Message message, Message parent) {
-        return null;
+        DAOFactory.getInstance().createMessageDAO().create(message,parent);
+        return message;
     }
 
     public List<Event> search(String title, String tag){

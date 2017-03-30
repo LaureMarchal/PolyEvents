@@ -1,15 +1,13 @@
 package persistence;
 
+import bl.dao.DAOFactory;
 import bl.dao.NotificationDAO;
 import bl.model.*;
 import persistence.connector.Connector;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class NotificationDAOPG extends NotificationDAO {
 
@@ -30,11 +28,47 @@ public class NotificationDAOPG extends NotificationDAO {
         }
     }
 
-    @Override
-    public Notification getAllForUser(User user) {
-
-        return null;
-    }
+//    @Override
+//    public  Notification getOne(int id) {
+//        try {
+//            String query = "SELECT * FROM Notification WHERE NotificationID = ?";
+//            Connection connection = Connector.getInstance().getConnection();
+//            PreparedStatement ps = connection.prepareStatement(query);
+//            ps.setString(1, String.valueOf(id));
+//            ResultSet rs = ps.executeQuery(query);
+//            int NotificationID = id;
+//            boolean isRead = isRead;
+//            Notifiable target = target;
+//            Notification notif = new Notification(NotificationID, isRead, target);
+//            connection.close();
+//            notif.setId(rs.getInt("id"));
+//            return notif;
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//    }
+//
+//    @Override
+//    public List<Notification> getAllForUser(User user) {
+//        List<Notification> notifications = new ArrayList<Notification>();
+//        try{
+//            String query = "SELECT * FROM Notification WHERE Notification.userid=?";
+//            Connection connection = Connector.getInstance().getConnection();
+//            PreparedStatement ps = connection.prepareStatement(query);
+//            ps.setString(1, String.valueOf(user));
+//            ResultSet rs = ps.executeQuery(query);
+//            while(rs.next()){
+//                int NotificationID = rs.getInt("id");
+//                Notification notif = new Notification(NotificationID);
+//                notifications.add(notif);
+//            }
+//            return notifications;
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//    }
 
     @Override
     public Notification createEventNotification(Notification notification, User user, String relatedTo, Event event, Message message, User relatesToUser, Consumer relatesToConsumer, Provider relatesToProvider){
@@ -108,5 +142,15 @@ public class NotificationDAOPG extends NotificationDAO {
                 e.printStackTrace();
                 return null;
             }
+    }
+
+    @Override
+    public List<Notification> getAllForUser(User user) {
+        return null;
+    }
+
+    @Override
+    public Notification getOne(int id) {
+        return null;
     }
 }

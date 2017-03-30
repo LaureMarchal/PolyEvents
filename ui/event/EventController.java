@@ -1,7 +1,10 @@
 package ui.event;
 
 import bl.facade.EventFacade;
+import bl.facade.RegistrationFacade;
+import bl.model.Consumer;
 import bl.model.Event;
+import bl.model.Registration;
 import bl.model.Role;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,6 +13,8 @@ import ui.Controller;
 import ui.OnInit;
 import ui.View;
 import ui.helper.AlertHelper;
+
+import java.util.Date;
 
 
 /**
@@ -204,7 +209,7 @@ public class EventController implements OnInit{
      * On "Delete" button click, delete the event and go back to main view
      */
     public void onDelete() {
-        AlertHelper.getInstance().showInfoAlert("Do you really want to delete this event ?");
+        //Controller.getInstance().showInfoAlert("Do you really want to delete this event ?");
         EventFacade.getInstance().delete(this.currentEvent);
         Controller.getInstance().goTo(View.MAIN);
     }
@@ -238,6 +243,12 @@ public class EventController implements OnInit{
      * On "Register" button click, go to the registration interface
      */
     public void onRegister() {
+        RegistrationFacade.getInstance().create(
+                new Registration(currentEvent,
+                        (Consumer)Controller.getInstance().getUserLogged(),
+                        new Date(),
+                        "WAITING_PAYMENT",
+                        null));
 
     }
 

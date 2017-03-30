@@ -2,13 +2,20 @@ package ui.event;
 
 import bl.facade.EventFacade;
 import bl.model.Event;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import ui.Controller;
 import ui.View;
+import javafx.collections.FXCollections;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.event.ActionEvent;
+import ui.helper.DateHelper;
+import ui.helper.PropertyConverter;
 
+import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 /**
  * Controller for the event's list interface
@@ -16,6 +23,7 @@ import java.util.List;
 public class EventListController {
 
     public static ObservableList<Event> eventsList;
+    private Event selectedEvent;
     /**
      * The box to choose if the user wants to search free events or not
      */
@@ -40,32 +48,32 @@ public class EventListController {
      * The table where are events
      */
     @FXML
-    private TableView eventsTable;
+    private TableView<Event> eventsTable;
     /**
      * The table column for the event date
      */
     @FXML
-    private TableColumn beginnigDateEvent;
+    private TableColumn<Event,String> beginnigDateEvent;
     /**
      * The table column for the event title
      */
     @FXML
-    private TableColumn titleEvent;
+    private TableColumn<Event,String> titleEvent;
     /**
      * The table column for the event deadline to register
      */
     @FXML
-    private TableColumn registrationDateEvent;
+    private TableColumn<Event,String> registrationDateEvent;
     /**
      * The table column for the event number of places
      */
     @FXML
-    private TableColumn placesEvent;
+    private TableColumn<Event,Integer> placesEvent;
     /**
      * The table column for the event price
      */
     @FXML
-    private TableColumn priceEvent;
+    private TableColumn<Event,Float> priceEvent;
     /**
      * The button to add events can only be seen by providers or administrators
      */
@@ -124,15 +132,13 @@ public class EventListController {
      * Initialize the events table view
      */
     private void initializeEventsTableView(){
-/*
         eventsTable.setItems(eventsList);
-        beginnigDateEvent.setCellValueFactory(cellData -> cellData.getValue().beginningDate());
-        titleEvent.setCellValueFactory(cellData -> cellData.getValue().title);
-        registrationDateEvent.setCellValueFactory(cellData -> cellData.getValue().yearReleaseProperty());
-        placesEvent.setCellValueFactory(cellData -> cellData.getValue().gameTypeLabelProperty());
-        priceEvent.setCellValueFactory(cellData -> cellData.getValue().price());
+        beginnigDateEvent.setCellValueFactory(cellData -> PropertyConverter.getInstance().convert(DateHelper.getInstance().formatter(cellData.getValue().getBeginningTime())));
+        titleEvent.setCellValueFactory(cellData -> PropertyConverter.getInstance().convert(cellData.getValue().getTitle()));
+        registrationDateEvent.setCellValueFactory(cellData -> PropertyConverter.getInstance().convert(DateHelper.getInstance().formatter(cellData.getValue().getRegistrationDeadline())));
+        placesEvent.setCellValueFactory(cellData -> PropertyConverter.getInstance().convert(cellData.getValue().getPlacesNumber()).asObject());
+        priceEvent.setCellValueFactory(cellData -> PropertyConverter.getInstance().convert(cellData.getValue().getPrice()).asObject());
         eventsTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> selectedEvent = newValue);
-*/
     }
 }

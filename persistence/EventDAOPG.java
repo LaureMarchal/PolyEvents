@@ -109,7 +109,7 @@ public class EventDAOPG extends EventDAO {
     public List<Event> search(String title, String tag) {
         List<Event> eventSearchResult = new ArrayList<Event>();
         try{
-            String query = "SELECT Event.id FROM Event, Event_tags WHERE Event.id = Event_tags.eventID AND Event.title LIKE ? AND Event_tags.name = ?";
+            String query = "SELECT Event.id FROM Event, Event_tags WHERE Event.id = Event_tags.eventID AND Event.title LIKE ? OR Event_tags.name = ?";
             Connection connection = Connector.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, ("?"+title+"?"));

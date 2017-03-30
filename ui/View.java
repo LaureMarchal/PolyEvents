@@ -3,7 +3,7 @@ package ui;
 public enum View {
 
     LOGIN("login/loginView"),
-    SIGN_IN("signIn/signInView"),
+    SIGN_UP("signUp/signUpView"),
     MAIN("MainView"),
     CREATE_EVENT("event/createEventView"),
     SEE_EVENT("event/eventView");

@@ -48,6 +48,6 @@ public class LoginController {
     }
 
     public void onRegister() {
-        Controller.getInstance().goTo(View.SIGN_IN);
+        Controller.getInstance().goTo(View.SIGN_UP);
     }
 }

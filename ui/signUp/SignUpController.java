@@ -1,4 +1,4 @@
-package ui.signIn;
+package ui.signUp;
 
 import bl.exception.SignInException;
 import bl.facade.UserFacade;
@@ -11,7 +11,7 @@ import javafx.scene.paint.Color;
 import ui.Controller;
 import ui.View;
 
-public class SignInController {
+public class SignUpController {
 
     // Common
 

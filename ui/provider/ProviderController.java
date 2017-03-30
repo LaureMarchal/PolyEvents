@@ -1,8 +1,17 @@
 package ui.provider;
 
+import bl.facade.ProviderFacade;
+import bl.model.Consumer;
 import bl.model.Provider;
-import javafx.scene.control.Label;
+import bl.model.ProviderReview;
+import javafx.collections.FXCollections;
+import javafx.scene.control.*;
+import ui.Controller;
 import ui.OnInit;
+import ui.helper.AlertHelper;
+import ui.helper.PropertyConverter;
+
+import java.util.List;
 
 /**
  * Controller for the provider interface
@@ -10,6 +19,7 @@ import ui.OnInit;
 public class ProviderController implements OnInit {
 
     private Provider displayedProvider;
+    private ProviderReview displayedProviderReview;
 
     public Label nameLabel;
     public Label descriptionLabel;
@@ -18,8 +28,19 @@ public class ProviderController implements OnInit {
     public Label websiteLabel;
     public Label officeLocationLabel;
 
+    public TitledPane yourReviewPanel;
+    public Slider rateSlider;
+    public TextArea commentTextArea;
+    public Button postButton;
+    public Button deleteButton;
+
+    public TableView<ProviderReview> reviewsTable;
+    public TableColumn<ProviderReview, String> rateColumn;
+    public TableColumn<ProviderReview, String> commentColumn;
+
     @Override
     public void onInit(Object data) {
+        // Display basic data
         this.displayedProvider = (Provider) data;
         this.nameLabel.setText(this.displayedProvider.getName());
         this.descriptionLabel.setText(this.displayedProvider.getDescription());
@@ -27,10 +48,67 @@ public class ProviderController implements OnInit {
         this.phoneLabel.setText(this.displayedProvider.getPhone());
         this.websiteLabel.setText(this.displayedProvider.getWebsite());
         this.officeLocationLabel.setText(this.displayedProvider.getOfficeLocation());
+
+        // Don't display "Your review" for the ownership
+        if (this.displayedProvider.getPseudo().equals(Controller.getInstance().getUserLogged().getPseudo())) {
+            this.yourReviewPanel.setVisible(false);
+        } else {
+            // Display potential review by current user
+            this.displayedProviderReview = ProviderFacade.getInstance().getReviewByProviderAndConsumer(this.displayedProvider, (Consumer) Controller.getInstance().getUserLogged());
+            if (this.displayedProviderReview != null) {
+                this.rateSlider.setValue(this.displayedProviderReview.getRate());
+                this.commentTextArea.setText(this.displayedProviderReview.getContent());
+            }
+            this.postButton.setVisible(this.displayedProviderReview == null);
+            this.deleteButton.setVisible(this.displayedProviderReview != null);
+        }
+
+        loadReviews();
     }
 
-    public void onComment(){
+    public void onPost() {
 
+        if (this.commentTextArea.getText().isEmpty()) {
+            AlertHelper.getInstance().showInfoAlert("You must write a comment to post a review.");
+            return;
+        }
+
+        ProviderReview result = ProviderFacade.getInstance().postReview(
+                this.displayedProvider,
+                (Consumer) Controller.getInstance().getUserLogged(),
+                new ProviderReview(this.commentTextArea.getText(), (int) this.rateSlider.getValue())
+        );
+
+        if (result != null) {
+            AlertHelper.getInstance().showInfoAlert("Your review has been submitted.");
+            this.displayedProviderReview = result;
+            this.postButton.setVisible(false);
+            this.deleteButton.setVisible(true);
+            loadReviews();
+        } else {
+            AlertHelper.getInstance().showInfoAlert("Your review can't be submitted.");
+        }
+    }
+
+    public void onDelete() {
+        if (ProviderFacade.getInstance().deleteReview(this.displayedProvider, (Consumer) Controller.getInstance().getUserLogged())) {
+            AlertHelper.getInstance().showInfoAlert("Your review has been deleted");
+            this.rateSlider.setValue(3);
+            this.commentTextArea.setText("");
+            this.displayedProviderReview = null;
+            this.postButton.setVisible(true);
+            this.deleteButton.setVisible(false);
+            loadReviews();
+        } else {
+            AlertHelper.getInstance().showInfoAlert("Your review can't be deleted");
+        }
+    }
+
+    private void loadReviews() {
+        List<ProviderReview> reviews = ProviderFacade.getInstance().getAllReviewsByProvider(this.displayedProvider);
+        this.reviewsTable.setItems(FXCollections.observableList(reviews));
+        this.rateColumn.setCellValueFactory(cellData -> PropertyConverter.getInstance().convert(cellData.getValue().getRate() + "/5"));
+        this.commentColumn.setCellValueFactory(cellData -> PropertyConverter.getInstance().convert(cellData.getValue().getContent()));
     }
 
 }

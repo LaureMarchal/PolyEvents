@@ -1,11 +1,13 @@
 package bl.facade;
 
+import bl.dao.DAOFactory;
 import bl.model.Consumer;
 import bl.model.Event;
 import bl.model.EventReview;
 import bl.model.Message;
 import bl.dao.DAOFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -70,8 +72,8 @@ public class EventFacade {
     }
 
     public List<Event> getAllEvent() {
-        List<Event> events = DAOFactory.getInstance().createEventDAO().getAllEvent();
-        return events;
+        //List<Event> events = DAOFactory.getInstance().createEventDAO().getAllEvent();
+        return new ArrayList<>();
     }
 
 }

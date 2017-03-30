@@ -155,6 +155,23 @@ public class Event implements Notifiable {
         this.provider = provider;
     }
 
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public List<Registration> getRegistrations() {
+        return registrations;
+    }
+
+    public void setRegistrations(List<Registration> registrations) {
+        this.registrations = registrations;
+    }
+
+
     @Override
     public String getNotificationText() {
         return "An new event called " + title + " has been created by " + provider.getPseudo();

@@ -160,6 +160,7 @@ public class EventCreationController {
                 Integer.getInteger(delayPayementField.getText()),
                 "AVAILABLE",
                 provider);
+        event.setTags(listTags);
         EventFacade.getInstance().create(event);
     }
 

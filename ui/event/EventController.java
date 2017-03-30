@@ -1,165 +1,98 @@
 package ui.event;
 
-import bl.facade.EventFacade;
-import bl.model.Event;
-import bl.model.Provider;
-import bl.model.Tag;
+import bl.model.Role;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import ui.Controller;
 import ui.View;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 /**
- * Controller for the event's creation interface
+ * Controller for the event interface
  */
 public class EventController {
 
     /**
-     * The field to write the title
+     * The label for event's title
      */
     @FXML
-    private TextField titleField;
+    private Label titleLabel;
 
     /**
-     * The field to write the subtitle
+     * The label for event's subtitle
      */
     @FXML
-    private TextField subtitleField;
+    private Label subtitleLabel;
 
     /**
-     * The field to write the location
+     * The label for event's decsription
      */
     @FXML
-    private TextField locationField;
+    private Label descriptionLabel;
+
+    //For consumers
 
     /**
-     * The field to write the description
+     * The button to register to this event
      */
     @FXML
-    private TextArea descriptionArea;
+    private Button registerButton;
 
     /**
-     * The field to write the duration
+     * The button to report this event
      */
     @FXML
-    private TextField durationField;
+    private Button reportButton;
+
+    //For provider
 
     /**
-     * The picker to write the date
+     * The button to update the event
      */
     @FXML
-    private DatePicker datePicker;
+    private Button updateButton;
 
     /**
-     * The field to write the beginning time
+     * The button to manage the event
      */
     @FXML
-    private TextField beginningTimeField;
+    private Button manageButton;
 
     /**
-     * The picker to write the deadline to register
+     * The button to delete the event
      */
     @FXML
-    private DatePicker registerDeadlinePicker;
+    private Button deleteButton;
 
     /**
-     * The field to write the number of places
+     * The button to cancel the event
      */
     @FXML
-    private TextField placesField;
+    private Button cancelButton;
 
     /**
-     * The field to write the price
+     * The method initialize allows to hide some buttons in function of the user logged
      */
     @FXML
-    private TextField priceField;
+    public void initialize(){
 
-    /**
-     * The field to write the delay to pay
-     */
-    @FXML
-    private TextField delayPayementField;
-
-    /**
-     * The field to write the list of tags
-     */
-    @FXML
-    private TextField tagsField;
-
-    /**
-     * The Box to write the restriction on students
-     */
-    @FXML
-    private CheckBox studentsRestrictionBox;
-
-    /**
-     * The Box to write the restriction on teachers
-     */
-    @FXML
-    private CheckBox teachersRestrictionBox;
-
-    /**
-     * The Box to write the restriction on BDE Members
-     */
-    @FXML
-    private CheckBox bDEMembersRestrictionBox;
-
-    /**
-     * On "Submit" button click, try to create the event with the tuple of fields provided
-     */
-    public void onCreate() {
-        //assign event date
-        String date = datePicker.toString()+beginningTimeField.getText();
-        Date time = new Date(date);
-        //assign deadline registration
-        Date deadline = new Date(registerDeadlinePicker.toString());
-        //assign the price
-        Float price = Float.valueOf(priceField.getText());
-        //assign tag
-        List<Tag> listTags = new ArrayList<>();
-        //TODO split not ok be careful about spaces
-        String[] tags = tagsField.getText().split("#");
-        for (String t : tags ){
-            Tag tag = new Tag(t);
-            listTags.add(tag);
+        if(Controller.getInstance().getUserLogged().getRole()== Role.CONSUMER){
+            cancelButton.setDisable(true);
+            deleteButton.setDisable(true);
+            manageButton.setDisable(true);
+            updateButton.setDisable(true);
+            reportButton.setDisable(false);
+            registerButton.setDisable(false);
+        } else{
+            cancelButton.setDisable(false);
+            deleteButton.setDisable(false);
+            manageButton.setDisable(false);
+            updateButton.setDisable(false);
+            reportButton.setDisable(true);
+            registerButton.setDisable(true);
         }
-        //assign eventcontraints
-        String restriction = "";
-        if (studentsRestrictionBox.isSelected()){
-            restriction = restriction+studentsRestrictionBox.getText();
-        }
-        if (teachersRestrictionBox.isSelected()){
-            restriction = restriction+teachersRestrictionBox.getText();
-        }
-        if (bDEMembersRestrictionBox.isSelected()){
-            restriction = restriction+bDEMembersRestrictionBox.getText();
-        }
-        //get the user logged
-        Provider provider = (Provider) Controller.getInstance().getUserLogged();
-        //create an event
-        Event event = new Event(-1,
-                titleField.getText(),
-                subtitleField.getText(),
-                locationField.getText(),
-                descriptionArea.getText(),
-                time,
-                deadline,
-                durationField.getText(),
-                restriction,
-                Integer.getInteger(placesField.getText()),
-                price,
-                Integer.getInteger(delayPayementField.getText()),
-                "AVAILABLE",
-                (Provider) Controller.getInstance().getUserLogged());
-        EventFacade.getInstance().create(event);
     }
+
 
     public void onEdit() {
 

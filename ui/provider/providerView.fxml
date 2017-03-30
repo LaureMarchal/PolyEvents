@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
@@ -21,52 +22,117 @@
         </VBox>
     </top>
     <center>
-        <HBox prefHeight="100.0" prefWidth="200.0" spacing="6.0" BorderPane.alignment="CENTER">
-            <children>
-                <TitledPane collapsible="false" layoutX="10.0" layoutY="10.0" prefHeight="50.0" prefWidth="200.0"
-                            text="Email">
-                    <content>
-                        <Label fx:id="emailLabel" prefHeight="106.0" prefWidth="198.0">
-                            <padding>
-                                <Insets left="6.0"/>
-                            </padding>
-                        </Label>
-                    </content>
-                </TitledPane>
-                <TitledPane collapsible="false" layoutX="210.0" layoutY="10.0" prefHeight="50.0" prefWidth="200.0"
-                            text="Phone">
-                    <content>
-                        <Label fx:id="phoneLabel" prefHeight="106.0" prefWidth="198.0">
-                            <padding>
-                                <Insets left="6.0"/>
-                            </padding>
-                        </Label>
-                    </content>
-                </TitledPane>
-                <TitledPane collapsible="false" layoutX="410.0" layoutY="10.0" prefHeight="50.0" prefWidth="200.0"
-                            text="Website">
-                    <content>
-                        <Label fx:id="websiteLabel" prefHeight="106.0" prefWidth="198.0">
-                            <padding>
-                                <Insets left="6.0"/>
-                            </padding>
-                        </Label>
-                    </content>
-                </TitledPane>
-                <TitledPane collapsible="false" layoutX="601.0" layoutY="10.0" prefHeight="50.0" prefWidth="200.0"
-                            text="Office location">
-                    <content>
-                        <Label fx:id="officeLocationLabel" prefHeight="106.0" prefWidth="198.0">
-                            <padding>
-                                <Insets left="6.0"/>
-                            </padding>
-                        </Label>
-                    </content>
-                </TitledPane>
-            </children>
+        <VBox BorderPane.alignment="CENTER">
             <BorderPane.margin>
                 <Insets bottom="6.0" left="6.0" right="6.0" top="6.0"/>
             </BorderPane.margin>
-        </HBox>
+            <children>
+                <HBox prefHeight="50.0" prefWidth="200.0" spacing="6.0">
+                    <children>
+                        <TitledPane collapsible="false" layoutX="10.0" layoutY="10.0" prefHeight="50.0"
+                                    prefWidth="200.0" text="Email">
+                            <content>
+                                <Label fx:id="emailLabel" prefHeight="106.0" prefWidth="198.0">
+                                    <padding>
+                                        <Insets left="6.0"/>
+                                    </padding>
+                                </Label>
+                            </content>
+                        </TitledPane>
+                        <TitledPane collapsible="false" layoutX="210.0" layoutY="10.0" prefHeight="50.0"
+                                    prefWidth="200.0" text="Phone">
+                            <content>
+                                <Label fx:id="phoneLabel" prefHeight="106.0" prefWidth="198.0">
+                                    <padding>
+                                        <Insets left="6.0"/>
+                                    </padding>
+                                </Label>
+                            </content>
+                        </TitledPane>
+                        <TitledPane collapsible="false" layoutX="410.0" layoutY="10.0" prefHeight="50.0"
+                                    prefWidth="200.0" text="Website">
+                            <content>
+                                <Label fx:id="websiteLabel" prefHeight="106.0" prefWidth="198.0">
+                                    <padding>
+                                        <Insets left="6.0"/>
+                                    </padding>
+                                </Label>
+                            </content>
+                        </TitledPane>
+                        <TitledPane collapsible="false" layoutX="601.0" layoutY="10.0" prefHeight="50.0"
+                                    prefWidth="200.0" text="Office location">
+                            <content>
+                                <Label fx:id="officeLocationLabel" prefHeight="106.0" prefWidth="198.0">
+                                    <padding>
+                                        <Insets left="6.0"/>
+                                    </padding>
+                                </Label>
+                            </content>
+                        </TitledPane>
+                    </children>
+                </HBox>
+                <HBox prefHeight="430.0" prefWidth="200.0">
+                    <children>
+                        <TitledPane collapsible="false" prefHeight="430.0" prefWidth="390.0" text="Feedbacks">
+                            <content>
+                                <TableView prefHeight="200.0" prefWidth="200.0">
+                                    <columns>
+                                        <TableColumn prefWidth="75.0" text="C1"/>
+                                        <TableColumn prefWidth="75.0" text="C2"/>
+                                    </columns>
+                                </TableView>
+                            </content>
+                        </TitledPane>
+                        <TitledPane collapsible="false" prefHeight="430.0" prefWidth="390.0" text="Your feedback">
+                            <HBox.margin>
+                                <Insets left="6.0"/>
+                            </HBox.margin>
+                            <content>
+                                <Pane>
+                                    <children>
+                                        <Group>
+                                            <children>
+                                                <Label text="Your rate :">
+                                                    <padding>
+                                                        <Insets left="6.0" top="6.0"/>
+                                                    </padding>
+                                                </Label>
+                                                <Slider fx:id="rateSlider" blockIncrement="1.0" layoutX="69.0"
+                                                        layoutY="8.0" majorTickUnit="1.0" max="5.0" min="1.0"
+                                                        minorTickCount="1" prefHeight="38.0" prefWidth="312.0"
+                                                        showTickLabels="true" snapToTicks="true" value="3.0">
+                                                    <padding>
+                                                        <Insets left="6.0"/>
+                                                    </padding>
+                                                </Slider>
+                                            </children>
+                                        </Group>
+                                        <Group layoutY="55.0">
+                                            <children>
+                                                <Label text="Comment :">
+                                                    <padding>
+                                                        <Insets left="6.0" top="6.0"/>
+                                                    </padding>
+                                                </Label>
+                                                <TextArea fx:id="commentTextArea" layoutX="78.0" prefHeight="200.0"
+                                                          prefWidth="290.0" translateX="6.0"/>
+                                            </children>
+                                        </Group>
+                                        <Button fx:id="postButton" defaultButton="true" layoutX="328.0" layoutY="256.0"
+                                                mnemonicParsing="false" onAction="#onPost" text="Post"
+                                                translateY="6.0"/>
+                                        <Button fx:id="deleteButton" layoutX="84.0" layoutY="262.0"
+                                                mnemonicParsing="false" onAction="#onDelete" text="Delete"/>
+                                    </children>
+                                </Pane>
+                            </content>
+                        </TitledPane>
+                    </children>
+                    <VBox.margin>
+                        <Insets top="6.0"/>
+                    </VBox.margin>
+                </HBox>
+            </children>
+        </VBox>
     </center>
 </BorderPane>

@@ -1,5 +1,6 @@
 package bl.facade;
 
+import bl.dao.DAOFactory;
 import bl.model.Consumer;
 import bl.model.Provider;
 import bl.model.ProviderReview;
@@ -33,7 +34,14 @@ public class ProviderFacade {
     }
 
     public ProviderReview postReview(Provider provider, Consumer consumer, ProviderReview providerReview) {
-        return null;
+        return DAOFactory.getInstance().createProviderReviewDAO().create(provider, consumer, providerReview);
     }
 
+    public ProviderReview getReviewByProviderAndConsumer(Provider provider, Consumer consumer) {
+        return DAOFactory.getInstance().createProviderReviewDAO().getReviewForProviderAndConsumer(provider, consumer);
+    }
+
+    public boolean deleteReview(Provider provider, Consumer consumer) {
+        return DAOFactory.getInstance().createProviderReviewDAO().delete(provider, consumer);
+    }
 }

@@ -1,14 +1,17 @@
 package persistence;
 
-import bl.dao.DAOFactory;
 import bl.dao.ProviderReviewDAO;
-import bl.model.*;
+import bl.model.Consumer;
+import bl.model.Provider;
+import bl.model.ProviderReview;
 import persistence.connector.Connector;
-import java.util.*;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * PostgreSQL DAO for the provider review model
@@ -42,7 +45,7 @@ public class ProviderReviewDAOPG extends ProviderReviewDAO {
             Connection connection = Connector.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, provider.getPseudo());
-            ResultSet rs = ps.executeQuery(query);
+            ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 String content = rs.getString("content");
                 int rate = rs.getInt("rate");
@@ -52,6 +55,7 @@ public class ProviderReviewDAOPG extends ProviderReviewDAO {
                 ProviderReview providerReview = new ProviderReview(content, rate);
                 providerReviews.add(providerReview);
             }
+            connection.close();
             return providerReviews;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -60,7 +64,31 @@ public class ProviderReviewDAOPG extends ProviderReviewDAO {
     }
 
     @Override
-    public boolean delete(Provider provider, Consumer consumer, ProviderReview providerReview) {
+    public ProviderReview getReviewForProviderAndConsumer(Provider provider, Consumer consumer) {
+        try {
+            String query = "SELECT * FROM Provider_review WHERE providerID = ? AND consumerID = ?";
+            Connection connection = Connector.getInstance().getConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, provider.getPseudo());
+            ps.setString(2, consumer.getPseudo());
+            ResultSet rs = ps.executeQuery();
+            if (!rs.next()) {
+                connection.close();
+                return null;
+            } else {
+                connection.close();
+                int rate = rs.getInt("rate");
+                String content = rs.getString("content");
+                return new ProviderReview(content, rate);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public boolean delete(Provider provider, Consumer consumer) {
         try {
             String query = "DELETE FROM Provider_review WHERE providerID = ? AND consumerID = ?";
             Connection connection = Connector.getInstance().getConnection();
@@ -75,4 +103,5 @@ public class ProviderReviewDAOPG extends ProviderReviewDAO {
             return false;
         }
     }
+
 }

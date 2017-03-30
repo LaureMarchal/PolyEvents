@@ -16,10 +16,11 @@ public class ProviderController implements OnInit {
     @Override
     public void onInit(Object data) {
         this.displayedProvider = (Provider) data;
+        this.nameLabel.setText(this.displayedProvider.getName());
     }
 
     public void initialize() {
-        //this.nameLabel.setText(this.displayedProvider.getName());
+        System.out.println("test");
     }
 
     public void onComment(){

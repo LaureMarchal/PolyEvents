@@ -49,9 +49,9 @@ public class Controller {
         if (stage != null) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../ui/" + view.toString() + ".fxml"));
+                Parent root = loader.load();
                 OnInit controller = loader.getController();
                 controller.onInit(data);
-                Parent root = loader.load();
                 stage.setTitle(APP_NAME);
                 stage.setScene(new Scene(root, APP_WIDTH, APP_HEIGHT));
                 stage.show();

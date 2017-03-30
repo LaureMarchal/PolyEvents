@@ -1,17 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
             prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="ui.provider.ProviderController">
     <top>
-        <Label fx:id="nameLabel" prefHeight="50.0" text="Name" BorderPane.alignment="CENTER">
-            <font>
-                <Font size="18.0"/>
-            </font>
-        </Label>
+        <VBox alignment="CENTER" prefHeight="100.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label fx:id="nameLabel" text="Name">
+                    <font>
+                        <Font size="18.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="descriptionLabel" alignment="CENTER" prefHeight="60.0" prefWidth="395.0"
+                       text="Description" textAlignment="CENTER"/>
+            </children>
+        </VBox>
     </top>
+    <center>
+        <HBox prefHeight="100.0" prefWidth="200.0" spacing="6.0" BorderPane.alignment="CENTER">
+            <children>
+                <TitledPane collapsible="false" layoutX="10.0" layoutY="10.0" prefHeight="50.0" prefWidth="200.0"
+                            text="Email">
+                    <content>
+                        <Label fx:id="emailLabel" prefHeight="106.0" prefWidth="198.0">
+                            <padding>
+                                <Insets left="6.0"/>
+                            </padding>
+                        </Label>
+                    </content>
+                </TitledPane>
+                <TitledPane collapsible="false" layoutX="210.0" layoutY="10.0" prefHeight="50.0" prefWidth="200.0"
+                            text="Phone">
+                    <content>
+                        <Label fx:id="phoneLabel" prefHeight="106.0" prefWidth="198.0">
+                            <padding>
+                                <Insets left="6.0"/>
+                            </padding>
+                        </Label>
+                    </content>
+                </TitledPane>
+                <TitledPane collapsible="false" layoutX="410.0" layoutY="10.0" prefHeight="50.0" prefWidth="200.0"
+                            text="Website">
+                    <content>
+                        <Label fx:id="websiteLabel" prefHeight="106.0" prefWidth="198.0">
+                            <padding>
+                                <Insets left="6.0"/>
+                            </padding>
+                        </Label>
+                    </content>
+                </TitledPane>
+                <TitledPane collapsible="false" layoutX="601.0" layoutY="10.0" prefHeight="50.0" prefWidth="200.0"
+                            text="Office location">
+                    <content>
+                        <Label fx:id="officeLocationLabel" prefHeight="106.0" prefWidth="198.0">
+                            <padding>
+                                <Insets left="6.0"/>
+                            </padding>
+                        </Label>
+                    </content>
+                </TitledPane>
+            </children>
+            <BorderPane.margin>
+                <Insets bottom="6.0" left="6.0" right="6.0" top="6.0"/>
+            </BorderPane.margin>
+        </HBox>
+    </center>
 </BorderPane>

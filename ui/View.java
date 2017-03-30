@@ -6,7 +6,8 @@ public enum View {
     SIGN_UP("signUp/signUpView"),
     MAIN("mainView"),
     CREATE_EVENT("event/createEventView"),
-    SEE_EVENT("event/eventView");
+    SEE_EVENT("event/eventView"),
+    UPDATE_EVENT("event/updateEventView");
 
     private final String text;
 

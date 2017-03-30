@@ -10,6 +10,8 @@ import ui.View;
 import javafx.collections.FXCollections;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+
+import java.sql.SQLException;
 import java.util.List;
 /**
  * Controller for the event's list interface
@@ -107,22 +109,31 @@ public class EventListController {
     }
 
     public void setEvents(List<Event> events) {
-        this.eventsList = FXCollections.observableList(EventFacade.getInstance().getAllEvent();
+        this.eventsList = FXCollections.observableList(events);
 
     }
 
+    @FXML
+    public void initialize(){
+        init();
+    }
+
+    public void init() {
+        setEvents(EventFacade.getInstance().getAllEvent());
+        initializeEventsTableView();
+    }
 
     /**
-     * Initialize the games table view
+     * Initialize the events table view
      */
     private void initializeEventsTableView(){
-        /*eventsTable.setItems(eventsList);
+        eventsTable.setItems(eventsList);
         beginnigDateEvent.setCellValueFactory(cellData -> cellData.getValue().beginningDate());
-        titleEvent.setCellValueFactory(cellData -> cellData.getValue().editorProperty());
+        titleEvent.setCellValueFactory(cellData -> cellData.getValue().title);
         registrationDateEvent.setCellValueFactory(cellData -> cellData.getValue().yearReleaseProperty());
         placesEvent.setCellValueFactory(cellData -> cellData.getValue().gameTypeLabelProperty());
         priceEvent.setCellValueFactory(cellData -> cellData.getValue().price());
         eventsTable.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> selectedEvent = newValue);*/
+                (observable, oldValue, newValue) -> selectedEvent = newValue);
     }
 }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+            prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ui.tagSubscription.TagSubscriptionController">
+    <center>
+
+    </center>
+    <center>
+        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+                <TitledPane alignment="CENTER" collapsible="false" contentDisplay="CENTER" prefHeight="600.0"
+                            prefWidth="335.0" text="Subscribed tags" textAlignment="CENTER">
+                    <content>
+                        <TableView prefHeight="200.0" prefWidth="350.0">
+                            <columns>
+                                <TableColumn prefWidth="75.0" text="C1"/>
+                                <TableColumn prefWidth="75.0" text="C2"/>
+                            </columns>
+                        </TableView>
+                    </content>
+                </TitledPane>
+                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="150.0">
+                    <children>
+                        <Button mnemonicParsing="false" text="&lt; Subscribe"/>
+                        <Button mnemonicParsing="false" text="Unsuscribe &gt;"/>
+                    </children>
+                </VBox>
+                <TitledPane alignment="CENTER" collapsible="false" prefHeight="600.0" prefWidth="340.0"
+                            text="Unsubscribed tags">
+                    <content>
+                        <TableView prefHeight="200.0" prefWidth="350.0">
+                            <columns>
+                                <TableColumn prefWidth="75.0" text="C1"/>
+                                <TableColumn prefWidth="75.0" text="C2"/>
+                            </columns>
+                        </TableView>
+                    </content>
+                </TitledPane>
+            </children>
+        </HBox>
+    </center>
+</BorderPane>

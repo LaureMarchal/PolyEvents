@@ -2,11 +2,11 @@ package ui.login;
 
 import bl.exception.LoginException;
 import bl.facade.UserFacade;
+import bl.model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
-import bl.model.User;
 import ui.Controller;
 import ui.View;
 
@@ -39,7 +39,7 @@ public class LoginController {
     public void onLogin() {
         try {
             User userLogged = UserFacade.getInstance().login(pseudoField.getText(), passwordField.getText());
-            Controller.getInstance().userLogged = userLogged;
+            Controller.getInstance().setUserLogged(userLogged);
             Controller.getInstance().goTo(View.MAIN);
         } catch (LoginException e) {
             this.messageLabel.setText(e.getErrorText());

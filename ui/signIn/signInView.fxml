@@ -4,8 +4,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-            minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.112"
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+            prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="ui.signIn.SignInController">
     <top>
         <VBox alignment="CENTER" BorderPane.alignment="CENTER">
@@ -113,7 +113,7 @@
                                     </VBox.margin>
                                 </RadioButton>
                                 <Label fx:id="messageLabel21" alignment="TOP_LEFT" prefHeight="14.0" prefWidth="370.0"
-                                       text="You create and manage you own events.">
+                                       text="You create and manage your own events.">
                                     <font>
                                         <Font name="System Italic" size="13.0"/>
                                     </font>

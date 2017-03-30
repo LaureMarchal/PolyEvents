@@ -1,13 +1,19 @@
 package ui.event;
 
 import bl.facade.EventFacade;
-import bl.model.*;
+import bl.model.Event;
+import bl.model.Provider;
+import bl.model.Tag;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import ui.Controller;
 import ui.View;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -136,7 +142,7 @@ public class EventController {
             restriction = restriction+bDEMembersRestrictionBox.getText();
         }
         //get the user logged
-        Provider provider = (Provider) Controller.getInstance().userLogged;
+        Provider provider = (Provider) Controller.getInstance().getUserLogged();
         //create an event
         Event event = new Event(-1,
                 titleField.getText(),
@@ -151,7 +157,7 @@ public class EventController {
                 price,
                 Integer.getInteger(delayPayementField.getText()),
                 "AVAILABLE",
-                (Provider)Controller.userLogged);
+                (Provider) Controller.getInstance().getUserLogged());
         EventFacade.getInstance().create(event);
     }
 

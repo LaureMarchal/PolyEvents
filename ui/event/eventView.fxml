@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -7,21 +8,59 @@
 
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" fx:controller="ui.event.EventController">
    <center>
-       <Button layoutX="14.0" layoutY="14.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onReturn" prefWidth="60.0" text="Return" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="8.0" />
-       <Button fx:id="registerButton" layoutX="527.0" layoutY="8.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onRegister" prefWidth="70.0" text="Register" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="8.0" />
-       <Button fx:id="reportButton" layoutX="532.0" layoutY="44.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onReport" prefWidth="70.0" text="Report" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="8.0" />
-       <Label fx:id="titleLabel" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="283.0" layoutY="13.0" text="Tile of the event" textAlignment="CENTER" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="10.0">
-           <font>
-               <Font size="16.0" />
-           </font>
-       </Label>
-       <Label fx:id="subtitleLabel" layoutX="265.0" layoutY="27.0" text="Subtitle" textAlignment="CENTER" AnchorPane.leftAnchor="255.0" AnchorPane.topAnchor="27.0" />
-       <Label fx:id="descriptionLabel" layoutX="38.0" layoutY="67.0" text="Description" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="75.0" />
-       <Separator layoutY="55.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0" />
-       <Button fx:id="updateButton" layoutX="532.0" layoutY="44.0" mnemonicParsing="false" onAction="#onEdit" text="Update" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="10.0" />
-       <Button fx:id="manageButton" layoutX="451.0" layoutY="8.0" mnemonicParsing="false" text="Manage" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="10.0" />
-       <Button fx:id="deleteButton" layoutX="534.0" layoutY="44.0" mnemonicParsing="false" onAction="#onDelete" text="Delete" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="40.0" />
-       <Button fx:id="cancelButton" layoutX="462.0" layoutY="40.0" mnemonicParsing="false" onAction="#onEdit" text="Cancel" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="40.0" />
+       <AnchorPane>
+          <children>
+              <Button layoutX="14.0" layoutY="14.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onReturn" prefWidth="60.0" text="Return" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="8.0" />
+              <Button fx:id="registerButton" layoutX="527.0" layoutY="8.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onRegister" prefWidth="70.0" text="Register" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="8.0" />
+              <Button fx:id="reportButton" layoutX="532.0" layoutY="44.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onReport" prefWidth="70.0" text="Report" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="8.0" />
+              <Label fx:id="titleLabel" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="283.0" layoutY="13.0" text="Tile of the event" textAlignment="CENTER" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="10.0">
+                  <font>
+                      <Font size="16.0" />
+                  </font>
+              </Label>
+              <Label fx:id="subtitleLabel" layoutX="265.0" layoutY="27.0" text="Subtitle" textAlignment="CENTER" AnchorPane.leftAnchor="255.0" AnchorPane.topAnchor="27.0" />
+              <Label fx:id="descriptionLabel" layoutX="38.0" layoutY="67.0" text="Description" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="75.0" />
+              <Separator layoutY="55.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0" />
+              <Button fx:id="updateButton" layoutX="532.0" layoutY="44.0" mnemonicParsing="false" onAction="#onEdit" text="Update" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="10.0" />
+              <Button fx:id="manageButton" layoutX="451.0" layoutY="8.0" mnemonicParsing="false" text="Manage" AnchorPane.bottomAnchor="175.0" AnchorPane.rightAnchor="15.0" />
+              <Button fx:id="deleteButton" layoutX="534.0" layoutY="44.0" mnemonicParsing="false" onAction="#onDelete" text="Delete" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="40.0" />
+              <Button fx:id="cancelButton" layoutX="462.0" layoutY="40.0" mnemonicParsing="false" onAction="#onEdit" text="Cancel" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="40.0" />
+            <Label fx:id="durationLabel" layoutX="14.0" layoutY="151.0" text="Duration" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="150.0" />
+            <Label fx:id="conditionsLabel" layoutX="186.0" layoutY="150.0" text="Access Conditions" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="150.0" />
+            <Label fx:id="tagsLabel" layoutX="303.0" layoutY="150.0" text="#tag#" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="150.0" />
+            <Separator layoutX="14.0" layoutY="178.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="175.0" />
+            <Separator layoutX="399.0" layoutY="67.0" maxWidth="-Infinity" orientation="VERTICAL" prefHeight="200.0" prefWidth="1.0" AnchorPane.bottomAnchor="205.0" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="70.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Separator>
+            <Separator layoutX="395.0" layoutY="99.0" prefWidth="200.0" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
+            <Separator layoutX="400.0" layoutY="139.0" prefWidth="200.0" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="140.0" />
+            <Label fx:id="numberPlacesLeftLabel" layoutX="424.0" layoutY="75.0" text="X places left" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="75.0" />
+            <Label fx:id="timeToRegisterLabel" layoutX="515.0" layoutY="75.0" text="Y minutes to register" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0" />
+            <Label fx:id="timeBeginningLabel" layoutX="395.0" layoutY="115.0" text="Date/Hour beginning" AnchorPane.rightAnchor="110.0" AnchorPane.topAnchor="110.0" />
+            <Label fx:id="locationLabel" layoutX="520.0" layoutY="110.0" text="Location" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="110.0" />
+            <Label fx:id="priceLabel" layoutX="388.0" layoutY="150.0" text="Price" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="150.0" />
+            <Label fx:id="delayPayementLabel" layoutX="544.0" layoutY="150.0" text="(delay to pay)" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="150.0" />
+            <Label layoutX="21.0" layoutY="183.0" text="Messages" AnchorPane.bottomAnchor="180.0" AnchorPane.leftAnchor="10.0">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="220.0" layoutY="184.0" text="Reviews" AnchorPane.bottomAnchor="180.0" AnchorPane.leftAnchor="220.0">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Button layoutX="191.0" layoutY="179.0" mnemonicParsing="false" onAction="#onAddMessage" text="New" AnchorPane.bottomAnchor="175.0" AnchorPane.leftAnchor="170.0" />
+            <Button layoutX="518.0" layoutY="179.0" mnemonicParsing="false" onAction="#onAddReview" text="New" AnchorPane.bottomAnchor="175.0" AnchorPane.leftAnchor="320.0" />
+            <Label layoutX="404.0" layoutY="185.0" text="Who comes ?" AnchorPane.bottomAnchor="180.0" AnchorPane.rightAnchor="145.0">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+          </children>
+       </AnchorPane>
    </center>
    <top>
       <Label alignment="TOP_LEFT" text="PolyEvent" BorderPane.alignment="TOP_LEFT">

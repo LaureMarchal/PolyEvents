@@ -28,7 +28,7 @@ public class EventDAOPG extends EventDAO {
             ps.setString(4, event.getDescription());
             ps.setDate(5, new java.sql.Date(event.getBeginningTime().getDate()));
             ps.setDate(6, new java.sql.Date(event.getBeginningTime().getDate()));
-            ps.setString(7, event.getDuration());
+            ps.setFloat(7, event.getDuration());
             ps.setString(8, event.getConstraints());
             ps.setInt(9, event.getPlacesNumber());
             ps.setFloat(10, event.getPrice());
@@ -89,7 +89,7 @@ public class EventDAOPG extends EventDAO {
             ps.setString(4, event.getDescription());
             ps.setString(5, String.valueOf(event.getBeginningTime()));
             ps.setString(6, String.valueOf(event.getRegistrationDeadline()));
-            ps.setString(7, event.getDuration());
+            ps.setFloat(7, Float.valueOf(event.getDuration()));
             ps.setString(8, event.getConstraints());
             ps.setInt(9, event.getPlacesNumber());
             ps.setFloat(10, event.getPrice());
@@ -139,10 +139,10 @@ public class EventDAOPG extends EventDAO {
             String title = rs.getString("title");
             String subTitle = rs.getString("subtitle");
             String place = rs.getString("location");
-            String description = rs.getString("descriotion");
+            String description = rs.getString("description");
             java.util.Date beginningTime = rs.getTimestamp("begining_time");
             java.util.Date registrationDeadline =  rs.getTimestamp("registration_deadline");
-            String duration = String.valueOf(rs.getFloat("duration"));
+            float duration = rs.getFloat("duration");
             String constraints = rs.getString("event_constraints");
             String status = rs.getString("status");
             int placesNumber = rs.getInt("max_number_of_places");

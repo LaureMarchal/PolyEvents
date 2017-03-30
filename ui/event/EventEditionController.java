@@ -136,9 +136,14 @@ public class EventEditionController implements OnInit{
         } else{
             descript=this.currentEvent.getDescription();
         }
-        String duration;
+        float duration;
         if(durationField.getText()!=""){
-            duration=durationField.getText();
+            try{
+                duration = Float.valueOf((String)durationField.getText());
+            }catch (NumberFormatException e){
+                System.out.println(e);
+                duration = 0;
+            }
         } else{
             duration=this.currentEvent.getDuration();
         }

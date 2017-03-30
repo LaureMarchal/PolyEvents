@@ -154,7 +154,7 @@ public class EventCreationController {
                 descriptionArea.getText(),
                 time,
                 deadline,
-                durationField.getText(),
+                Float.valueOf(durationField.getText()),
                 restriction,
                 Integer.getInteger(placesField.getText()),
                 price,

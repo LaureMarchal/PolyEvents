@@ -15,7 +15,7 @@ public class Event implements Notifiable {
     private String description;
     private Date beginningTime;
     private Date registrationDeadline;
-    private String duration;
+    private float duration;
     private String constraints;
     private int placesNumber;
     private float price;
@@ -26,7 +26,7 @@ public class Event implements Notifiable {
     private List<Tag> tags;
     private List<Message> messages;
 
-    public Event(int id, String title, String subTitle, String place, String description, Date beginningTime, Date registrationDeadline, String duration, String constraints, int placesNumber, float price, int delayToPay, String status, Provider provider) {
+    public Event(int id, String title, String subTitle, String place, String description, Date beginningTime, Date registrationDeadline, float duration, String constraints, int placesNumber, float price, int delayToPay, String status, Provider provider) {
         this.id = id;
         this.title = title;
         this.subTitle = subTitle;
@@ -99,11 +99,11 @@ public class Event implements Notifiable {
         this.registrationDeadline = registrationDeadline;
     }
 
-    public String getDuration() {
+    public float getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(float duration) {
         this.duration = duration;
     }
 

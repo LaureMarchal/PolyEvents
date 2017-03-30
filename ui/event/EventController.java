@@ -156,7 +156,7 @@ public class EventController implements OnInit{
         this.titleLabel.setText(this.currentEvent.getTitle());
         this.subtitleLabel.setText(this.currentEvent.getSubTitle());
         this.descriptionLabel.setText(this.currentEvent.getDescription());
-        this.durationLabel.setText(this.currentEvent.getDuration());
+        this.durationLabel.setText(String.valueOf(this.currentEvent.getDuration()));
         this.delayPayementLabel.setText(String.valueOf(this.currentEvent.getDelayToPay()));
         this.conditionsLabel.setText(this.currentEvent.getConstraints());
         this.priceLabel.setText(String.valueOf(this.currentEvent.getPrice()));

@@ -8,6 +8,7 @@ import bl.model.Tag;
 import persistence.connector.Connector;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +26,8 @@ public class EventDAOPG extends EventDAO {
             ps.setString(2, event.getSubTitle());
             ps.setString(3, event.getPlace());
             ps.setString(4, event.getDescription());
-            ps.setString(5, String.valueOf(event.getBeginningTime()));
-            ps.setString(6, String.valueOf(event.getRegistrationDeadline()));
+            ps.setDate(5, new java.sql.Date(event.getBeginningTime().getDate()));
+            ps.setDate(6, new java.sql.Date(event.getBeginningTime().getDate()));
             ps.setString(7, event.getDuration());
             ps.setString(8, event.getConstraints());
             ps.setInt(9, event.getPlacesNumber());

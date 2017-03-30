@@ -1,16 +1,25 @@
 package ui.event;
 
+import bl.facade.EventFacade;
+import bl.facade.NotificationFacade;
+import bl.model.Event;
 import bl.model.Role;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import ui.Controller;
+import ui.OnInit;
 import ui.View;
 
 
 /**
  * Controller for the event interface
  */
-public class EventController {
+public class EventController implements OnInit{
+
+    /**
+     * The event to see
+     */
+    private Event currentEvent;
 
     /**
      * The label for event's title
@@ -30,6 +39,62 @@ public class EventController {
     @FXML
     private Label descriptionLabel;
 
+    /**
+     * The label for event's duration
+     */
+    @FXML
+    private Label durationLabel;
+
+    /**
+     * The label for event's conditions
+     */
+    @FXML
+    private Label conditionsLabel;
+
+
+    /**
+     * The label for event's tags
+     */
+    @FXML
+    private Label tagsLabel;
+
+    /**
+     * The label for event's number of Places Left
+     */
+    @FXML
+    private Label numberPlacesLeftLabel;
+
+    /**
+     * The label for event's time To Register
+     */
+    @FXML
+    private Label timeToRegisterLabel;
+
+
+    /**
+     * The label for event's time Beginning
+     */
+    @FXML
+    private Label timeBeginningLabel;
+
+    /**
+     * The label for event's location
+     */
+    @FXML
+    private Label locationLabel;
+
+    /**
+     * The label for event's price
+     */
+    @FXML
+    private Label priceLabel;
+
+    /**
+     * The label for event's delay of Payement
+     */
+    @FXML
+    private Label delayPayementLabel;
+
     //For consumers
 
     /**
@@ -43,6 +108,12 @@ public class EventController {
      */
     @FXML
     private Button reportButton;
+
+    /**
+     * The button to add a review to this event
+     */
+    @FXML
+    private Button addReviewButton;
 
     //For provider
 
@@ -75,7 +146,25 @@ public class EventController {
      */
     @FXML
     public void initialize(){
+        //assign all the label
+        this.titleLabel.setText(this.currentEvent.getTitle());
+        this.subtitleLabel.setText(this.currentEvent.getSubTitle());
+        this.descriptionLabel.setText(this.currentEvent.getDescription());
+        this.durationLabel.setText(this.currentEvent.getDuration());
+        this.delayPayementLabel.setText(String.valueOf(this.currentEvent.getDelayToPay()));
+        this.conditionsLabel.setText(this.currentEvent.getConstraints());
+        this.priceLabel.setText(String.valueOf(this.currentEvent.getPrice()));
+        int nbRegistration = this.currentEvent.getRegistrations().size();
+        this.numberPlacesLeftLabel.setText(String.valueOf(this.currentEvent.getPlacesNumber()- (nbRegistration)));
+        this.locationLabel.setText(this.currentEvent.getPlace());
+        this.tagsLabel.setText(this.currentEvent.getTags().toString());
+        this.timeBeginningLabel.setText(String.valueOf(this.currentEvent.getBeginningTime()));
+        this.timeToRegisterLabel.setText( String.valueOf(this.currentEvent.getRegistrationDeadline()));
 
+        if(Controller.getInstance().getUserLogged()==this.currentEvent.getProvider()){
+            addReviewButton.setDisable(true);
+            manageButton.setDisable(false);
+        }
         if(Controller.getInstance().getUserLogged().getRole()== Role.CONSUMER){
             cancelButton.setDisable(true);
             deleteButton.setDisable(true);
@@ -83,6 +172,7 @@ public class EventController {
             updateButton.setDisable(true);
             reportButton.setDisable(false);
             registerButton.setDisable(false);
+            manageButton.setDisable(true);
         } else{
             cancelButton.setDisable(false);
             deleteButton.setDisable(false);
@@ -90,28 +180,57 @@ public class EventController {
             updateButton.setDisable(false);
             reportButton.setDisable(true);
             registerButton.setDisable(true);
+            manageButton.setDisable(true);
         }
     }
 
 
+    /**
+     * On "Edit" button click, go to the edition interface
+     */
     public void onEdit() {
-
+        Controller.getInstance().goTo(View.UPDATE_EVENT,this.currentEvent);
     }
 
+    /**
+     * On "Cancel" button click, set the status of the event to cancelled
+     */
+    public void onCancel() {
+        this.currentEvent.setStatus("Cancelled");
+        //TODO send notification to all consumers registered
+    }
+    /**
+     * On "Delete" button click, delete the event and go back to main view
+     */
     public void onDelete() {
-
+        Controller.getInstance().showInfoAlert("Do you really want to delete this event ?");
+        EventFacade.getInstance().delete(this.currentEvent);
+        Controller.getInstance().goTo(View.MAIN);
     }
-
+    /**
+     * On "Report" button click, go to the reportation interface
+     */
     public void onReport() {
 
     }
-
+    /**
+     * On "new" button click, go to the review interface
+     */
     public void onAddReview() {
 
     }
-
+    /**
+     * On "New" button click, go to the add messages interface
+     */
     public void onAddMessage() {
 
+    }
+
+    /**
+     * On "Manage" button click, go to the list of the event's consumers
+     */
+    public void onManage() {
+        //TODO go to
     }
 
     /**
@@ -128,4 +247,8 @@ public class EventController {
         Controller.getInstance().goTo(View.MAIN);
     }
 
+    @Override
+    public void onInit(Object data) {
+        this.currentEvent = (Event) data;
+    }
 }

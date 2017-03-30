@@ -18,4 +18,6 @@ public abstract class EventDAO {
     public abstract Event getOne(int id);
 
     public abstract List<Event> getAllEventForTag(Tag tag);
+
+    public abstract List<Event> getAllEvent();
 }

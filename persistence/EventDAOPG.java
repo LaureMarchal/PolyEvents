@@ -200,4 +200,23 @@ public class EventDAOPG extends EventDAO {
             return null;
         }
     }
+
+    public List<Event> getAllEvent(){
+        List<Event> eventSearchResult = new ArrayList<Event>();
+        try{
+            String query = "SELECT Event.id FROM Event";
+            Connection connection = Connector.getInstance().getConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery(query);
+            while(rs.next()){
+                // Not sure, could be : this.getOne(rs.getInt("Event.id"));
+                Event event = this.getOne(rs.getInt("id"));
+                eventSearchResult.add(event);
+            }
+            return eventSearchResult;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

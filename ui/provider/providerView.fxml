@@ -83,7 +83,8 @@
                                 </TableView>
                             </content>
                         </TitledPane>
-                        <TitledPane collapsible="false" prefHeight="430.0" prefWidth="390.0" text="Your review">
+                        <TitledPane fx:id="yourReviewPanel" collapsible="false" prefHeight="430.0" prefWidth="390.0"
+                                    text="Your review">
                             <HBox.margin>
                                 <Insets left="6.0"/>
                             </HBox.margin>

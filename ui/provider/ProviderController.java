@@ -28,6 +28,7 @@ public class ProviderController implements OnInit {
     public Label websiteLabel;
     public Label officeLocationLabel;
 
+    public TitledPane yourReviewPanel;
     public Slider rateSlider;
     public TextArea commentTextArea;
     public Button postButton;
@@ -48,14 +49,19 @@ public class ProviderController implements OnInit {
         this.websiteLabel.setText(this.displayedProvider.getWebsite());
         this.officeLocationLabel.setText(this.displayedProvider.getOfficeLocation());
 
-        // Display potential review by current user
-        this.displayedProviderReview = ProviderFacade.getInstance().getReviewByProviderAndConsumer(this.displayedProvider, (Consumer) Controller.getInstance().getUserLogged());
-        if (this.displayedProviderReview != null) {
-            this.rateSlider.setValue(this.displayedProviderReview.getRate());
-            this.commentTextArea.setText(this.displayedProviderReview.getContent());
+        // Don't display "Your review" for the ownership
+        if (this.displayedProvider.getPseudo().equals(Controller.getInstance().getUserLogged().getPseudo())) {
+            this.yourReviewPanel.setVisible(false);
+        } else {
+            // Display potential review by current user
+            this.displayedProviderReview = ProviderFacade.getInstance().getReviewByProviderAndConsumer(this.displayedProvider, (Consumer) Controller.getInstance().getUserLogged());
+            if (this.displayedProviderReview != null) {
+                this.rateSlider.setValue(this.displayedProviderReview.getRate());
+                this.commentTextArea.setText(this.displayedProviderReview.getContent());
+            }
+            this.postButton.setVisible(this.displayedProviderReview == null);
+            this.deleteButton.setVisible(this.displayedProviderReview != null);
         }
-        this.postButton.setVisible(this.displayedProviderReview == null);
-        this.deleteButton.setVisible(this.displayedProviderReview != null);
 
         loadReviews();
     }

@@ -87,4 +87,8 @@ public class Provider extends User {
     public void setSubscribers(List<ProviderSubscription> subscribers) {
         this.subscribers = subscribers;
     }
+
+    public Provider clone() {
+        return new Provider(this.pseudo, this.password, this.email, this.name, this.description, this.phone, this.website, this.officeLocation);
+    }
 }

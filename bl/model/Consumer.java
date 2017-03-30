@@ -75,4 +75,9 @@ public class Consumer extends User {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public Consumer clone() {
+        return new Consumer(this.pseudo, this.password, this.email, this.firstName, this.lastName, this.comments);
+    }
+
 }

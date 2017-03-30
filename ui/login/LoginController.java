@@ -1,6 +1,6 @@
 package ui.login;
 
-import bl.exception.LoginException;
+import bl.exception.UserException;
 import bl.facade.UserFacade;
 import bl.model.User;
 import javafx.fxml.FXML;
@@ -41,7 +41,7 @@ public class LoginController {
             User userLogged = UserFacade.getInstance().login(pseudoField.getText(), passwordField.getText());
             Controller.getInstance().setUserLogged(userLogged);
             Controller.getInstance().goTo(View.MAIN);
-        } catch (LoginException e) {
+        } catch (UserException e) {
             this.messageLabel.setText(e.getErrorText());
             this.messageLabel.setTextFill(Color.RED);
         }

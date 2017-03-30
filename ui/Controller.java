@@ -4,7 +4,6 @@ import bl.model.User;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -63,25 +62,12 @@ public class Controller {
         }
     }
 
-    public void showInfoAlert(String text) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information");
-        alert.setHeaderText(null);
-        alert.setContentText(text);
-        alert.showAndWait();
-    }
-
     public User getUserLogged() {
         return userLogged;
     }
 
     public void setUserLogged(User userLogged) {
-        if (this.userLogged == null) {
-            this.userLogged = userLogged;
-        }
+        this.userLogged = userLogged;
     }
 
-    public void removeUserLogged() {
-        this.userLogged = null;
-    }
 }

@@ -5,6 +5,8 @@ import bl.model.Consumer;
 import bl.model.Provider;
 import bl.model.ProviderReview;
 
+import java.util.List;
+
 /**
  * Entry point to the business behaviour
  */
@@ -39,6 +41,10 @@ public class ProviderFacade {
 
     public ProviderReview getReviewByProviderAndConsumer(Provider provider, Consumer consumer) {
         return DAOFactory.getInstance().createProviderReviewDAO().getReviewForProviderAndConsumer(provider, consumer);
+    }
+
+    public List<ProviderReview> getAllReviewsByProvider(Provider provider) {
+        return DAOFactory.getInstance().createProviderReviewDAO().getAllReviewsForProvider(provider);
     }
 
     public boolean deleteReview(Provider provider, Consumer consumer) {

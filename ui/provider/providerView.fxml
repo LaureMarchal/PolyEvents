@@ -73,17 +73,17 @@
                 </HBox>
                 <HBox prefHeight="430.0" prefWidth="200.0">
                     <children>
-                        <TitledPane collapsible="false" prefHeight="430.0" prefWidth="390.0" text="Feedbacks">
+                        <TitledPane collapsible="false" prefHeight="430.0" prefWidth="390.0" text="Reviews">
                             <content>
-                                <TableView prefHeight="200.0" prefWidth="200.0">
+                                <TableView fx:id="reviewsTable" prefHeight="200.0" prefWidth="200.0">
                                     <columns>
-                                        <TableColumn prefWidth="75.0" text="C1"/>
-                                        <TableColumn prefWidth="75.0" text="C2"/>
+                                        <TableColumn fx:id="rateColumn" prefWidth="75.0" text="Rate"/>
+                                        <TableColumn fx:id="commentColumn" prefWidth="313.0" text="Comment"/>
                                     </columns>
                                 </TableView>
                             </content>
                         </TitledPane>
-                        <TitledPane collapsible="false" prefHeight="430.0" prefWidth="390.0" text="Your feedback">
+                        <TitledPane collapsible="false" prefHeight="430.0" prefWidth="390.0" text="Your review">
                             <HBox.margin>
                                 <Insets left="6.0"/>
                             </HBox.margin>

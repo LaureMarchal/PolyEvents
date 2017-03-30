@@ -4,13 +4,14 @@ import bl.facade.ProviderFacade;
 import bl.model.Consumer;
 import bl.model.Provider;
 import bl.model.ProviderReview;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextArea;
+import javafx.collections.FXCollections;
+import javafx.scene.control.*;
 import ui.Controller;
 import ui.OnInit;
 import ui.helper.AlertHelper;
+import ui.helper.PropertyConverter;
+
+import java.util.List;
 
 /**
  * Controller for the provider interface
@@ -32,6 +33,10 @@ public class ProviderController implements OnInit {
     public Button postButton;
     public Button deleteButton;
 
+    public TableView<ProviderReview> reviewsTable;
+    public TableColumn<ProviderReview, String> rateColumn;
+    public TableColumn<ProviderReview, String> commentColumn;
+
     @Override
     public void onInit(Object data) {
         // Display basic data
@@ -51,6 +56,8 @@ public class ProviderController implements OnInit {
         }
         this.postButton.setVisible(this.displayedProviderReview == null);
         this.deleteButton.setVisible(this.displayedProviderReview != null);
+
+        loadReviews();
     }
 
     public void onPost() {
@@ -71,6 +78,7 @@ public class ProviderController implements OnInit {
             this.displayedProviderReview = result;
             this.postButton.setVisible(false);
             this.deleteButton.setVisible(true);
+            loadReviews();
         } else {
             AlertHelper.getInstance().showInfoAlert("Your review can't be submitted.");
         }
@@ -84,9 +92,17 @@ public class ProviderController implements OnInit {
             this.displayedProviderReview = null;
             this.postButton.setVisible(true);
             this.deleteButton.setVisible(false);
+            loadReviews();
         } else {
             AlertHelper.getInstance().showInfoAlert("Your review can't be deleted");
         }
+    }
+
+    private void loadReviews() {
+        List<ProviderReview> reviews = ProviderFacade.getInstance().getAllReviewsByProvider(this.displayedProvider);
+        this.reviewsTable.setItems(FXCollections.observableList(reviews));
+        this.rateColumn.setCellValueFactory(cellData -> PropertyConverter.getInstance().convert(cellData.getValue().getRate() + "/5"));
+        this.commentColumn.setCellValueFactory(cellData -> PropertyConverter.getInstance().convert(cellData.getValue().getContent()));
     }
 
 }

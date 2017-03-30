@@ -40,7 +40,7 @@ public class ProviderReviewDAOPG extends ProviderReviewDAO {
     @Override
     public List<ProviderReview> getAllReviewsForProvider(Provider provider) {
         try {
-            List<ProviderReview> providerReviews = new ArrayList<ProviderReview>();
+            List<ProviderReview> providerReviews = new ArrayList<>();
             String query = "SELECT * FROM Provider_review WHERE providerID = ?";
             Connection connection = Connector.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(query);
@@ -49,9 +49,6 @@ public class ProviderReviewDAOPG extends ProviderReviewDAO {
             while(rs.next()){
                 String content = rs.getString("content");
                 int rate = rs.getInt("rate");
-                //TODO fix when ConsumerDAOPG is done
-                // Unused given the current constructor of Provider : ProviderReview(String content, int rate)
-                //Consumer consumer = (Consumer)DAOFactory.getInstance().createUserDAO().read(rs.getString("consumerID"));
                 ProviderReview providerReview = new ProviderReview(content, rate);
                 providerReviews.add(providerReview);
             }

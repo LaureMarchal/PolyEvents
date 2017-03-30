@@ -4,7 +4,7 @@ public enum View {
 
     LOGIN("login/loginView"),
     SIGN_UP("signUp/signUpView"),
-    MAIN("MainView"),
+    MAIN("mainView"),
     CREATE_EVENT("event/createEventView"),
     SEE_EVENT("event/eventView");
 

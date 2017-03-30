@@ -13,6 +13,8 @@ import ui.Controller;
 import ui.View;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -61,11 +63,16 @@ public class EventCreationController {
     private DatePicker datePicker;
 
     /**
-     * The field to write the beginning time
+     * The field to write the beginning time hour
      */
     @FXML
-    private TextField beginningTimeField;
+    private TextField beginningTimeHourField;
 
+    /**
+     * The field to write the beginning time min
+     */
+    @FXML
+    private TextField beginningTimeMinField;
     /**
      * The picker to write the deadline to register
      */
@@ -119,8 +126,9 @@ public class EventCreationController {
      */
     public void onCreate() {
         //assign event date
-        Date hour = new Date(beginningTimeField.getText());
-        Date time = new Date(datePicker.getValue().toEpochDay());
+        LocalDate localDate = datePicker.getValue();
+        LocalDateTime localDateTime = localDate.atTime(Integer.parseInt(beginningTimeHourField.getText()), Integer.parseInt(beginningTimeMinField.getText()));
+        Date time = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
         //assign deadline registration
         Date deadline = new Date(registerDeadlinePicker.toString());
         //assign the price

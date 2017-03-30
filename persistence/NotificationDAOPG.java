@@ -8,8 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.List;
 
 public class NotificationDAOPG extends NotificationDAO {
 
@@ -31,7 +30,7 @@ public class NotificationDAOPG extends NotificationDAO {
     }
 
     @Override
-    public Notification getAllForUser(User user) {
+    public List<Notification> getAllForUser(User user) {
 
         return null;
     }

@@ -1,6 +1,11 @@
 package bl.facade;
 
+import bl.dao.DAOFactory;
+import bl.model.Event;
 import bl.model.Notification;
+import ui.Controller;
+
+import java.util.List;
 
 public class NotificationFacade {
 
@@ -25,6 +30,11 @@ public class NotificationFacade {
 
     public void readNotification(Notification notification) {
 
+    }
+
+    public List<Notification> getAllNotification() {
+        List<Notification> notifications = DAOFactory.getInstance().createNotificationDAO().getAllForUser(Controller.getInstance().getUserLogged());
+        return notifications;
     }
 
 }

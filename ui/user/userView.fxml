@@ -133,4 +133,16 @@
             </font>
         </Label>
     </top>
+    <bottom>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button cancelButton="true" mnemonicParsing="false" onAction="#onCancel" text="Cancel"/>
+                <Button defaultButton="true" mnemonicParsing="false" onAction="#onUpdate" text="Save">
+                    <HBox.margin>
+                        <Insets left="6.0"/>
+                    </HBox.margin>
+                </Button>
+            </children>
+        </HBox>
+    </bottom>
 </BorderPane>

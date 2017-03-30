@@ -60,7 +60,8 @@ public class EventFacade {
     }
 
     public Message addMessage(Message message, Message parent) {
-        return null;
+        DAOFactory.getInstance().createMessageDAO().create(message,parent);
+        return message;
     }
 
     public List<Event> search(String title, String tag){

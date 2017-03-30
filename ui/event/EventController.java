@@ -229,7 +229,7 @@ public class EventController implements OnInit{
      * On "New" button click, go to the add messages interface
      */
     public void onAddMessage() {
-
+        Controller.getInstance().goTo(View.ADD_MESSAGE,this.currentEvent);
     }
 
     /**

@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import ui.Controller;
 import ui.View;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -118,8 +119,8 @@ public class EventCreationController {
      */
     public void onCreate() {
         //assign event date
-        String date = datePicker.toString()+beginningTimeField.getText();
-        Date time = new Date(date);
+        Date hour = new Date(beginningTimeField.getText());
+        Date time = new Date(datePicker.getValue().toEpochDay());
         //assign deadline registration
         Date deadline = new Date(registerDeadlinePicker.toString());
         //assign the price

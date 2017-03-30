@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.112"
+            fx:controller="ui.signIn.SignInController">
+    <top>
+        <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets top="20.0"/>
+            </BorderPane.margin>
+            <children>
+                <Label alignment="CENTER" text="PolyEvent">
+                    <font>
+                        <Font name="System Bold" size="24.0"/>
+                    </font>
+                </Label>
+                <Label text="Create a new account">
+                    <font>
+                        <Font size="16.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets top="5.0"/>
+                    </VBox.margin>
+                </Label>
+            </children>
+        </VBox>
+    </top>
+    <center>
+        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label fx:id="messageLabel" text="Fields with (*) are required.">
+                    <VBox.margin>
+                        <Insets bottom="20.0"/>
+                    </VBox.margin>
+                </Label>
+                <TextField fx:id="pseudoField" alignment="CENTER" maxWidth="-Infinity" prefWidth="200.0"
+                           promptText="Pseudo (*)">
+                    <VBox.margin>
+                        <Insets bottom="5.0"/>
+                    </VBox.margin>
+                </TextField>
+                <PasswordField fx:id="passwordField" alignment="CENTER" maxWidth="-Infinity" prefWidth="200.0"
+                               promptText="Password (*)">
+                    <VBox.margin>
+                        <Insets bottom="5.0"/>
+                    </VBox.margin>
+                </PasswordField>
+                <TextField fx:id="emailField" alignment="CENTER" layoutX="310.0" layoutY="160.0" maxWidth="-Infinity"
+                           prefWidth="200.0" promptText="Email (*)"/>
+                <Label fx:id="messageLabel1" text="Choose your role">
+                    <VBox.margin>
+                        <Insets top="20.0"/>
+                    </VBox.margin>
+                    <font>
+                        <Font name="System Bold" size="13.0"/>
+                    </font>
+                </Label>
+                <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="40.0">
+                    <children>
+                        <VBox alignment="TOP_RIGHT" prefHeight="400.0">
+                            <children>
+                                <RadioButton mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT"
+                                             onAction="#onConsumerSelected" selected="true" text="Consumer">
+                                    <toggleGroup>
+                                        <ToggleGroup fx:id="role"/>
+                                    </toggleGroup>
+                                    <font>
+                                        <Font size="16.0"/>
+                                    </font>
+                                    <VBox.margin>
+                                        <Insets bottom="5.0"/>
+                                    </VBox.margin>
+                                </RadioButton>
+                                <Label fx:id="messageLabel2" alignment="TOP_RIGHT" contentDisplay="CENTER"
+                                       prefHeight="14.0" prefWidth="370.0"
+                                       text="You participate, comment and review various events."
+                                       textAlignment="CENTER">
+                                    <font>
+                                        <Font name="System Italic" size="13.0"/>
+                                    </font>
+                                </Label>
+                                <VBox fx:id="consumerForm" alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0"
+                                      spacing="5.0">
+                                    <children>
+                                        <TextField fx:id="firstnameField" alignment="CENTER" maxWidth="-Infinity"
+                                                   prefWidth="200.0" promptText="Firstname (*)"/>
+                                        <TextField fx:id="lastnameField" alignment="CENTER" maxWidth="-Infinity"
+                                                   prefWidth="200.0" promptText="Lastname (*)"/>
+                                    </children>
+                                    <padding>
+                                        <Insets top="10.0"/>
+                                    </padding>
+                                </VBox>
+                            </children>
+                            <HBox.margin>
+                                <Insets right="-30.0"/>
+                            </HBox.margin>
+                        </VBox>
+                        <Separator orientation="VERTICAL" prefHeight="200.0"/>
+                        <VBox layoutX="166.0" layoutY="10.0" prefHeight="400.0">
+                            <children>
+                                <RadioButton mnemonicParsing="false" onAction="#onProviderSelected" text="Provider"
+                                             toggleGroup="$role">
+                                    <font>
+                                        <Font size="16.0"/>
+                                    </font>
+                                    <VBox.margin>
+                                        <Insets bottom="5.0"/>
+                                    </VBox.margin>
+                                </RadioButton>
+                                <Label fx:id="messageLabel21" alignment="TOP_LEFT" prefHeight="14.0" prefWidth="370.0"
+                                       text="You create and manage you own events.">
+                                    <font>
+                                        <Font name="System Italic" size="13.0"/>
+                                    </font>
+                                </Label>
+                                <VBox fx:id="providerForm" alignment="CENTER_LEFT" disable="true" prefHeight="200.0"
+                                      prefWidth="100.0" spacing="5.0">
+                                    <children>
+                                        <TextField fx:id="nameField" alignment="CENTER" layoutX="310.0" layoutY="105.0"
+                                                   maxWidth="-Infinity" prefWidth="200.0" promptText="Name (*)"/>
+                                        <TextField fx:id="descriptionField" alignment="CENTER" layoutX="310.0"
+                                                   layoutY="118.0" maxWidth="-Infinity" prefWidth="200.0"
+                                                   promptText="Description (*)"/>
+                                        <TextField fx:id="phoneField" alignment="CENTER" layoutX="310.0" layoutY="131.0"
+                                                   maxWidth="-Infinity" prefWidth="200.0" promptText="Phone"/>
+                                        <TextField fx:id="websiteField" alignment="CENTER" layoutX="310.0"
+                                                   layoutY="144.0" maxWidth="-Infinity" prefWidth="200.0"
+                                                   promptText="Website"/>
+                                        <TextField fx:id="officeLocationField" alignment="CENTER" layoutX="310.0"
+                                                   layoutY="157.0" maxWidth="-Infinity" prefWidth="200.0"
+                                                   promptText="Office location"/>
+                                    </children>
+                                    <VBox.margin>
+                                        <Insets top="10.0"/>
+                                    </VBox.margin>
+                                </VBox>
+                            </children>
+                            <HBox.margin>
+                                <Insets left="-30.0"/>
+                            </HBox.margin>
+                        </VBox>
+                    </children>
+                    <VBox.margin>
+                        <Insets top="10.0"/>
+                    </VBox.margin>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <Button cancelButton="true" mnemonicParsing="false" onAction="#onCancel" text="Cancel">
+                            <HBox.margin>
+                                <Insets right="10.0"/>
+                            </HBox.margin>
+                        </Button>
+                        <Button defaultButton="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false"
+                                onAction="#onSubmit" text="Submit"/>
+                    </children>
+                </HBox>
+            </children>
+            <BorderPane.margin>
+                <Insets top="20.0"/>
+            </BorderPane.margin>
+        </VBox>
+    </center>
+</BorderPane>

@@ -21,10 +21,11 @@ public class Consumer extends User {
         this.registrations = registrations;
     }
 
-    public Consumer(String pseudo, String password, String email, String firstName, String lastName) {
+    public Consumer(String pseudo, String password, String email, String firstName, String lastName, String comments) {
         super(pseudo, password, email, Role.CONSUMER);
         this.firstName = firstName;
         this.lastName = lastName;
+        this.comments = comments;
     }
 
     public String getComments() {

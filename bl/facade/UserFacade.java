@@ -74,7 +74,7 @@ public class UserFacade {
         } else if (lastName.equals("")) {
             throw new SignInException("The last name can't be empty");
         }
-        Consumer consumer = new Consumer(pseudo, Util.getInstance().hashString(password), email, firstName, lastName);
+        Consumer consumer = new Consumer(pseudo, Util.getInstance().hashString(password), email, firstName, lastName, "");
         return DAOFactory.getInstance().createUserDAO().create(consumer);
     }
 

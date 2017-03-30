@@ -1,10 +1,7 @@
 package persistence;
 
 import bl.dao.UserDAO;
-import bl.model.Consumer;
-import bl.model.Provider;
-import bl.model.Role;
-import bl.model.User;
+import bl.model.*;
 import persistence.connector.Connector;
 
 import java.sql.Connection;
@@ -20,16 +17,46 @@ public class UserDAOPG extends UserDAO {
     @Override
     public User read(String pseudo) {
         try {
-            String query = "SELECT * FROM \"User\" WHERE pseudo = ?";
             Connection connection = Connector.getInstance().getConnection();
+            String query = "SELECT * FROM \"User\" WHERE pseudo = ?";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, pseudo);
             ResultSet rs = ps.executeQuery();
-            connection.close();
+
             if (!rs.next()) {
                 return null;
             } else {
-                return new User(rs.getString("pseudo"), rs.getString("password"), rs.getString("email"), Role.valueOf(rs.getString("role")));
+                User user = new User(rs.getString("pseudo"),
+                        rs.getString("password"),
+                        rs.getString("email"),
+                        Role.valueOf(rs.getString("role")));
+
+                // Specify the user in his role by do a more specified request
+                query = "SELECT * FROM " + user.getRole().name() + " WHERE userID = ?";
+                ps = connection.prepareStatement(query);
+                ps.setString(1, user.getPseudo());
+                rs = ps.executeQuery();
+                rs.next();
+                connection.close();
+
+                switch (user.getRole()) {
+                    case CONSUMER:
+                        return new Consumer(user.getPseudo(), user.getPassword(), user.getEmail(),
+                                rs.getString("firstname"),
+                                rs.getString("lastname"),
+                                rs.getString("comments"));
+                    case PROVIDER:
+                        return new Provider(user.getPseudo(), user.getPassword(), user.getEmail(),
+                                rs.getString("name"),
+                                rs.getString("description"),
+                                rs.getString("phone"),
+                                rs.getString("website"),
+                                rs.getString("officeLocation"));
+                    case ADMINISTRATOR:
+                        return new Administrator(user.getPseudo(), user.getPassword(), user.getEmail());
+                    default:
+                        return null;
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -77,7 +104,7 @@ public class UserDAOPG extends UserDAO {
         }
     }
 
-    public User createAssociatedRole(User user) {
+    private User createAssociatedRole(User user) {
         try {
             String query;
             PreparedStatement ps;

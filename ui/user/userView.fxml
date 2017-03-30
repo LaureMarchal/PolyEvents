@@ -21,15 +21,17 @@
                                 <Group layoutX="14.0" layoutY="14.0">
                                     <children>
                                         <Label layoutY="5.0" text="Pseudo"/>
-                                        <TextField fx:id="pseudoTextField" alignment="TOP_LEFT" layoutX="99.0"
-                                                   prefHeight="27.0" prefWidth="254.0" translateX="5.0"/>
+                                        <TextField fx:id="pseudoTextField" alignment="TOP_LEFT" disable="true"
+                                                   editable="false" layoutX="99.0" prefHeight="27.0" prefWidth="254.0"
+                                                   translateX="5.0"/>
                                     </children>
                                 </Group>
                                 <Group layoutX="14.0" layoutY="41.0" translateY="5.0">
                                     <children>
                                         <Label layoutY="5.0" text="Email"/>
-                                        <TextField fx:id="emailTextField" alignment="TOP_LEFT" layoutX="99.0"
-                                                   prefHeight="27.0" prefWidth="254.0" translateX="5.0"/>
+                                        <TextField fx:id="emailTextField" alignment="TOP_LEFT" disable="true"
+                                                   editable="false" layoutX="99.0" prefHeight="27.0" prefWidth="254.0"
+                                                   translateX="5.0"/>
                                     </children>
                                 </Group>
                                 <Group layoutX="14.0" layoutY="73.0" translateY="5.0">
@@ -45,7 +47,8 @@
                 </TitledPane>
                 <StackPane alignment="TOP_CENTER" prefHeight="150.0" prefWidth="400.0">
                     <children>
-                        <TitledPane animated="false" collapsible="false" prefWidth="390.0" text="Consumer informations">
+                        <TitledPane fx:id="consumerInfosPane" animated="false" collapsible="false" prefWidth="390.0"
+                                    text="Consumer informations" visible="false">
                             <content>
                                 <Pane prefHeight="90.0" prefWidth="388.0">
                                     <children>
@@ -67,8 +70,8 @@
                                 </Pane>
                             </content>
                         </TitledPane>
-                        <TitledPane animated="false" collapsible="false" prefWidth="390.0" text="Provider informations"
-                                    visible="false">
+                        <TitledPane fx:id="providerInfosPane" animated="false" collapsible="false" prefWidth="390.0"
+                                    text="Provider informations" visible="false">
                             <content>
                                 <Pane prefHeight="280.0" prefWidth="394.0">
                                     <children>
@@ -123,7 +126,8 @@
         </HBox>
     </center>
     <top>
-        <Label prefHeight="50.0" text="You are / it is a ???" textAlignment="CENTER" BorderPane.alignment="CENTER">
+        <Label fx:id="roleLabel" prefHeight="50.0" text="You are / it is a ???" textAlignment="CENTER"
+               BorderPane.alignment="CENTER">
             <font>
                 <Font name="System Italic" size="13.0"/>
             </font>

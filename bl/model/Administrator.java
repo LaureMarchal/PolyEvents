@@ -6,4 +6,8 @@ public class Administrator extends User {
         super(pseudo, password, email, Role.ADMINISTRATOR);
     }
 
+    public Administrator clone() {
+        return new Administrator(this.pseudo, this.password, this.email);
+    }
+
 }

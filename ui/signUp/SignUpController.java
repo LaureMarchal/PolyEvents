@@ -1,6 +1,6 @@
 package ui.signUp;
 
-import bl.exception.SignInException;
+import bl.exception.UserException;
 import bl.facade.UserFacade;
 import bl.model.User;
 import javafx.fxml.FXML;
@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import ui.Controller;
 import ui.View;
+import ui.helper.AlertHelper;
 
 public class SignUpController {
 
@@ -85,9 +86,9 @@ public class SignUpController {
             }
             messageLabel.setText("");
             messageLabel.setTextFill(Color.BLACK);
-            Controller.getInstance().showInfoAlert("You are now registered as " + user.getPseudo() + " ! Please, try to login.");
+            AlertHelper.getInstance().showInfoAlert("You are now registered as " + user.getPseudo() + " ! Please, try to login.");
             Controller.getInstance().goTo(View.LOGIN);
-        } catch (SignInException e) {
+        } catch (UserException e) {
             messageLabel.setText(e.getErrorText());
             messageLabel.setTextFill(Color.RED);
         }

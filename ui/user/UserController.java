@@ -1,5 +1,8 @@
 package ui.user;
 
+import bl.Util;
+import bl.exception.UserException;
+import bl.facade.UserFacade;
 import bl.model.Consumer;
 import bl.model.Provider;
 import bl.model.Role;
@@ -7,6 +10,7 @@ import bl.model.User;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import ui.Controller;
+import ui.helper.AlertHelper;
 
 /**
  * Controller for the user interface
@@ -19,6 +23,7 @@ public class UserController {
 
     public TextField pseudoTextField;
     public TextField emailTextField;
+    public PasswordField oldPasswordTextField;
     public PasswordField newPasswordTextField;
 
     public TitledPane consumerInfosPane;
@@ -66,6 +71,78 @@ public class UserController {
     }
 
     public void onUpdate(ActionEvent actionEvent) {
+        User updatedUser = this.displayedUser.clone();
+
+        // Ask old password if a new password has been set
+        if (!this.oldPasswordTextField.getText().isEmpty() || !this.newPasswordTextField.getText().isEmpty()) {
+            if (!this.oldPasswordTextField.getText().isEmpty() && !this.newPasswordTextField.getText().isEmpty()) {
+                if (Util.getInstance().hashString(oldPasswordTextField.getText()).equals(this.displayedUser.getPassword())) {
+                    updatedUser.setPassword(Util.getInstance().hashString(this.newPasswordTextField.getText()));
+                } else {
+                    AlertHelper.getInstance().showInfoAlert("The old password provided is wrong, you can't update it.");
+                    return;
+                }
+            } else {
+                AlertHelper.getInstance().showInfoAlert("To update your password, you need to fill both of old and new password fields.");
+                return;
+            }
+        }
+
+        // Update user with new data
+        switch (this.displayedUser.getRole()) {
+            case CONSUMER:
+                Consumer consumer = (Consumer) updatedUser;
+
+                if (this.firstnameTextField.getText().isEmpty()) {
+                    AlertHelper.getInstance().showInfoAlert("The new first name can't be empty");
+                    return;
+                } else {
+                    consumer.setFirstName(this.firstnameTextField.getText());
+                }
+
+                if (this.lastnameTextField.getText().isEmpty()) {
+                    AlertHelper.getInstance().showInfoAlert("The new last name can't be empty");
+                    return;
+                } else {
+                    consumer.setLastName(this.lastnameTextField.getText());
+                }
+
+                break;
+            case PROVIDER:
+                Provider provider = (Provider) updatedUser;
+
+                if (this.nameTextField.getText().isEmpty()) {
+                    AlertHelper.getInstance().showInfoAlert("The new name can't be empty");
+                    return;
+                } else {
+                    provider.setName(this.nameTextField.getText());
+                }
+
+                if (this.descriptionTextArea.getText().isEmpty()) {
+                    AlertHelper.getInstance().showInfoAlert("The new description can't be empty");
+                    return;
+                } else {
+                    provider.setDescription(this.descriptionTextArea.getText());
+                }
+
+                provider.setPhone(this.phoneTextField.getText());
+                provider.setWebsite(this.websiteTextField.getText());
+                provider.setOfficeLocation(this.officeLocationTextArea.getText());
+
+                break;
+            case ADMINISTRATOR:
+
+                break;
+        }
+
+        try {
+            UserFacade.getInstance().updateUser(updatedUser);
+            this.displayedUser = updatedUser;
+            Controller.getInstance().setUserLogged(updatedUser);
+            AlertHelper.getInstance().showInfoAlert("Your profile has been updated successfully !");
+        } catch (UserException e) {
+            AlertHelper.getInstance().showInfoAlert(e.getErrorText());
+        }
 
     }
 
@@ -75,7 +152,7 @@ public class UserController {
 
     public void onCancel(ActionEvent actionEvent) {
         initialize();
-        Controller.getInstance().showInfoAlert("Your updates have been cancelled.");
+        AlertHelper.getInstance().showInfoAlert("Your updates have been cancelled.");
     }
 
 }

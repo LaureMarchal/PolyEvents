@@ -3,12 +3,10 @@ package ui.event;
 import bl.facade.EventFacade;
 import bl.model.*;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import ui.Controller;
+import ui.View;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.List;
 
@@ -39,7 +37,7 @@ public class EventController {
      * The field to write the description
      */
     @FXML
-    private TextField descriptionField;
+    private TextArea descriptionArea;
 
     /**
      * The field to write the duration
@@ -144,7 +142,7 @@ public class EventController {
                 titleField.getText(),
                 subtitleField.getText(),
                 locationField.getText(),
-                descriptionField.getText(),
+                descriptionArea.getText(),
                 time,
                 deadline,
                 durationField.getText(),
@@ -175,6 +173,20 @@ public class EventController {
 
     public void onAddMessage() {
 
+    }
+
+    /**
+     * On "Register" button click, go to the registration interface
+     */
+    public void onRegister() {
+
+    }
+
+    /**
+     * On "Return" button click, return to the main view
+     */
+    public void onReturn() {
+        Controller.getInstance().goTo(View.MAIN);
     }
 
 }

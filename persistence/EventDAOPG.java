@@ -201,6 +201,7 @@ public class EventDAOPG extends EventDAO {
         }
     }
 
+    @Override
     public List<Event> getAllEvent(){
         List<Event> eventSearchResult = new ArrayList<Event>();
         try{

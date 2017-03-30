@@ -61,8 +61,14 @@ public class EventFacade {
         return null;
     }
 
-    public List<Event> search(String title, String tag) {
-        return null;
+    public List<Event> search(String title, String tag){
+        List<Event> events = DAOFactory.getInstance().createEventDAO().search(title,tag);
+        return events;
+    }
+
+    public List<Event> getAllEvent() {
+        List<Event> events = DAOFactory.getInstance().createEventDAO().getAllEvent();
+        return events;
     }
 
 }

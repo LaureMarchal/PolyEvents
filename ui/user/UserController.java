@@ -4,6 +4,7 @@ import bl.model.Consumer;
 import bl.model.Provider;
 import bl.model.Role;
 import bl.model.User;
+import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import ui.Controller;
 
@@ -11,6 +12,8 @@ import ui.Controller;
  * Controller for the user interface
  */
 public class UserController {
+
+    private User displayedUser;
 
     public Label roleLabel;
 
@@ -31,6 +34,8 @@ public class UserController {
 
     public void initialize() {
         User user = Controller.getInstance().getUserLogged();
+
+        this.displayedUser = user;
 
         // Compute visibility for specific panes
         this.consumerInfosPane.setVisible(user.getRole() == Role.CONSUMER);
@@ -60,10 +65,17 @@ public class UserController {
         }
     }
 
-    public void onUpdate(User user){
+    public void onUpdate(ActionEvent actionEvent) {
+
     }
 
-    public void onDelete(User user){
+    public void onDelete(ActionEvent actionEvent) {
+
+    }
+
+    public void onCancel(ActionEvent actionEvent) {
+        initialize();
+        Controller.getInstance().showInfoAlert("Your updates have been cancelled.");
     }
 
 }

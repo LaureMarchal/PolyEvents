@@ -5,7 +5,7 @@
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://ec2-54-247-92-185.eu-west-1.compute.amazonaws.com:5432/df0nkq6bthnr4h</jdbc-url>
+      <jdbc-url>jdbc:postgresql://ec2-54-247-82-87.eu-west-1.compute.amazonaws.com:5432/dfupganb0rggik</jdbc-url>
       <driver-properties>
         <property name="sslmode" value="require" />
       </driver-properties>

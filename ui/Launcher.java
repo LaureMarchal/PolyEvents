@@ -20,6 +20,6 @@ public class Launcher extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Controller.getInstance().setStage(primaryStage);
-        Controller.getInstance().goTo(View.LOGIN);
+        Controller.getInstance().goTo(View.MAIN);
     }
 }

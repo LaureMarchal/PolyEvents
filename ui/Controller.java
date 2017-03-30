@@ -46,6 +46,23 @@ public class Controller {
         }
     }
 
+    public void goTo(View view, Object data) {
+        if (stage != null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../ui/" + view.toString() + ".fxml"));
+                OnInit controller = loader.getController();
+                controller.onInit(data);
+                Parent root = loader.load();
+                stage.setTitle(APP_NAME);
+                stage.setScene(new Scene(root, APP_WIDTH, APP_HEIGHT));
+                stage.show();
+            } catch (IOException e) {
+                System.err.println("The view " + "../ui/" + view.toString() + ".fxml" + " doesn't exist.");
+                e.printStackTrace();
+            }
+        }
+    }
+
     public void showInfoAlert(String text) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information");

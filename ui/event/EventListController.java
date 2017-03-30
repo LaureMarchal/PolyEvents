@@ -2,16 +2,13 @@ package ui.event;
 
 import bl.facade.EventFacade;
 import bl.model.Event;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import ui.Controller;
 import ui.View;
-import javafx.collections.FXCollections;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 
-import java.sql.SQLException;
 import java.util.List;
 /**
  * Controller for the event's list interface
@@ -127,6 +124,7 @@ public class EventListController {
      * Initialize the events table view
      */
     private void initializeEventsTableView(){
+        /*
         eventsTable.setItems(eventsList);
         beginnigDateEvent.setCellValueFactory(cellData -> cellData.getValue().beginningDate());
         titleEvent.setCellValueFactory(cellData -> cellData.getValue().title);
@@ -135,5 +133,6 @@ public class EventListController {
         priceEvent.setCellValueFactory(cellData -> cellData.getValue().price());
         eventsTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> selectedEvent = newValue);
+                */
     }
 }

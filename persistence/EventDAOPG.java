@@ -4,17 +4,11 @@ import bl.dao.DAOFactory;
 import bl.dao.EventDAO;
 import bl.model.Event;
 import bl.model.Provider;
-import bl.model.Registration;
 import bl.model.Tag;
-import bl.model.Message;
 import persistence.connector.Connector;
-import java.sql.ResultSet;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.text.SimpleDateFormat;
+
+import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -205,10 +199,10 @@ public class EventDAOPG extends EventDAO {
     public List<Event> getAllEvent(){
         List<Event> eventSearchResult = new ArrayList<Event>();
         try{
-            String query = "SELECT Event.id FROM Event";
+            String query = "SELECT id FROM Event";
             Connection connection = Connector.getInstance().getConnection();
-            PreparedStatement ps = connection.prepareStatement(query);
-            ResultSet rs = ps.executeQuery(query);
+            Statement s = connection.createStatement();
+            ResultSet rs = s.executeQuery(query);
             while(rs.next()){
                 // Not sure, could be : this.getOne(rs.getInt("Event.id"));
                 Event event = this.getOne(rs.getInt("id"));

@@ -1,14 +1,15 @@
 package ui.event;
 
 import bl.facade.EventFacade;
-import bl.facade.NotificationFacade;
 import bl.model.Event;
 import bl.model.Role;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import ui.Controller;
 import ui.OnInit;
 import ui.View;
+import ui.helper.AlertHelper;
 
 
 /**
@@ -203,7 +204,7 @@ public class EventController implements OnInit{
      * On "Delete" button click, delete the event and go back to main view
      */
     public void onDelete() {
-        Controller.getInstance().showInfoAlert("Do you really want to delete this event ?");
+        AlertHelper.getInstance().showInfoAlert("Do you really want to delete this event ?");
         EventFacade.getInstance().delete(this.currentEvent);
         Controller.getInstance().goTo(View.MAIN);
     }

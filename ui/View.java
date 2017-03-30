@@ -7,7 +7,8 @@ public enum View {
     MAIN("mainView"),
     CREATE_EVENT("event/createEventView"),
     SEE_EVENT("event/eventView"),
-    UPDATE_EVENT("event/updateEventView");
+    UPDATE_EVENT("event/updateEventView"),
+    SEE_PROVIDER("provider/providerView");
 
     private final String text;
 

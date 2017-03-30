@@ -124,7 +124,7 @@ public class EventListController {
      * Initialize the events table view
      */
     private void initializeEventsTableView(){
-        /*
+/*
         eventsTable.setItems(eventsList);
         beginnigDateEvent.setCellValueFactory(cellData -> cellData.getValue().beginningDate());
         titleEvent.setCellValueFactory(cellData -> cellData.getValue().title);
@@ -133,6 +133,6 @@ public class EventListController {
         priceEvent.setCellValueFactory(cellData -> cellData.getValue().price());
         eventsTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> selectedEvent = newValue);
-                */
+*/
     }
 }

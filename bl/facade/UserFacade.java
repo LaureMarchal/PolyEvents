@@ -135,4 +135,8 @@ public class UserFacade {
         return DAOFactory.getInstance().createUserDAO().update(user);
     }
 
+    public User getOneByPseudo(String pseudo) {
+        return DAOFactory.getInstance().createUserDAO().read(pseudo);
+    }
+
 }

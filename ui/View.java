@@ -8,8 +8,9 @@ public enum View {
     CREATE_EVENT("event/createEventView"),
     SEE_EVENT("event/eventView"),
     UPDATE_EVENT("event/updateEventView"),
-    ADD_MESSAGE("message/newMessageView"),
-    SEE_PROVIDER("provider/providerView");
+    SEE_PROVIDER("provider/providerView"),
+    REGISTRATION("registration/registrationView"),
+    ADD_MESSAGE("message/newMessageView");
 
     private final String text;
 

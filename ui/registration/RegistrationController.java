@@ -2,6 +2,7 @@ package ui.registration;
 
 import bl.dao.DAOFactory;
 import bl.model.Event;
+import bl.model.Registration;
 import bl.model.User;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -34,7 +35,7 @@ public class RegistrationController implements OnInit {
     @FXML
     private void initialize() {
         // Initialize the person table with the two columns.
-        participantColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
+        participantColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPseudo()));
     }
 
     @Override
@@ -44,7 +45,7 @@ public class RegistrationController implements OnInit {
         Event event = factory.createEventDAO().getOne(eventId);
         List<User> participants = factory.createRegistrationDAO().findAllForEvent(event)
                 .stream()
-                .map(registration -> registration.getConsumer())
+                .map(Registration::getConsumer)
                 .collect(Collectors.toList());
         this.participants = FXCollections.observableArrayList(participants);
         table.setItems(this.participants);

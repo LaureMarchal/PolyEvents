@@ -2,6 +2,7 @@ package ui.event;
 
 import bl.facade.EventFacade;
 import bl.model.Event;
+import bl.model.Role;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -89,7 +90,7 @@ public class EventListController {
      * On "Search" button click, search event by title or tag and set the new table
      */
     public void onSearch() {
-        setEvents(EventFacade.getInstance().search(searchField.getText(),searchField.getText()));
+        //setEvents(EventFacade.getInstance().search(searchField.getText(),searchField.getText()));
     }
 
     /**
@@ -103,7 +104,7 @@ public class EventListController {
      * On "Reset" button click, reset the table to all events
      */
     public void onReset() {
-        setEvents(EventFacade.getInstance().getAllEvent());
+        //setEvents(EventFacade.getInstance().getAllEvent());
     }
 
     /**
@@ -114,17 +115,22 @@ public class EventListController {
     }
 
     public void setEvents(List<Event> events) {
-        this.eventsList = FXCollections.observableList(events);
+        //this.eventsList = FXCollections.observableList(events);
 
     }
 
     @FXML
     public void initialize(){
+        if(Controller.getInstance().getUserLogged().getRole()== Role.CONSUMER){
+            addEventButton.setDisable(true);
+        } else{
+            addEventButton.setDisable(false);
+        }
         init();
     }
 
     public void init() {
-        setEvents(EventFacade.getInstance().getAllEvent());
+        //setEvents(EventFacade.getInstance().getAllEvent());
         initializeEventsTableView();
     }
 

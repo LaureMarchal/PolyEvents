@@ -12,4 +12,6 @@ public abstract class NotificationDAO {
 
     public abstract List<Notification> getAllForUser(User user);
 
+    public abstract Notification getOne(int id);
+
 }

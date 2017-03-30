@@ -70,8 +70,8 @@ public class EventFacade {
     }
 
     public List<Event> getAllEvent() {
-        List<Event> events = DAOFactory.getInstance().createEventDAO().getAllEvent();
-        return events;
+        //List<Event> events = DAOFactory.getInstance().createEventDAO().getAllEvent();
+        return null;
     }
 
 }

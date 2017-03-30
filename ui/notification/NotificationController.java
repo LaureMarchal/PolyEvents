@@ -1,6 +1,5 @@
 package ui.notification;
 
-import bl.facade.EventFacade;
 import bl.facade.NotificationFacade;
 import bl.model.Notification;
 import javafx.collections.FXCollections;

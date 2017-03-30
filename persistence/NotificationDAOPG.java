@@ -14,8 +14,20 @@ import java.util.Date;
 public class NotificationDAOPG extends NotificationDAO {
 
     @Override
-    public Notification update(Notification notification) {
-        return null;
+    public Notification updateRead(Notification notification, Boolean read) {
+        try {
+            String query = "UPDATE Notification SET isRead = ?";
+            Connection connection = Connector.getInstance().getConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setBoolean(1, read);
+            ps.execute();
+            connection.close();
+            notification.setRead(read);
+            return notification;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override

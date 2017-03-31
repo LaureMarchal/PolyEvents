@@ -128,8 +128,8 @@ public class EventCreationController {
         Date time = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
         //assign deadline registration
         LocalDate localDateDeadline = registerDeadlinePicker.getValue();
-        LocalDateTime localDateTimeDeadline = localDate.atTime(0, 0);
-        Date deadline = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+        LocalDateTime localDateTimeDeadline = localDateDeadline.atTime(0, 0);
+        Date deadline = Date.from(localDateTimeDeadline.atZone(ZoneId.systemDefault()).toInstant());
         //assign the price
         Float price = Float.valueOf(priceField.getText());
         //assign eventcontraints

@@ -199,7 +199,7 @@ public class EventController implements OnInit{
      * On "Manage" button click, go to the list of the event's consumers
      */
     public void onManage() {
-        //TODO go to
+        Controller.getInstance().goTo(View.REGISTRATION,this.currentEvent.getId());
     }
 
     /**

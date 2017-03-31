@@ -36,9 +36,9 @@ public class EventDAOPG extends EventDAO {
             ps.setString(12, event.getStatus());
             ps.setString(13, event.getProvider().getPseudo());
             ps.execute();
-            String queryID = "SELECT id FROM Message WHERE id=LAST_INSERT_ID()";
-            PreparedStatement psID = connection.prepareStatement(queryID);
-            ResultSet rs = psID.executeQuery(queryID);
+            String queryID = "SELECT MAX(id) FROM Event ";
+            Statement s = connection.createStatement();
+            ResultSet rs = s.executeQuery(queryID);
             connection.close();
             event.setId(rs.getInt("id"));
             return event;

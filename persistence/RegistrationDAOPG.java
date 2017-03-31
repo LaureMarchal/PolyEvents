@@ -113,13 +113,13 @@ public class RegistrationDAOPG extends RegistrationDAO {
             Connection connection = Connector.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, consumer.getPseudo());
-            ResultSet rs = ps.executeQuery(query);
+            ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                Event event =  FactoryDAOPG.getInstance().createEventDAO().getOne(rs.getInt("consumerID"));
+                Event event =  FactoryDAOPG.getInstance().createEventDAO().getOne(rs.getInt("eventID"));
                 String status = rs.getString("status");
                 java.util.Date creationDate = rs.getTimestamp("creation_time");
                 EventReview eventReview = FactoryDAOPG.getInstance().createEventReviewDAO().getReviewByEventID(rs.getInt("eventID"),
-                        rs.getString("userID"));
+                        consumer.getPseudo());
                 Registration registration =  new Registration(event,
                         consumer,
                         creationDate,

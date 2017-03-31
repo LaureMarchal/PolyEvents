@@ -65,10 +65,29 @@ public class NotificationDAOPG extends NotificationDAO {
                 return null;
             } else {
                 int notifID = id;
-                Boolean isRead = rs.getBoolean("isread");
+                Boolean isRead = rs.getBoolean("isRead");
                 User user = DAOFactory.getInstance().createUserDAO().read(rs.getString("userID"));
-                Notifiable content = null;
-                Notification notif = new Notification(notifID, isRead, user, null, 0, content);
+                int relatedTo;
+                switch (rs.getString("relatedTo")){
+                    case "MESSAGE":
+                        relatedTo = rs.getInt("relatedToMessageID");
+                        break;
+                    case "EVENT":
+                        relatedTo = rs.getInt("relatedToEventID");
+                        break;
+                    case "REGISTRATION":
+                        relatedTo = rs.getInt("relatedToEventID");
+                        break;
+                    case "PROVIDER_REVIEW":
+                        Notification notif = new Notification(notifID, isRead, user, null, 0, null);
+                        connection.close();
+                        return notif;
+                        break;
+                    case "EVENT_REVIEW":
+                        relatedTo = rs.getInt("relatedToEventID");
+                        break;
+                }
+                Notification notif = new Notification(notifID, isRead, user, null, 0, null);
                 connection.close();
                 return notif;
             }
@@ -84,10 +103,11 @@ public class NotificationDAOPG extends NotificationDAO {
     public List<Notification> getAllForUser(User user) {
         List<Notification> notificationSearchResult = new ArrayList<Notification>();
         try{
-            String query = "SELECT id FROM Notification";
+            String query = "SELECT id FROM Notification WHERE userID = ?";
             Connection connection = Connector.getInstance().getConnection();
-            Statement s = connection.createStatement();
-            ResultSet rs = s.executeQuery(query);
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, user.getPseudo());
+            ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 Notification notif = this.getOne(rs.getInt("id"));
                 notificationSearchResult.add(notif);

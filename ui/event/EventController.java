@@ -1,6 +1,7 @@
 package ui.event;
 
 import bl.dao.DAOFactory;
+import bl.facade.EventFacade;
 import bl.facade.RegistrationFacade;
 import bl.model.*;
 import javafx.fxml.FXML;
@@ -184,7 +185,9 @@ public class EventController implements OnLoad {
      * On "Report" button click, go to the reportation interface
      */
     public void onReport() {
-
+        Event event = EventFacade.getInstance().read(this.currentEvent.getId());
+        EventFacade.getInstance().report(event);
+        AlertHelper.getInstance().showInfoAlert("This event has been reported to the administrators.");
     }
     /**
      * On "new" button click, go to the review interface

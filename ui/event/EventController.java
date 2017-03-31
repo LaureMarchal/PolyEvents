@@ -13,7 +13,9 @@ import ui.View;
 import ui.helper.AlertHelper;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -269,5 +271,12 @@ public class EventController implements OnLoad {
             deleteButton.setDisable(true);
             cancelButton.setDisable(true);
         }
+    }
+
+    public void onGoToProviderPage() {
+        Map<String, Object> data = new HashMap<>();
+        data.put("provider", this.currentEvent.getProvider());
+        data.put("event", this.currentEvent);
+        Controller.getInstance().goTo(View.SEE_PROVIDER, data);
     }
 }

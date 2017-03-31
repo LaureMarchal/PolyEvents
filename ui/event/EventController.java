@@ -1,11 +1,9 @@
 package ui.event;
 
 import bl.facade.EventFacade;
+import bl.facade.NotificationFacade;
 import bl.facade.RegistrationFacade;
-import bl.model.Consumer;
-import bl.model.Event;
-import bl.model.Registration;
-import bl.model.Role;
+import bl.model.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,6 +13,7 @@ import ui.View;
 import ui.helper.AlertHelper;
 
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -174,6 +173,12 @@ public class EventController implements OnLoad {
      * On "Delete" button click, delete the event and go back to main view
      */
     public void onDelete() {
+        List<Registration> list = RegistrationFacade.getInstance().getAllRegistrations(this.currentEvent);
+        for (Registration registration : list){
+
+        }
+        Notification notif = new Notification(false,);
+        NotificationFacade.getInstance().create(notif);
         AlertHelper.getInstance().showConfirmationDeleteAlert("Do you really want to delete this event ?",this.currentEvent);
     }
     /**

@@ -100,77 +100,23 @@ public class NotificationDAOPG extends NotificationDAO {
     }
 
     @Override
-    public Notification createEventNotification(Notification notification, User user, String relatedTo, Event event, Message message, User relatesToUser, Consumer relatesToConsumer, Provider relatesToProvider){
-            try {
-                String queryInsert = "INSERT INTO Notification (isRead, userID, related_to";
-                String valuesInsert = " VALUES (?, ?, ?";
-                switch (relatedTo){
-                    case "EVENT":
-                        queryInsert += ", relatedToEventID)";
-                        valuesInsert += ", ?)";
-                        break;
-                    case "MESSAGE":
-                        queryInsert += ", relatedToMessageID)";
-                        valuesInsert += ", ?)";
-                        break;
-                    case "REGISTRATION":
-                        queryInsert += ", relatedToEventID, relatedToConsumerID, relatedToProviderID)";
-                        valuesInsert += ", ?, ?, ?)";
-                        break;
-                    case "PROVIDER_REVIEW":
-                        queryInsert += ", relatedToConsumerID, relatedToProviderID)";
-                        valuesInsert += ", ?, ?)";
-                        break;
-                    case "EVENT_REVIEW":
-                        queryInsert += ", relatedToEventID, relatedToConsumerID)";
-                        valuesInsert += ", ?, ?)";
-                        break;
-                    default:
-                        queryInsert += ")";
-                        valuesInsert += ")";
-                        return null;
-                }
-                String query = queryInsert + valuesInsert;
-                Connection connection = Connector.getInstance().getConnection();
-                PreparedStatement ps = connection.prepareStatement(query);
-                ps.setBoolean(1, false);
-                ps.setString(2, user.getPseudo());
-                ps.setString(3, relatedTo);
-                switch (relatedTo){
-                    case "EVENT":
-                        ps.setInt(4, event.getId());
-                        break;
-                    case "MESSAGE":
-                        ps.setInt(4, message.getID());
-                        break;
-                    case "REGISTRATION":
-                        ps.setInt(4, event.getId());
-                        ps.setString(5, relatesToConsumer.getPseudo());
-                        ps.setString(6, relatesToProvider.getPseudo());
-                        break;
-                    case "PROVIDER_REVIEW":
-                        ps.setString(4, relatesToConsumer.getPseudo());
-                        ps.setString(5, relatesToProvider.getPseudo());
-                        break;
-                    case "EVENT_REVIEW":
-                        ps.setInt(4, event.getId());
-                        ps.setString(5, relatesToConsumer.getPseudo());
-                        break;
-                    default:
-                        return null;
-                }
-                ps.execute();
-                // fetch back the last inserted ID to complete de notification Object.
-                String queryID = "SELECT id FROM Message WHERE id=LAST_INSERT_ID()";
-                PreparedStatement psID = connection.prepareStatement(queryID);
-                ResultSet rs = psID.executeQuery(queryID);
-                connection.close();
-                notification.setId(rs.getInt("id"));
-                return null;
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return null;
-            }
+    public Notification createEventNotification(Notification notification){
+        try {
+            String query = "INSERT INTO Notification (isRead, userId, message, relatedTo, relatedToEventId) VALUES (?, ?, ?, ?::Related_To, ?)";
+            Connection connection = Connector.getInstance().getConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setBoolean(1, false);
+            ps.setString(2, notification.getTarget().getPseudo());
+            ps.setString(3, notification.getContent().getNotificationText());
+            ps.setString(4, RelatedTo.EVENT.name());
+            ps.setInt(5, notification.getRelatedToId());
+            ps.execute();
+            connection.close();
+            return notification;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

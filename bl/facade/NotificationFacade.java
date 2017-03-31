@@ -32,6 +32,11 @@ public class NotificationFacade {
 
     }
 
+    public Notification create(Notification notif) {
+        Notification potentialNotification = DAOFactory.getInstance().createNotificationDAO().createEventNotification(notif);
+        return potentialNotification;
+    }
+
     public List<Notification> getAllNotification() {
         List<Notification> notifications = DAOFactory.getInstance().createNotificationDAO().getAllForUser(Controller.getInstance().getUserLogged());
         return notifications;

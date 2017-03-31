@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 /**
+ * Written by Théo Gauchoux
  * A connector to a remote PostgreSQL database hosted in an Heroku App
  */
 public class ConnectorPG extends Connector {

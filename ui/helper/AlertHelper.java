@@ -1,9 +1,11 @@
 package ui.helper;
 
-import bl.facade.EventFacade;
 import bl.facade.NotificationFacade;
 import bl.facade.RegistrationFacade;
-import bl.model.*;
+import bl.model.Event;
+import bl.model.Notification;
+import bl.model.Registration;
+import bl.model.RelatedTo;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputDialog;
@@ -15,6 +17,7 @@ import java.util.Optional;
 
 /**
  * Created by Theo Gauchoux on 30/03/2017.
+ * Provide useful methods to display alerts
  */
 public class AlertHelper {
 

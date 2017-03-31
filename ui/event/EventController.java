@@ -1,9 +1,12 @@
 package ui.event;
-
+/**
+ * Created by Laure & Tom
+ */
 import bl.facade.EventFacade;
-import bl.facade.NotificationFacade;
 import bl.facade.RegistrationFacade;
-import bl.model.*;
+import bl.model.Consumer;
+import bl.model.Event;
+import bl.model.Registration;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,7 +16,8 @@ import ui.View;
 import ui.helper.AlertHelper;
 
 import java.util.Date;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -161,7 +165,8 @@ public class EventController implements OnLoad {
      * On "Report" button click, go to the reportation interface
      */
     public void onReport() {
-
+        EventFacade.getInstance().report(this.currentEvent);
+        AlertHelper.getInstance().showInfoAlert("This event has been reported to the administrators.");
     }
     /**
      * On "See all" button click, go to the messages interface
@@ -248,5 +253,12 @@ public class EventController implements OnLoad {
             updateButton.setVisible(false);
             cancelButton.setVisible(false);
         }
+    }
+
+    public void onGoToProviderPage() {
+        Map<String, Object> data = new HashMap<>();
+        data.put("provider", this.currentEvent.getProvider());
+        data.put("event", this.currentEvent);
+        Controller.getInstance().goTo(View.SEE_PROVIDER, data);
     }
 }

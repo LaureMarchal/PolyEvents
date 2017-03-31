@@ -30,16 +30,6 @@
                         <fx:include fx:id="profileTab" source="user/userView.fxml" />
                     </content>
                 </Tab>
-                <Tab text="Test">
-                    <content>
-                        <VBox>
-                            <children>
-                                <Button mnemonicParsing="false" onAction="#testGoToProviderPage"
-                                        text="Go to provider page"/>
-                            </children>
-                        </VBox>
-                    </content>
-                </Tab>
             </tabs>
         </TabPane>
     </center>

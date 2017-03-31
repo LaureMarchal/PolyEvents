@@ -2,18 +2,22 @@ package ui.provider;
 
 import bl.facade.ProviderFacade;
 import bl.model.Consumer;
+import bl.model.Event;
 import bl.model.Provider;
 import bl.model.ProviderReview;
 import javafx.collections.FXCollections;
 import javafx.scene.control.*;
 import ui.Controller;
 import ui.OnLoad;
+import ui.View;
 import ui.helper.AlertHelper;
 import ui.helper.PropertyConverter;
 
 import java.util.List;
+import java.util.Map;
 
 /**
+ * Written by Théo Gauchoux
  * Controller for the provider interface
  */
 public class ProviderController implements OnLoad {
@@ -24,21 +28,27 @@ public class ProviderController implements OnLoad {
     public Label phoneLabel;
     public Label websiteLabel;
     public Label officeLocationLabel;
+
     public TitledPane yourReviewPanel;
     public Slider rateSlider;
     public TextArea commentTextArea;
     public Button postButton;
     public Button deleteButton;
+
     public TableView<ProviderReview> reviewsTable;
     public TableColumn<ProviderReview, String> rateColumn;
     public TableColumn<ProviderReview, String> commentColumn;
+
     private Provider displayedProvider;
     private ProviderReview displayedProviderReview;
+    private Event returnToEvent;
 
     @Override
     public void onLoad(Object data) {
         // Display basic data
-        this.displayedProvider = (Provider) data;
+        Map<String, Object> dataRetrieved = (Map<String, Object>) data;
+        this.displayedProvider = (Provider) dataRetrieved.get("provider");
+        this.returnToEvent = (Event) dataRetrieved.get("event");
         this.nameLabel.setText(this.displayedProvider.getName());
         this.descriptionLabel.setText(this.displayedProvider.getDescription());
         this.emailLabel.setText(this.displayedProvider.getEmail());
@@ -99,6 +109,10 @@ public class ProviderController implements OnLoad {
         } else {
             AlertHelper.getInstance().showInfoAlert("Your review can't be deleted");
         }
+    }
+
+    public void onReturn() {
+        Controller.getInstance().goTo(View.SEE_EVENT, this.returnToEvent);
     }
 
     private void loadReviews() {

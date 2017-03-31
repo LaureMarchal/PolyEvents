@@ -11,6 +11,7 @@ import ui.Controller;
 import ui.View;
 
 /**
+ * Written by Théo Gauchoux
  * Controller for the login interface
  */
 public class LoginController {
@@ -47,6 +48,9 @@ public class LoginController {
         }
     }
 
+    /**
+     * On "sign in" button click, go to the sign up screen
+     */
     public void onRegister() {
         Controller.getInstance().goTo(View.SIGN_UP);
     }

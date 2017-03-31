@@ -5,6 +5,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
 /**
+ * Written by Théo Gauchoux
  * Helper to handle generic methods
  */
 public class Util {

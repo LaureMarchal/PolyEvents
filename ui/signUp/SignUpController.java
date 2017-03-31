@@ -12,6 +12,10 @@ import ui.Controller;
 import ui.View;
 import ui.helper.AlertHelper;
 
+/**
+ * Written by Théo Gauchoux
+ * Sign up controller handle the registration to the app
+ */
 public class SignUpController {
 
     // Common

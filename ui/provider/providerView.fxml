@@ -9,17 +9,26 @@
             prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="ui.provider.ProviderController">
     <top>
-        <VBox alignment="CENTER" prefHeight="100.0" BorderPane.alignment="CENTER">
+        <HBox BorderPane.alignment="CENTER">
             <children>
-                <Label fx:id="nameLabel" text="Name">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                </Label>
-                <Label fx:id="descriptionLabel" alignment="CENTER" prefHeight="60.0" prefWidth="395.0"
-                       text="Description" textAlignment="CENTER"/>
+                <Button mnemonicParsing="false" onAction="#onReturn" text="&lt; Event">
+                    <HBox.margin>
+                        <Insets bottom="6.0" left="6.0" right="6.0" top="6.0"/>
+                    </HBox.margin>
+                </Button>
+                <VBox alignment="CENTER" prefHeight="100.0" prefWidth="659.0">
+                    <children>
+                        <Label fx:id="nameLabel" text="Name">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="descriptionLabel" alignment="CENTER" prefHeight="60.0" prefWidth="395.0"
+                               text="Description" textAlignment="CENTER"/>
+                    </children>
+                </VBox>
             </children>
-        </VBox>
+        </HBox>
     </top>
     <center>
         <VBox BorderPane.alignment="CENTER">

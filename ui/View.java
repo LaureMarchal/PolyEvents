@@ -1,5 +1,9 @@
 package ui;
 
+/**
+ * Written by Théo Gauchoux
+ * An string enum to describe in one place the path to use for each view
+ */
 public enum View {
 
     LOGIN("login/loginView"),

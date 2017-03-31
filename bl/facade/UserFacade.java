@@ -8,6 +8,7 @@ import bl.model.Provider;
 import bl.model.User;
 
 /**
+ * Written by Théo Gauchoux
  * Entry point to the business behaviour
  */
 public class UserFacade {

@@ -82,7 +82,6 @@ public class NotificationDAOPG extends NotificationDAO {
                         Notification notif = new Notification(notifID, isRead, user, null, 0, null);
                         connection.close();
                         return notif;
-                        break;
                     case "EVENT_REVIEW":
                         relatedTo = rs.getInt("relatedToEventID");
                         break;

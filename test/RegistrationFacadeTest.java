@@ -1,12 +1,10 @@
-package test;
-
 import bl.dao.DAOFactory;
 import bl.model.Consumer;
 import bl.model.Event;
 import bl.model.Provider;
 import bl.model.Registration;
-import com.sun.tools.javac.util.Assert;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import persistence.connector.ConnectorPG;
@@ -70,15 +68,15 @@ class RegistrationFacadeTest {
         registrations.add(registration);
 
         // Check registration in not already cancelled (= refused)
-        Assert.check(!registration.getStatus().equals("REFUSED"));
+        Assertions.assertTrue(!registration.getStatus().equals("REFUSED"));
 
         // Check update is well executed
         registration.setStatus("REFUSED");
-        Assert.checkNonNull(DAOFactory.getInstance().createRegistrationDAO().update(registration));
+        Assertions.assertNotNull(DAOFactory.getInstance().createRegistrationDAO().update(registration));
 
         // Check status has been updated
         Registration registrationUpdated = DAOFactory.getInstance().createRegistrationDAO().getOne(consumer.getPseudo(), event.getId());
-        Assert.check(registrationUpdated.getStatus().equals("REFUSED"));
+        Assertions.assertTrue(registrationUpdated.getStatus().equals("REFUSED"));
 
     }
 

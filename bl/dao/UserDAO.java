@@ -1,6 +1,9 @@
 package bl.dao;
 
+import bl.model.Administrator;
 import bl.model.User;
+
+import java.util.List;
 
 /**
  * Abstract DAO for the user model
@@ -21,4 +24,5 @@ public abstract class UserDAO {
 
     public abstract boolean delete(User user);
 
+    public abstract List<Administrator> getAllAdministrators();
 }

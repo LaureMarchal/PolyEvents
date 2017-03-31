@@ -1,15 +1,36 @@
 package persistence;
 
-import bl.dao.DAOFactory;
 import bl.dao.NotificationDAO;
 import bl.model.*;
 import persistence.connector.Connector;
 
-import java.sql.*;
-import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class NotificationDAOPG extends NotificationDAO {
+
+    @Override
+    public Notification createSuspectEventNotification(Notification notification) {
+        try {
+            String query = "INSERT INTO Notification (isRead, userId, message, relatedTo, relatedToEventId) VALUES (?, ?, ?, ?::Related_To, ?)";
+            Connection connection = Connector.getInstance().getConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setBoolean(1, false);
+            ps.setString(2, notification.getTarget().getPseudo());
+            ps.setString(3, notification.getContent().getNotificationText());
+            ps.setString(4, RelatedTo.EVENT.name());
+            ps.setInt(5, notification.getRelatedToId());
+            ps.execute();
+            connection.close();
+            return notification;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     @Override
     public Notification updateRead(Notification notification, Boolean read) {
@@ -20,7 +41,13 @@ public class NotificationDAOPG extends NotificationDAO {
             ps.setBoolean(1, read);
             ps.execute();
             connection.close();
-            notification.setRead(read);
+
+            // fetch back the last inserted ID to complete de notification Object.
+            String queryID = "SELECT id FROM Notification WHERE id=LAST_INSERT_ID()";
+            PreparedStatement psID = connection.prepareStatement(queryID);
+            ResultSet rs = psID.executeQuery(queryID);
+            connection.close();
+            notification.setId(rs.getInt("id"));
             return notification;
         } catch (SQLException e) {
             e.printStackTrace();

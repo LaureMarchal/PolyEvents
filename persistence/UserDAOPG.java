@@ -4,10 +4,9 @@ import bl.dao.UserDAO;
 import bl.model.*;
 import persistence.connector.Connector;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * PostgreSQL DAO for the user model
@@ -114,6 +113,27 @@ public class UserDAOPG extends UserDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    @Override
+    public List<Administrator> getAllAdministrators() {
+        try {
+            List<Administrator> administrators = new ArrayList<>();
+            Connection connection = Connector.getInstance().getConnection();
+            String query = "SELECT * FROM \"User\" WHERE role = 'ADMINISTRATOR'";
+            Statement s = connection.createStatement();
+            ResultSet rs = s.executeQuery(query);
+            while (rs.next()) {
+                String pseudo = rs.getString("pseudo");
+                String password = rs.getString("password");
+                String email = rs.getString("email");
+                administrators.add(new Administrator(pseudo, password, email));
+            }
+            return administrators;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 

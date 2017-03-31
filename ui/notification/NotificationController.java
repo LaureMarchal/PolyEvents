@@ -52,8 +52,8 @@ public class NotificationController {
      */
     private void initializeNotificationsTableView(){
         notificationsTable.setItems(notificationsList);
-        targetColumn.setCellValueFactory(cellData -> PropertyConverter.getInstance().convert(cellData.getValue().getTarget().toString()));
-        infoColumn.setCellValueFactory(cellData -> PropertyConverter.getInstance().convert(cellData.getValue().getTarget().getNotificationText()));
+        targetColumn.setCellValueFactory(cellData -> PropertyConverter.getInstance().convert(cellData.getValue().getTarget().getPseudo()));
+        infoColumn.setCellValueFactory(cellData -> PropertyConverter.getInstance().convert(cellData.getValue().getContent().getNotificationText()));
         notificationsTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> selectedNotif = newValue);
     }

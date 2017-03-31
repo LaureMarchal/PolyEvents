@@ -178,6 +178,7 @@ CREATE TABLE Notification (
   id                  SERIAL      NOT NULL,
   isRead              BOOLEAN     NOT NULL DEFAULT FALSE,
   userID              VARCHAR(30) NOT NULL,
+  message             VARCHAR(200),
   relatedTo           Related_to  NOT NULL,
   relatedToEventID    INT,
   relatedToMessageID  INT,

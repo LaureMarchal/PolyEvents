@@ -1,7 +1,9 @@
 package ui;
 
 
+import bl.facade.EventFacade;
 import bl.facade.UserFacade;
+import bl.model.Event;
 import bl.model.Provider;
 
 /**
@@ -16,8 +18,13 @@ public class MainController {
         Controller.getInstance().goTo(View.LOGIN);
     }
 
-    public void testProviderPage() {
+    public void testGoToProviderPage() {
         Provider provider = (Provider) UserFacade.getInstance().getOneByPseudo("provider");
         Controller.getInstance().goTo(View.SEE_PROVIDER, provider);
+    }
+
+    public void testReportEvent() {
+        Event event = EventFacade.getInstance().read(4);
+        EventFacade.getInstance().report(event);
     }
 }

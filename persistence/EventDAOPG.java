@@ -8,7 +8,6 @@ import bl.model.Tag;
 import persistence.connector.Connector;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -128,47 +127,50 @@ public class EventDAOPG extends EventDAO {
         }
     }
 
-    public  Event getOne(int id){
+    public Event getOne(int id) {
         try {
-            String query = "SELECT * FROM Event WHERE eventID = ?";
+            String query = "SELECT * FROM Event WHERE id = ?";
             Connection connection = Connector.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, String.valueOf(id));
-            ResultSet rs = ps.executeQuery(query);
-            int eventID = id;
-            String title = rs.getString("title");
-            String subTitle = rs.getString("subtitle");
-            String place = rs.getString("location");
-            String description = rs.getString("description");
-            java.util.Date beginningTime = rs.getTimestamp("begining_time");
-            java.util.Date registrationDeadline =  rs.getTimestamp("registration_deadline");
-            float duration = rs.getFloat("duration");
-            String constraints = rs.getString("event_constraints");
-            String status = rs.getString("status");
-            int placesNumber = rs.getInt("max_number_of_places");
-            float price =  rs.getFloat("price");
-            int delayToPay = rs.getInt("delay_to_pay");
-            Provider provider = (Provider)DAOFactory.getInstance().createUserDAO().read(rs.getString("providerID"));
-            Event event = new Event(eventID,
-                    title,
-                    subTitle,
-                    place,
-                    description,
-                    beginningTime,
-                    registrationDeadline,
-                    duration,
-                    constraints,
-                    placesNumber,
-                    price,
-                    delayToPay,
-                    status,
-                    provider);
-            String queryID = "SELECT id FROM Message WHERE id=LAST_INSERT_ID()";
-            PreparedStatement psID = connection.prepareStatement(queryID);
-            ResultSet rsID = ps.executeQuery(queryID);
-            connection.close();
-            event.setId(rs.getInt("id"));
-            return event;
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (!rs.next()) {
+                return null;
+            } else {
+                int eventID = id;
+                String title = rs.getString("title");
+                String subTitle = rs.getString("subtitle");
+                String place = rs.getString("location");
+                String description = rs.getString("description");
+                java.util.Date beginningTime = rs.getTimestamp("begining_time");
+                java.util.Date registrationDeadline = rs.getTimestamp("registration_deadline");
+                Float duration = rs.getFloat("duration");
+                String constraints = rs.getString("event_constraints");
+                String status = rs.getString("status");
+                int placesNumber = rs.getInt("max_number_of_places");
+                float price = rs.getFloat("price");
+                int delayToPay = rs.getInt("delay_to_pay");
+                Provider provider = (Provider) DAOFactory.getInstance().createUserDAO().read(rs.getString("providerID"));
+                Event event = new Event(eventID,
+                        title,
+                        subTitle,
+                        place,
+                        description,
+                        beginningTime,
+                        registrationDeadline,
+                        duration,
+                        constraints,
+                        placesNumber,
+                        price,
+                        delayToPay,
+                        status,
+                        provider);
+                connection.close();
+                return event;
+            }
+
+
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

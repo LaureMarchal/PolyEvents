@@ -1,11 +1,7 @@
 package bl.facade;
 
 import bl.dao.DAOFactory;
-import bl.model.Consumer;
-import bl.model.Event;
-import bl.model.EventReview;
-import bl.model.Message;
-import bl.dao.DAOFactory;
+import bl.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +34,10 @@ public class EventFacade {
         return instance;
     }
 
+    public Event read(int id) {
+        return DAOFactory.getInstance().createEventDAO().getOne(id);
+    }
+
     public Event create(Event event) {
         Event potentialEvent = DAOFactory.getInstance().createEventDAO().create(event);
         return potentialEvent;
@@ -53,8 +53,11 @@ public class EventFacade {
         return true;
     }
 
-    public Event report(Event event) {
-        return event;
+    public void report(Event event) {
+        for (Administrator administrator : DAOFactory.getInstance().createUserDAO().getAllAdministrators()) {
+            Notification reportNotification = new Notification(false, administrator, RelatedTo.EVENT, event.getId(), event);
+            DAOFactory.getInstance().createNotificationDAO().createSuspectEventNotification(reportNotification);
+        }
     }
 
     public EventReview postReview(Event event, Consumer consumer, EventReview eventReview) {

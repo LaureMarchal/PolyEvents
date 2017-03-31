@@ -56,6 +56,7 @@ public class AlertHelper {
 
     private void delete(Event event){
         EventFacade.getInstance().delete(event);
+        Controller.getInstance().goTo(View.MAIN);
     }
 
 }

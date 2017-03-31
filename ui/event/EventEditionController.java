@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import ui.Controller;
 import ui.OnInit;
 import ui.View;
+import ui.helper.AlertHelper;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -113,6 +114,7 @@ public class EventEditionController implements OnInit{
         float duration=this.currentEvent.getDuration();
         int places;
         if(placesField.getText()!=""){
+            System.out.println("hey");
             places=Integer.parseInt(placesField.getText());
         } else{
             places=this.currentEvent.getPlacesNumber();
@@ -126,14 +128,13 @@ public class EventEditionController implements OnInit{
         //verify fields fill or not
         Date time = this.currentEvent.getBeginningTime();
         Date deadline = this.currentEvent.getRegistrationDeadline();
-        Float price;
+        float price;
         if(priceField.getText()!=""){
             price = Float.valueOf(priceField.getText());
         } else{
             price = this.currentEvent.getPrice();
         }
         String restriction = this.currentEvent.getConstraints();
-        Provider provider = (Provider) Controller.getInstance().getUserLogged();
         //create new an event
         Event event = new Event(this.currentEvent.getId(),
                 title,
@@ -147,9 +148,11 @@ public class EventEditionController implements OnInit{
                 places,
                 price,
                 delayPayement,
-                "AVAILABLE",
-                provider);
+                this.currentEvent.getStatus(),
+                this.currentEvent.getProvider());
         EventFacade.getInstance().update(event);
+        AlertHelper.getInstance().showInfoAlert("Your changes have been saved");
+        Controller.getInstance().goTo(View.SEE_EVENT);
     }
 
     @Override

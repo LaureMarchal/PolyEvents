@@ -3,7 +3,6 @@ package bl.facade;
 import bl.dao.DAOFactory;
 import bl.model.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -61,7 +60,11 @@ public class EventFacade {
     }
 
     public EventReview postReview(Event event, Consumer consumer, EventReview eventReview) {
-        return eventReview;
+        if (DAOFactory.getInstance().createRegistrationDAO().getOne(consumer.getPseudo(), event.getId()) != null) {
+            return DAOFactory.getInstance().createEventReviewDAO().create(event, consumer, eventReview);
+        } else {
+            return null;
+        }
     }
 
     public Message addMessage(Message message, Message parent) {

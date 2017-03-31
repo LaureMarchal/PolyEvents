@@ -11,10 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class RegistrationDAOPG extends RegistrationDAO {
@@ -144,20 +141,23 @@ public class RegistrationDAOPG extends RegistrationDAO {
             ps.setInt(1, eventID);
             ps.setString(2, userID);
             ResultSet rs = ps.executeQuery();
-            rs.next();
-            // Sets the newly found registration.
-            Consumer consumer = (Consumer) FactoryDAOPG.getInstance().createUserDAO().read(rs.getString("consumerID"));
-            Event event = FactoryDAOPG.getInstance().createEventDAO().getOne(rs.getInt("eventID"));
-            String status = rs.getString("status");
-            java.util.Date creationDate = rs.getTimestamp("creation_time");
-            EventReview eventReview = FactoryDAOPG.getInstance().createEventReviewDAO().getReviewByEventID(rs.getInt("eventID"),
-                    rs.getString("consumerID"));
-            Registration registration =  new Registration(event,
-                    consumer,
-                    creationDate,
-                    status,
-                    eventReview);
-            return registration;
+            if (!rs.next()) {
+                return null;
+            } else {
+                // Sets the newly found registration.
+                Consumer consumer = (Consumer) FactoryDAOPG.getInstance().createUserDAO().read(rs.getString("consumerID"));
+                Event event = FactoryDAOPG.getInstance().createEventDAO().getOne(rs.getInt("eventID"));
+                String status = rs.getString("status");
+                java.util.Date creationDate = rs.getTimestamp("creation_time");
+                EventReview eventReview = FactoryDAOPG.getInstance().createEventReviewDAO().getReviewByEventID(rs.getInt("eventID"),
+                        rs.getString("consumerID"));
+                Registration registration = new Registration(event,
+                        consumer,
+                        creationDate,
+                        status,
+                        eventReview);
+                return registration;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

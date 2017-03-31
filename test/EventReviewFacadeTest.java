@@ -1,11 +1,8 @@
 package test;
 
 import bl.dao.DAOFactory;
-import bl.facade.RegistrationFacade;
-import bl.model.Consumer;
-import bl.model.Event;
-import bl.model.Provider;
-import bl.model.Registration;
+import bl.facade.EventFacade;
+import bl.model.*;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -13,20 +10,19 @@ import org.junit.jupiter.api.Test;
 import persistence.connector.ConnectorPG;
 import persistence.connector.DBMode;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Random;
 
 /**
  * Created by Théo Gauchoux on 31/03/2017.
  */
-class RegistrationFacadeTest {
+class EventReviewFacadeTest {
 
     private static Provider provider;
     private static Consumer consumer;
     private static Event event;
-    private static List<Registration> registrations = new ArrayList<>();
+    private static Registration registration;
+    private static EventReview eventReview;
 
     private static Random randomizer = new Random();
 
@@ -54,31 +50,30 @@ class RegistrationFacadeTest {
      */
     @AfterAll
     static void tearDownAll() {
-        for (Registration registration : registrations) {
-            DAOFactory.getInstance().createRegistrationDAO().delete(registration);
-        }
-
+        DAOFactory.getInstance().createEventReviewDAO().delete(event, consumer);
+        DAOFactory.getInstance().createRegistrationDAO().delete(registration);
         DAOFactory.getInstance().createEventDAO().delete(event);
         DAOFactory.getInstance().createUserDAO().delete(consumer);
         DAOFactory.getInstance().createUserDAO().delete(provider);
     }
 
     @Test
-    void cancel() {
+    void create() {
 
-        // Make a registration before test (use DAO directly because it's not the purpose of the test)
-        Registration registration = DAOFactory.getInstance().createRegistrationDAO().create(new Registration(event, consumer, new Date(), "WAITING_PAYMENT", null));
-        registrations.add(registration);
+        // Check fail creating the event review without existing registration
+        eventReview = EventFacade.getInstance().postReview(event, consumer, new EventReview("A review", 3));
+        Assertions.assertNull(eventReview);
 
-        // Check registration in not already cancelled (= refused)
-        Assertions.assertTrue(!registration.getStatus().equals("REFUSED"));
+        // Create appropriate registration
+        registration = DAOFactory.getInstance().createRegistrationDAO().create(new Registration(event, consumer, new Date(), "WAITING_PAYMENT", null));
+        Assertions.assertNotNull(registration);
 
-        // Check update is well executed
-        Assertions.assertNotNull(RegistrationFacade.getInstance().cancel(registration));
+        // Check creating the event review with existing registration
+        eventReview = EventFacade.getInstance().postReview(event, consumer, new EventReview("A review", 3));
+        Assertions.assertNotNull(eventReview);
 
-        // Check status has been updated (use DAO directly because it's not the purpose of the test)
-        Registration registrationUpdated = DAOFactory.getInstance().createRegistrationDAO().getOne(consumer.getPseudo(), event.getId());
-        Assertions.assertTrue(registrationUpdated.getStatus().equals("REFUSED"));
+        // Check event review is saved
+        Assertions.assertNotNull(DAOFactory.getInstance().createEventReviewDAO().getReviewByEventID(event.getId(), consumer.getPseudo()));
 
     }
 

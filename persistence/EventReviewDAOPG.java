@@ -4,16 +4,12 @@ import bl.dao.EventReviewDAO;
 import bl.model.Consumer;
 import bl.model.Event;
 import bl.model.EventReview;
-import bl.model.Registration;
 import persistence.connector.Connector;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
 /**
  * PostgreSQL DAO for the provider review model
@@ -59,6 +55,21 @@ public class EventReviewDAOPG extends EventReviewDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    @Override
+    public void delete(Event event, Consumer consumer) {
+        try {
+            String query = "DELETE FROM Event_review WHERE consumerID = ? AND eventID = ?";
+            Connection connection = Connector.getInstance().getConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, consumer.getPseudo());
+            ps.setInt(2, event.getId());
+            ps.execute();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

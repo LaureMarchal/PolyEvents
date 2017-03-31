@@ -32,8 +32,9 @@ public class RegistrationFacade {
         return reg;
     }
 
-    public boolean cancel(Registration registration) {
-        return true;
+    public Registration cancel(Registration registration) {
+        registration.setStatus("REFUSED");
+        return DAOFactory.getInstance().createRegistrationDAO().update(registration);
     }
 
     public Registration save(Registration registration) {

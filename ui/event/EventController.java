@@ -1,17 +1,16 @@
 package ui.event;
 
-import bl.facade.EventFacade;
 import bl.facade.RegistrationFacade;
 import bl.model.Consumer;
 import bl.model.Event;
 import bl.model.Registration;
-import bl.model.Role;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import ui.Controller;
 import ui.OnLoad;
 import ui.View;
+import ui.helper.AlertHelper;
 
 import java.util.Date;
 

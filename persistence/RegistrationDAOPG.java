@@ -11,7 +11,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class RegistrationDAOPG extends RegistrationDAO {
@@ -80,14 +83,14 @@ public class RegistrationDAOPG extends RegistrationDAO {
             Connection connection = Connector.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, event.getId());
-            ResultSet rs = ps.executeQuery(query);
+            ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 //TODO needs to be changed once ConsumerDOAPG.getOne(userID) is done
-                Consumer consumer =  (Consumer)FactoryDAOPG.getInstance().createUserDAO().read(rs.getString("userID"));
+                Consumer consumer = (Consumer) FactoryDAOPG.getInstance().createUserDAO().read(rs.getString("consumerID"));
                 String status = rs.getString("status");
                 java.util.Date creationDate = rs.getTimestamp("creation_time");
                 EventReview eventReview = FactoryDAOPG.getInstance().createEventReviewDAO().getReviewByEventID(rs.getInt("eventID"),
-                        rs.getString("userID"));
+                        rs.getString("consumerID"));
                 Registration registration =  new Registration(event,
                         consumer,
                         creationDate,

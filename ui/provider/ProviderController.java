@@ -7,7 +7,7 @@ import bl.model.ProviderReview;
 import javafx.collections.FXCollections;
 import javafx.scene.control.*;
 import ui.Controller;
-import ui.OnInit;
+import ui.OnLoad;
 import ui.helper.AlertHelper;
 import ui.helper.PropertyConverter;
 
@@ -16,10 +16,7 @@ import java.util.List;
 /**
  * Controller for the provider interface
  */
-public class ProviderController implements OnInit {
-
-    private Provider displayedProvider;
-    private ProviderReview displayedProviderReview;
+public class ProviderController implements OnLoad {
 
     public Label nameLabel;
     public Label descriptionLabel;
@@ -27,19 +24,19 @@ public class ProviderController implements OnInit {
     public Label phoneLabel;
     public Label websiteLabel;
     public Label officeLocationLabel;
-
     public TitledPane yourReviewPanel;
     public Slider rateSlider;
     public TextArea commentTextArea;
     public Button postButton;
     public Button deleteButton;
-
     public TableView<ProviderReview> reviewsTable;
     public TableColumn<ProviderReview, String> rateColumn;
     public TableColumn<ProviderReview, String> commentColumn;
+    private Provider displayedProvider;
+    private ProviderReview displayedProviderReview;
 
     @Override
-    public void onInit(Object data) {
+    public void onLoad(Object data) {
         // Display basic data
         this.displayedProvider = (Provider) data;
         this.nameLabel.setText(this.displayedProvider.getName());

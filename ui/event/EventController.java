@@ -10,9 +10,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import ui.Controller;
-import ui.OnInit;
+import ui.OnLoad;
 import ui.View;
-import ui.helper.AlertHelper;
 
 import java.util.Date;
 
@@ -20,7 +19,7 @@ import java.util.Date;
 /**
  * Controller for the event interface
  */
-public class EventController implements OnInit{
+public class EventController implements OnLoad {
 
     /**
      * The event to see
@@ -223,7 +222,7 @@ public class EventController implements OnInit{
     }
 
     @Override
-    public void onInit(Object data) {
+    public void onLoad(Object data) {
         this.currentEvent = (Event) data;
         //assign all the label
         this.titleLabel.setText(this.currentEvent.getTitle());
@@ -241,30 +240,26 @@ public class EventController implements OnInit{
         }
         this.numberPlacesLeftLabel.setText(String.valueOf(this.currentEvent.getPlacesNumber()- (nbRegistration)));
         this.locationLabel.setText(this.currentEvent.getPlace());
-        //this.tagsLabel.setText(this.currentEvent.getTags().toString());
         this.timeBeginningLabel.setText(String.valueOf(this.currentEvent.getBeginningTime()));
         this.timeToRegisterLabel.setText( String.valueOf(this.currentEvent.getRegistrationDeadline()));
-
-        if(Controller.getInstance().getUserLogged()==this.currentEvent.getProvider()){
+        String pseudouserlogged = Controller.getInstance().getUserLogged().getPseudo();
+        String pseudoprovider = this.currentEvent.getProvider().getPseudo();
+        if(pseudouserlogged.equals(pseudoprovider)){
             addReviewButton.setDisable(true);
             manageButton.setDisable(false);
-        }
-        if(Controller.getInstance().getUserLogged().getRole()== Role.CONSUMER){
-            cancelButton.setDisable(true);
-            deleteButton.setDisable(true);
-            manageButton.setDisable(true);
-            updateButton.setDisable(true);
-            reportButton.setDisable(false);
-            registerButton.setDisable(false);
-            manageButton.setDisable(true);
-        } else{
-            cancelButton.setDisable(false);
-            deleteButton.setDisable(false);
-            manageButton.setDisable(false);
             updateButton.setDisable(false);
+            deleteButton.setDisable(false);
+            cancelButton.setDisable(false);
             reportButton.setDisable(true);
             registerButton.setDisable(true);
+        } else{
+            reportButton.setDisable(false);
+            registerButton.setDisable(false);
+            addReviewButton.setDisable(false);
             manageButton.setDisable(true);
+            updateButton.setDisable(true);
+            deleteButton.setDisable(true);
+            cancelButton.setDisable(true);
         }
     }
 }

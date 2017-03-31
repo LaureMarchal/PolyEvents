@@ -16,7 +16,7 @@
                     <children>
                         <Button mnemonicParsing="false" onAction="#onBackToList" text="&lt; Back"/>
                         <Pane HBox.hgrow="ALWAYS"/>
-                        <Button mnemonicParsing="false" onAction="#onDelete" text="Supprimer"/>
+                        <Button mnemonicParsing="false" onAction="#onDelete" text="Delete"/>
                     </children>
                 </HBox>
                 <TableView fx:id="table" VBox.vgrow="ALWAYS">

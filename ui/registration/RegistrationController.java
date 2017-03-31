@@ -19,6 +19,7 @@ import ui.View;
 import java.util.List;
 
 /**
+ * Written by Mehdi Fakihani
  * Controller for the registration interface
  */
 public class RegistrationController implements OnLoad {

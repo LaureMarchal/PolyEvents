@@ -1,5 +1,3 @@
-package test;
-
 import bl.dao.DAOFactory;
 import bl.facade.RegistrationFacade;
 import bl.model.Consumer;

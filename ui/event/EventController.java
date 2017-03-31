@@ -1,9 +1,10 @@
 package ui.event;
 
 import bl.facade.EventFacade;
-import bl.facade.NotificationFacade;
 import bl.facade.RegistrationFacade;
-import bl.model.*;
+import bl.model.Consumer;
+import bl.model.Event;
+import bl.model.Registration;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,7 +15,6 @@ import ui.helper.AlertHelper;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -163,7 +163,8 @@ public class EventController implements OnLoad {
      * On "Report" button click, go to the reportation interface
      */
     public void onReport() {
-
+        EventFacade.getInstance().report(this.currentEvent);
+        AlertHelper.getInstance().showInfoAlert("This event has been reported to the administrators.");
     }
     /**
      * On "new" button click, go to the review interface

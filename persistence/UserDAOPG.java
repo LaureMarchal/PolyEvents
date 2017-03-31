@@ -103,7 +103,8 @@ public class UserDAOPG extends UserDAO {
     @Override
     public boolean delete(User user) {
         try {
-            String query = "DELETE FROM \"User\" WHERE userID = ? ";
+            deleteAssociatedRole(user);
+            String query = "DELETE FROM \"User\" WHERE pseudo = ? ";
             Connection connection = Connector.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, user.getPseudo());
@@ -207,6 +208,21 @@ public class UserDAOPG extends UserDAO {
                 case ADMINISTRATOR:
                     break;
             }
+            connection.close();
+            return user;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private User deleteAssociatedRole(User user) {
+        try {
+            Connection connection = Connector.getInstance().getConnection();
+            String query = "DELETE FROM " + user.getRole().name() + " WHERE userID = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, user.getPseudo());
+            ps.execute();
             connection.close();
             return user;
         } catch (SQLException e) {

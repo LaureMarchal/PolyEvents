@@ -52,7 +52,7 @@ public class EventDAOPG extends EventDAO {
     @Override
     public boolean delete(Event event) {
         try {
-            String query = "DELETE FROM Event WHERE eventID = ?";
+            String query = "DELETE FROM Event WHERE id = ?";
             Connection connection = Connector.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, event.getId());

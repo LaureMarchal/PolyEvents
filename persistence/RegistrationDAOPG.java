@@ -6,37 +6,30 @@ import bl.model.Event;
 import bl.model.EventReview;
 import bl.model.Registration;
 import persistence.connector.Connector;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.util.*;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RegistrationDAOPG extends RegistrationDAO {
 
     @Override
     public Registration create(Registration registration) {
             try {
-                String query = "INSERT INTO Registration (consumerID, eventID, creation_time, status) VALUES (?, ?, ?, ?)";
+                String query = "INSERT INTO Registration (consumerID, eventID, creation_time, status) VALUES (?, ?, ?, ?::registration_status)";
                 Connection connection = Connector.getInstance().getConnection();
                 PreparedStatement ps = connection.prepareStatement(query);
                 ps.setString(1, registration.getConsumer().getPseudo());
                 ps.setInt(2, registration.getEvent().getId());
-                String postTime = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-                ps.setString(3, postTime);
+                ps.setDate(3, new java.sql.Date(registration.getCreationTime().getTime()));
                 ps.setString(4, registration.getStatus());
                 ps.execute();
                 connection.close();
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
-                Date date = formatter.parse(postTime);
-                registration.setCreationTime(date);
                 return registration;
             } catch (SQLException e) {
-                e.printStackTrace();
-                return null;
-            } catch (ParseException e) {
                 e.printStackTrace();
                 return null;
             }
@@ -62,10 +55,10 @@ public class RegistrationDAOPG extends RegistrationDAO {
     @Override
     public Registration update(Registration registration) {
         try {
-            String query = "UPDATE Registration SET creation_time = ? , status = ? WHERE consumerID = ? AND eventID = ?";
+            String query = "UPDATE Registration SET creation_time = ? , status = ?::registration_status WHERE consumerID = ? AND eventID = ?";
             Connection connection = Connector.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()));
+            ps.setDate(1, new java.sql.Date(registration.getCreationTime().getTime()));
             ps.setString(2, registration.getStatus());
             ps.setString(3, registration.getConsumer().getPseudo());
             ps.setInt(4, registration.getEvent().getId());
@@ -142,19 +135,20 @@ public class RegistrationDAOPG extends RegistrationDAO {
     public Registration getOne(String userID, int eventID) {
 
         try {
-            String query = "SELECT * FROM Registration WHERE eventID = ? AND userID = ?";
+            String query = "SELECT * FROM Registration WHERE eventID = ? AND consumerID = ?";
             Connection connection = Connector.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, eventID);
             ps.setString(2, userID);
-            ResultSet rs = ps.executeQuery(query);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
             // Sets the newly found registration.
-            Consumer consumer =  (Consumer)FactoryDAOPG.getInstance().createUserDAO().read(rs.getString("userID"));
+            Consumer consumer = (Consumer) FactoryDAOPG.getInstance().createUserDAO().read(rs.getString("consumerID"));
             Event event = FactoryDAOPG.getInstance().createEventDAO().getOne(rs.getInt("eventID"));
             String status = rs.getString("status");
             java.util.Date creationDate = rs.getTimestamp("creation_time");
             EventReview eventReview = FactoryDAOPG.getInstance().createEventReviewDAO().getReviewByEventID(rs.getInt("eventID"),
-                    rs.getString("userID"));
+                    rs.getString("consumerID"));
             Registration registration =  new Registration(event,
                     consumer,
                     creationDate,

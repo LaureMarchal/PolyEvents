@@ -40,7 +40,7 @@ public class AlertHelper {
         return dialog.showAndWait().orElse("");
     }
 
-    public void showConfirmationDeleteAlert(String text,Event event){
+    public void showConfirmationDeleteAlert(String text, Event event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation Dialog");
         alert.setHeaderText("Look, a Confirmation Dialog");

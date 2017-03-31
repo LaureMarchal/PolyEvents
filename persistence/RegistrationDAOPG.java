@@ -89,7 +89,7 @@ public class RegistrationDAOPG extends RegistrationDAO {
                 Consumer consumer = (Consumer) FactoryDAOPG.getInstance().createUserDAO().read(rs.getString("consumerID"));
                 String status = rs.getString("status");
                 java.util.Date creationDate = rs.getTimestamp("creation_time");
-                EventReview eventReview = FactoryDAOPG.getInstance().createEventReviewDAO().getReviewByEventID(rs.getInt("eventID"),
+                EventReview eventReview = FactoryDAOPG.getInstance().createEventReviewDAO().getReviewByEventID(event.getId(),
                         rs.getString("consumerID"));
                 Registration registration =  new Registration(event,
                         consumer,

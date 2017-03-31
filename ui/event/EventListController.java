@@ -90,7 +90,7 @@ public class EventListController {
      * On "Search" button click, search event by title or tag and set the new table
      */
     public void onSearch() {
-        //setEvents(EventFacade.getInstance().search(searchField.getText(),searchField.getText()));
+        this.setEvents(EventFacade.getInstance().search(searchField.getText(),searchField.getText()));
     }
 
     /**
@@ -104,7 +104,7 @@ public class EventListController {
      * On "Reset" button click, reset the table to all events
      */
     public void onReset() {
-        //setEvents(EventFacade.getInstance().getAllEvent());
+        setEvents(EventFacade.getInstance().getAllEvent());
     }
 
     /**
@@ -115,7 +115,10 @@ public class EventListController {
     }
 
     public void setEvents(List<Event> events) {
-        //this.eventsList = FXCollections.observableList(events);
+        this.eventsList = FXCollections.observableList(events);
+        this.eventsTable.setItems(eventsList);
+        this.eventsTable.refresh();
+        initializeEventsTableView();
 
     }
 
@@ -129,8 +132,12 @@ public class EventListController {
         init();
     }
 
+    public void handleDetailClick() {
+        Controller.getInstance().goTo(View.SEE_EVENT, this.selectedEvent);
+    }
+
     public void init() {
-        //setEvents(EventFacade.getInstance().getAllEvent());
+        setEvents(EventFacade.getInstance().getAllEvent());
         initializeEventsTableView();
     }
 

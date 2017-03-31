@@ -161,9 +161,7 @@ public class EventController implements OnLoad {
      * On "Report" button click, go to the reportation interface
      */
     public void onReport() {
-        EventFacade.getInstance().read(this.currentEvent.getId());
-        EventFacade.getInstance().report(this.currentEvent);
-        AlertHelper.getInstance().showInfoAlert("Your report has been send to administrators");
+
     }
     /**
      * On "new" button click, go to the review interface

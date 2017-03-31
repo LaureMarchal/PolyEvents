@@ -36,8 +36,6 @@
                             <children>
                                 <Button mnemonicParsing="false" onAction="#testGoToProviderPage"
                                         text="Go to provider page"/>
-                                <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false"
-                                        onAction="#testReportEvent" text="Report event"/>
                             </children>
                         </VBox>
                     </content>

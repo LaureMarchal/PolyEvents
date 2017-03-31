@@ -67,6 +67,10 @@ public class EventFacade {
         }
     }
 
+    public void deleteReview(Event event, Consumer consumer) {
+        DAOFactory.getInstance().createEventReviewDAO().delete(event, consumer);
+    }
+
     public Message addMessage(Message message, Message parent) {
         DAOFactory.getInstance().createMessageDAO().create(message,parent);
         return message;

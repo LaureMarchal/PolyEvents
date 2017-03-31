@@ -6,11 +6,9 @@ import bl.model.Event;
 import bl.model.Message;
 import bl.model.User;
 import persistence.connector.Connector;
+
+import java.sql.*;
 import java.util.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -19,23 +17,21 @@ public class MessageDAOPG extends MessageDAO {
     @Override
     public Message create(Message message, Message parent) {
         try {
-            String query = "INSERT INTO Message (userID, eventID, content, postTime, parent) VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INTO Message (userid, eventid, content, posttime, parent) VALUES (?, ?, ?, ?, ?)";
             Connection connection = Connector.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, message.getWriter().getPseudo());
             ps.setInt(2, message.getEvent().getId());
             ps.setString(3, message.getContent());
-            String postTime = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-            ps.setString(4, postTime);
+            ps.setTimestamp(4, new java.sql.Timestamp(message.getPostTime().getTime()));
             ps.setInt(5, parent.getID());
             ps.execute();
-            //TODO
-            message.setPostTime(null);
-            String queryID = "SELECT id FROM Message WHERE id=LAST_INSERT_ID()";
-            PreparedStatement psID = connection.prepareStatement(queryID);
-            ResultSet rs = psID.executeQuery(queryID);
-            connection.close();
+            String queryID = "SELECT MAX(id) AS id FROM message ";
+            Statement s = connection.createStatement();
+            ResultSet rs = s.executeQuery(queryID);
+            rs.next();
             message.setID(rs.getInt("id"));
+            connection.close();
             return message;
         } catch (SQLException e) {
             e.printStackTrace();

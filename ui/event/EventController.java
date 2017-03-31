@@ -164,6 +164,12 @@ public class EventController implements OnLoad {
 
     }
     /**
+     * On "See all" button click, go to the messages interface
+     */
+    public void onSeeMessages() {
+        Controller.getInstance().goTo(View.SEE_MESSAGES,this.currentEvent);
+    }
+    /**
      * On "new" button click, go to the review interface
      */
     public void onAddReview() {
@@ -228,19 +234,19 @@ public class EventController implements OnLoad {
         String pseudouserlogged = Controller.getInstance().getUserLogged().getPseudo();
         String pseudoprovider = this.currentEvent.getProvider().getPseudo();
         if(pseudouserlogged.equals(pseudoprovider)){
-            addReviewButton.setDisable(true);
-            manageButton.setDisable(false);
-            updateButton.setDisable(false);
-            cancelButton.setDisable(false);
-            reportButton.setDisable(true);
-            registerButton.setDisable(true);
+            addReviewButton.setVisible(false);
+            manageButton.setVisible(true);
+            updateButton.setVisible(true);
+            cancelButton.setVisible(true);
+            reportButton.setVisible(false);
+            registerButton.setVisible(false);
         } else{
-            reportButton.setDisable(false);
-            registerButton.setDisable(false);
-            addReviewButton.setDisable(false);
-            manageButton.setDisable(true);
-            updateButton.setDisable(true);
-            cancelButton.setDisable(true);
+            reportButton.setVisible(true);
+            registerButton.setVisible(true);
+            addReviewButton.setVisible(true);
+            manageButton.setVisible(false);
+            updateButton.setVisible(false);
+            cancelButton.setVisible(false);
         }
     }
 }

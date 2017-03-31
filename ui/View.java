@@ -10,6 +10,7 @@ public enum View {
     UPDATE_EVENT("event/updateEventView"),
     SEE_PROVIDER("provider/providerView"),
     REGISTRATION("registration/registrationView"),
+    SEE_MESSAGES("message/messageslistView"),
     ADD_MESSAGE("message/newMessageView");
 
     private final String text;

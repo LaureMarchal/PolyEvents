@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.message.MessageController">
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" fx:controller="ui.message.MessageController">
    <top>
       <Label text="Post a message" BorderPane.alignment="CENTER">
          <font>
@@ -14,12 +15,15 @@
       </Label>
    </top>
    <center>
-      <TextArea fx:id="contentArea" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="150.0" prefWidth="300.0" promptText="content (*)" BorderPane.alignment="CENTER" />
+      <TextArea fx:id="contentArea" promptText="content (*)" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="50.0" left="50.0" right="50.0" top="20.0" />
+         </BorderPane.margin></TextArea>
    </center>
    <bottom>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="CENTER" prefHeight="100.0" prefWidth="290.0">
+            <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
                <children>
                   <Button maxWidth="-Infinity" mnemonicParsing="false" onAction="#onReturn" prefWidth="150.0" text="Cancel">
                      <font>
@@ -27,8 +31,11 @@
                      </font>
                   </Button>
                </children>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="100.0" prefWidth="311.0">
+            <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
                <children>
                   <Button maxWidth="-Infinity" mnemonicParsing="false" onAction="#onSubmit" prefWidth="150.0" text="Save">
                      <font>
@@ -36,6 +43,9 @@
                      </font>
                   </Button>
                </children>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
             </VBox>
          </children>
       </HBox>

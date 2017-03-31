@@ -64,6 +64,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
+            <Button layoutX="98.0" layoutY="179.0" mnemonicParsing="false" onAction="#onSeeMessages" text="See all" AnchorPane.bottomAnchor="175.0" AnchorPane.leftAnchor="98.0" />
           </children>
        </AnchorPane>
    </center>

@@ -76,6 +76,11 @@ public class EventFacade {
         return message;
     }
 
+    public List<Message> getAllMessage(Event event) {
+        List<Message> msg = DAOFactory.getInstance().createMessageDAO().findAllMessagesForEvent(event);
+        return msg;
+    }
+
     public List<Event> search(String title, String tag){
         List<Event> events = DAOFactory.getInstance().createEventDAO().search(title,tag);
         return events;

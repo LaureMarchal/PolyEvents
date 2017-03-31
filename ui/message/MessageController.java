@@ -8,6 +8,7 @@ import javafx.scene.control.TextArea;
 import ui.Controller;
 import ui.OnLoad;
 import ui.View;
+import ui.helper.AlertHelper;
 
 import java.util.Date;
 
@@ -30,14 +31,15 @@ public class MessageController implements OnLoad {
         Date today = new Date();
         Message msg = new Message(-1,contentArea.getText(),today,Controller.getInstance().getUserLogged(),this.currentEvent,-1);
         EventFacade.getInstance().addMessage(msg,null);
-        Controller.getInstance().goTo(View.SEE_EVENT);
+        AlertHelper.getInstance().showInfoAlert("Your message has been posted");
+        Controller.getInstance().goTo(View.SEE_MESSAGES,this.currentEvent);
     }
 
     /**
      * On "Return" button click, return to the event view
      */
     public void onReturn() {
-        Controller.getInstance().goTo(View.SEE_EVENT);
+        Controller.getInstance().goTo(View.SEE_EVENT,this.currentEvent);
     }
 
     @Override

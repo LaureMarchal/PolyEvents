@@ -25,26 +25,7 @@ public class EventListController {
 
     public static ObservableList<Event> eventsList;
     private Event selectedEvent;
-    /**
-     * The box to choose if the user wants to search free events or not
-     */
-    @FXML
-    private ComboBox pricingBox;
-    /**
-     * The box to choose if the user wants to search finished events or not
-     */
-    @FXML
-    private ComboBox finishedEventBox;
-    /**
-     * The box to choose if the user wants to search cancelled events or not
-     */
-    @FXML
-    private ComboBox CancelledEventBox;
-    /**
-     * The box to choose if the user wants to search full events or not
-     */
-    @FXML
-    private ComboBox fullEventBox;
+
     /**
      * The table where are events
      */
@@ -107,12 +88,7 @@ public class EventListController {
         setEvents(EventFacade.getInstance().getAllEvent());
     }
 
-    /**
-     * On "Apply" button click, apply all the fields and boxs to search
-     */
-    public void onApply() {
-        //TODO
-    }
+
 
     public void setEvents(List<Event> events) {
         this.eventsList = FXCollections.observableList(events);
@@ -125,9 +101,9 @@ public class EventListController {
     @FXML
     public void initialize(){
         if(Controller.getInstance().getUserLogged().getRole()== Role.CONSUMER){
-            addEventButton.setDisable(true);
+            addEventButton.setVisible(false);
         } else{
-            addEventButton.setDisable(false);
+            addEventButton.setVisible(true);
         }
         init();
     }

@@ -111,12 +111,13 @@ public class EventDAOPG extends EventDAO {
     public List<Event> search(String title, String tag) {
         List<Event> eventSearchResult = new ArrayList<Event>();
         try{
-            String query = "SELECT Event.id FROM Event, Event_tags WHERE Event.id = Event_tags.eventID AND Event.title LIKE ? OR Event_tags.name = ?";
+            String query = "SELECT id FROM event WHERE title LIKE ? ";
             Connection connection = Connector.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, ("?"+title+"?"));
-            ps.setString(2, tag);
-            ResultSet rs = ps.executeQuery(query);
+            String titleRegex =  "%"+title+"%";
+            ps.setString(1, titleRegex);
+            //ps.setString(2, tag);
+            ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 // Not sure, could be : this.getOne(rs.getInt("Event.id"));
                 Event event = this.getOne(rs.getInt("id"));
@@ -187,7 +188,7 @@ public class EventDAOPG extends EventDAO {
             Connection connection = Connector.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, tag.getLabel());
-            ResultSet rs = ps.executeQuery(query);
+            ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 // Not sure, could be : this.getOne(rs.getInt("Event.id"));
                 Event event = this.getOne(rs.getInt("id"));

@@ -22,7 +22,7 @@
                 </Tab>
                 <Tab text="Notifications">
                     <content>
-                        <!--<fx:include fx:id="notificationsTab" source="notification/NotificationController.java" />-->
+                        <fx:include fx:id="notificationsTab" source="notification/notificationsView.fxml" />
                     </content>
                 </Tab>
                 <Tab text="Profile">

@@ -1,7 +1,7 @@
 package ui.event;
 
-import bl.dao.DAOFactory;
 import bl.facade.EventFacade;
+import bl.facade.NotificationFacade;
 import bl.facade.RegistrationFacade;
 import bl.model.*;
 import javafx.fxml.FXML;
@@ -58,12 +58,6 @@ public class EventController implements OnLoad {
     @FXML
     private Label conditionsLabel;
 
-
-    /**
-     * The label for event's tags
-     */
-    @FXML
-    private Label tagsLabel;
 
     /**
      * The label for event's number of Places Left
@@ -136,11 +130,6 @@ public class EventController implements OnLoad {
     @FXML
     private Button manageButton;
 
-    /**
-     * The button to delete the event
-     */
-    @FXML
-    private Button deleteButton;
 
     /**
      * The button to cancel the event
@@ -168,28 +157,13 @@ public class EventController implements OnLoad {
      * On "Cancel" button click, set the status of the event to cancelled
      */
     public void onCancel() {
-        this.currentEvent.setStatus("Cancelled");
-        //TODO send notification to all consumers registered
-    }
-    /**
-     * On "Delete" button click, delete the event and go back to main view
-     */
-    public void onDelete() {
-        AlertHelper.getInstance().showConfirmationDeleteAlert("Do you really want to delete this event ?", this.currentEvent);
-
-        List<Registration> list = RegistrationFacade.getInstance().getAllRegistrations(this.currentEvent);
-        for (Registration registration : list){
-            Notification notification = new Notification(false, registration.getConsumer(), RelatedTo.EVENT, this.currentEvent.getId(), this.currentEvent);
-            DAOFactory.getInstance().createNotificationDAO().createEventNotification(notification);
-        }
+        AlertHelper.getInstance().showConfirmationCancelAlert("Do you really want to cancel this event ?", this.currentEvent);
     }
     /**
      * On "Report" button click, go to the reportation interface
      */
     public void onReport() {
-        Event event = EventFacade.getInstance().read(this.currentEvent.getId());
-        EventFacade.getInstance().report(event);
-        AlertHelper.getInstance().showInfoAlert("This event has been reported to the administrators.");
+
     }
     /**
      * On "new" button click, go to the review interface
@@ -221,6 +195,7 @@ public class EventController implements OnLoad {
                         new Date(),
                         "WAITING_PAYMENT",
                         null));
+        AlertHelper.getInstance().showInfoAlert("Your registration has been saved");
 
     }
 
@@ -258,7 +233,6 @@ public class EventController implements OnLoad {
             addReviewButton.setDisable(true);
             manageButton.setDisable(false);
             updateButton.setDisable(false);
-            deleteButton.setDisable(false);
             cancelButton.setDisable(false);
             reportButton.setDisable(true);
             registerButton.setDisable(true);
@@ -268,7 +242,6 @@ public class EventController implements OnLoad {
             addReviewButton.setDisable(false);
             manageButton.setDisable(true);
             updateButton.setDisable(true);
-            deleteButton.setDisable(true);
             cancelButton.setDisable(true);
         }
     }

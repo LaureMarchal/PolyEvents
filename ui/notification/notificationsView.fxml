@@ -5,18 +5,15 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="477.0" prefWidth="652.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.notification.NotificationController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" minHeight="0.0" minWidth="0.0" prefHeight="477.0" prefWidth="652.0" xmlns="http://javafx.com/javafx/8" fx:controller="ui.notification.NotificationController">
    <children>
-      <Label layoutX="286.0" layoutY="28.0" text="Notifications" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="252.0" AnchorPane.topAnchor="10.0">
-         <font>
-            <Font name="System Bold" size="16.0" />
-         </font>
-      </Label>
-      <TableView fx:id="notificationsTable" layoutX="200.0" layoutY="64.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
+      <TableView fx:id="notificationsTable" layoutX="200.0" layoutY="64.0" onMouseClicked="#handleDetailClick" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
         <columns>
-          <TableColumn fx:id="targetColumn" prefWidth="150.0" text="From" />
-          <TableColumn fx:id="infoColumn" prefWidth="500.0" text="Informations" />
+          <TableColumn fx:id="infoColumn" prefWidth="500.0" text="Notifications" />
         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
    </children>
 </AnchorPane>

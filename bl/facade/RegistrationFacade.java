@@ -42,7 +42,7 @@ public class RegistrationFacade {
     }
 
     public List<Registration> getAllRegistrations(Event event) {
-        return new ArrayList<Registration>();
+        return DAOFactory.getInstance().createRegistrationDAO().findAllForEvent(event);
     }
 
 }

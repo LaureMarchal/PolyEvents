@@ -7,6 +7,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import ui.Controller;
+import ui.View;
 import ui.helper.PropertyConverter;
 
 /**
@@ -22,11 +24,7 @@ public class NotificationController {
      */
     @FXML
     private TableView<Notification> notificationsTable;
-    /**
-     * The table column for the event date
-     */
-    @FXML
-    private TableColumn<Notification,String> targetColumn;
+
     /**
      * The table column for the event title
      */
@@ -42,6 +40,10 @@ public class NotificationController {
         init();
     }
 
+    public void handleDetailClick() {
+        Controller.getInstance().goTo(View.SEE_EVENT, this.selectedNotif.getContent());
+    }
+
     public void init() {
         this.notificationsList = FXCollections.observableList(NotificationFacade.getInstance().getAllNotification());
         initializeNotificationsTableView();
@@ -52,7 +54,6 @@ public class NotificationController {
      */
     private void initializeNotificationsTableView(){
         notificationsTable.setItems(notificationsList);
-        targetColumn.setCellValueFactory(cellData -> PropertyConverter.getInstance().convert(cellData.getValue().getTarget().getPseudo()));
         infoColumn.setCellValueFactory(cellData -> PropertyConverter.getInstance().convert(cellData.getValue().getContent().getNotificationText()));
         notificationsTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> selectedNotif = newValue);

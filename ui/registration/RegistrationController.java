@@ -1,19 +1,22 @@
 package ui.registration;
 
 import bl.dao.DAOFactory;
+import bl.dao.RegistrationDAO;
 import bl.model.Consumer;
 import bl.model.Event;
 import bl.model.Registration;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import ui.Controller;
 import ui.OnLoad;
+import ui.View;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Controller for the registration interface
@@ -23,41 +26,63 @@ public class RegistrationController implements OnLoad {
     /**
      * List of the participants of an event to display
      */
-    private ObservableList<Consumer> participants;
+    private ObservableList<Registration> registrations;
+
+    /**
+     * The event whose we want to show the participants
+     */
+    private Event currentevent;
 
     /**
      * Reference to the table view
      */
     @FXML
-    private TableView<Consumer> table;
+    private TableView<Registration> table;
 
     /**
      * Reference to the column containing the participants to the event
      */
     @FXML
-    private TableColumn<Consumer, String> participantColumn;
+    private TableColumn<Registration, String> participantColumn;
+
+    @FXML
+    private TableColumn<Registration, String> statusColumn;
 
     @FXML
     private void initialize() {
         // Initialize the person table with the two columns.
         participantColumn.setCellValueFactory(cellData -> {
-            Consumer consumer = cellData.getValue();
+            Registration registration = cellData.getValue();
+            Consumer consumer = registration.getConsumer();
             return new SimpleStringProperty(consumer.getFirstName() + " " + consumer.getLastName());
         });
 
-        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        statusColumn.setCellValueFactory(cellData -> {
+            Registration registration = cellData.getValue();
+            return new SimpleStringProperty(registration.getStatus());
+        });
+    }
+
+    @FXML
+    private void onBackToList(ActionEvent event) {
+        Controller.getInstance().goTo(View.SEE_EVENT, currentevent);
+    }
+
+    @FXML
+    private void onDelete(ActionEvent event) {
+        ObservableList<Registration> selectedRegistration = table.getSelectionModel().getSelectedItems();
+        RegistrationDAO dao = DAOFactory.getInstance().createRegistrationDAO();
+        selectedRegistration.stream().forEach(dao::delete);
+        registrations.removeAll(selectedRegistration);
     }
 
     @Override
     public void onLoad(Object data) {
         DAOFactory factory = DAOFactory.getInstance();
         Integer eventId = (Integer) data;
-        Event event = factory.createEventDAO().getOne(eventId);
-        List<Consumer> participants = factory.createRegistrationDAO().findAllForEvent(event)
-                .stream()
-                .map(Registration::getConsumer)
-                .collect(Collectors.toList());
-        this.participants = FXCollections.observableArrayList(participants);
-        table.setItems(this.participants);
+        currentevent = factory.createEventDAO().getOne(eventId);
+        List<Registration> registrations = factory.createRegistrationDAO().findAllForEvent(currentevent);
+        this.registrations = FXCollections.observableArrayList(registrations);
+        table.setItems(this.registrations);
     }
 }

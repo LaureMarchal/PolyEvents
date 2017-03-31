@@ -13,6 +13,9 @@ import ui.Controller;
 import ui.OnInit;
 import ui.View;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -52,29 +55,6 @@ public class EventEditionController implements OnInit{
     @FXML
     private TextArea descriptionArea;
 
-    /**
-     * The field to write the duration
-     */
-    @FXML
-    private TextField durationField;
-
-    /**
-     * The picker to write the date
-     */
-    @FXML
-    private DatePicker datePicker;
-
-    /**
-     * The field to write the beginning time
-     */
-    @FXML
-    private TextField beginningTimeField;
-
-    /**
-     * The picker to write the deadline to register
-     */
-    @FXML
-    private DatePicker registerDeadlinePicker;
 
     /**
      * The field to write the number of places
@@ -93,12 +73,6 @@ public class EventEditionController implements OnInit{
      */
     @FXML
     private TextField delayPayementField;
-
-    /**
-     * The field to write the list of tags
-     */
-    @FXML
-    private TextField tagsField;
 
 
     /**
@@ -136,17 +110,7 @@ public class EventEditionController implements OnInit{
         } else{
             descript=this.currentEvent.getDescription();
         }
-        float duration;
-        if(durationField.getText()!=""){
-            try{
-                duration = Float.valueOf((String)durationField.getText());
-            }catch (NumberFormatException e){
-                System.out.println(e);
-                duration = 0;
-            }
-        } else{
-            duration=this.currentEvent.getDuration();
-        }
+        float duration=this.currentEvent.getDuration();
         int places;
         if(placesField.getText()!=""){
             places=Integer.parseInt(placesField.getText());
@@ -159,42 +123,14 @@ public class EventEditionController implements OnInit{
         } else{
             delayPayement=this.currentEvent.getDelayToPay();
         }
-        String date = "";
-        Date time;
         //verify fields fill or not
-        if(datePicker.toString()!= ""){
-            date = datePicker.toString();
-        } else{
-            date = this.currentEvent.getBeginningTime().toString();
-        }
-        if(beginningTimeField.getText()!=""){
-            date = date + beginningTimeField.getText();
-        } else {
-            date = date + this.currentEvent.getBeginningTime().toString();
-        }
-        time = new Date(date);
-        Date deadline;
-        if(registerDeadlinePicker.toString()!="") {
-            deadline = new Date(registerDeadlinePicker.toString());
-        } else {
-            deadline = this.currentEvent.getRegistrationDeadline();
-        }
+        Date time = this.currentEvent.getBeginningTime();
+        Date deadline = this.currentEvent.getRegistrationDeadline();
         Float price;
         if(priceField.getText()!=""){
             price = Float.valueOf(priceField.getText());
         } else{
             price = this.currentEvent.getPrice();
-        }
-        List<Tag> listTags = new ArrayList<>();
-        String[] tags;
-        if(tagsField.getText()!=""){
-            tags = tagsField.getText().split("#");
-            for (String t : tags ){
-                Tag tag = new Tag(t);
-                listTags.add(tag);
-            }
-        } else{
-            listTags=this.currentEvent.getTags();
         }
         String restriction = this.currentEvent.getConstraints();
         Provider provider = (Provider) Controller.getInstance().getUserLogged();
@@ -213,7 +149,6 @@ public class EventEditionController implements OnInit{
                 delayPayement,
                 "AVAILABLE",
                 provider);
-        event.setTags(listTags);
         EventFacade.getInstance().update(event);
     }
 

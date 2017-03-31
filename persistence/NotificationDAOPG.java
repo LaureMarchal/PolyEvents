@@ -66,9 +66,10 @@ public class NotificationDAOPG extends NotificationDAO {
             } else {
                 int notifID = id;
                 Boolean isRead = rs.getBoolean("isread");
-                User user = DAOFactory.getInstance().createUserDAO().read(rs.getString("userID"));
-                Notifiable content = null;
-                Notification notif = new Notification(notifID, isRead, user, null, 0, content);
+                User user = DAOFactory.getInstance().createUserDAO().read(rs.getString("userid"));
+                RelatedTo relatedTo = RelatedTo.EVENT;
+                Event event = DAOFactory.getInstance().createEventDAO().getOne(rs.getInt("relatedtoeventid"));
+                Notification notif = new Notification(notifID, isRead, user, relatedTo, event.getId(),event );
                 connection.close();
                 return notif;
             }
@@ -84,10 +85,11 @@ public class NotificationDAOPG extends NotificationDAO {
     public List<Notification> getAllForUser(User user) {
         List<Notification> notificationSearchResult = new ArrayList<Notification>();
         try{
-            String query = "SELECT id FROM Notification";
+            String query = "SELECT id FROM Notification WHERE userid=?";
             Connection connection = Connector.getInstance().getConnection();
-            Statement s = connection.createStatement();
-            ResultSet rs = s.executeQuery(query);
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, user.getPseudo());
+            ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 Notification notif = this.getOne(rs.getInt("id"));
                 notificationSearchResult.add(notif);

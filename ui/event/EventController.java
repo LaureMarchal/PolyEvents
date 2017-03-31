@@ -58,12 +58,6 @@ public class EventController implements OnLoad {
 
 
     /**
-     * The label for event's tags
-     */
-    @FXML
-    private Label tagsLabel;
-
-    /**
      * The label for event's number of Places Left
      */
     @FXML
@@ -167,7 +161,9 @@ public class EventController implements OnLoad {
      * On "Report" button click, go to the reportation interface
      */
     public void onReport() {
-
+        EventFacade.getInstance().read(this.currentEvent.getId());
+        EventFacade.getInstance().report(this.currentEvent);
+        AlertHelper.getInstance().showInfoAlert("Your report has been send to administrators");
     }
     /**
      * On "new" button click, go to the review interface
@@ -199,6 +195,7 @@ public class EventController implements OnLoad {
                         new Date(),
                         "WAITING_PAYMENT",
                         null));
+        AlertHelper.getInstance().showInfoAlert("Your registration has been saved");
 
     }
 

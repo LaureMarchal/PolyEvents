@@ -33,7 +33,6 @@
               <Button fx:id="cancelButton" layoutX="462.0" layoutY="40.0" mnemonicParsing="false" onAction="#onCancel" text="Cancel" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="40.0" />
             <Label fx:id="durationLabel" layoutX="14.0" layoutY="151.0" text="Duration" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="150.0" />
             <Label fx:id="conditionsLabel" layoutX="186.0" layoutY="150.0" text="Access Conditions" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="150.0" />
-            <Label fx:id="tagsLabel" layoutX="303.0" layoutY="150.0" text="#tag#" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="150.0" />
             <Separator layoutX="14.0" layoutY="178.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="175.0" />
             <Separator layoutX="399.0" layoutY="67.0" maxWidth="-Infinity" orientation="VERTICAL" prefHeight="200.0" prefWidth="1.0" AnchorPane.bottomAnchor="205.0" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="70.0">
                <opaqueInsets>

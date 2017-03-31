@@ -4,12 +4,16 @@ import bl.dao.EventReviewDAO;
 import bl.model.Consumer;
 import bl.model.Event;
 import bl.model.EventReview;
+import bl.model.Registration;
 import persistence.connector.Connector;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 /**
  * PostgreSQL DAO for the provider review model

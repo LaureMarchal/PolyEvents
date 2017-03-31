@@ -105,15 +105,15 @@ public class EventEditionController implements OnLoad {
         }
         float duration=this.currentEvent.getDuration();
         int places;
-        if(placesField.getText()!=""){
+        if(!placesField.getText().trim().isEmpty()){
             System.out.println("hey");
-            places=Integer.parseInt(placesField.getText());
+            places = Integer.valueOf(placesField.getText());
         } else{
             places=this.currentEvent.getPlacesNumber();
         }
         int delayPayement;
-        if(delayPayementField.getText()!=""){
-            delayPayement=Integer.parseInt(delayPayementField.getText());
+        if(!delayPayementField.getText().trim().isEmpty()){
+            delayPayement=Integer.valueOf(delayPayementField.getText());
         } else{
             delayPayement=this.currentEvent.getDelayToPay();
         }
@@ -121,7 +121,7 @@ public class EventEditionController implements OnLoad {
         Date time = this.currentEvent.getBeginningTime();
         Date deadline = this.currentEvent.getRegistrationDeadline();
         float price;
-        if(priceField.getText()!=""){
+        if(!priceField.getText().trim().isEmpty()){
             price = Float.valueOf(priceField.getText());
         } else{
             price = this.currentEvent.getPrice();
@@ -143,8 +143,9 @@ public class EventEditionController implements OnLoad {
                 this.currentEvent.getStatus(),
                 this.currentEvent.getProvider());
         EventFacade.getInstance().update(event);
+        this.currentEvent = event;
         AlertHelper.getInstance().showInfoAlert("Your changes have been saved");
-        Controller.getInstance().goTo(View.SEE_EVENT);
+        Controller.getInstance().goTo(View.SEE_EVENT, currentEvent);
     }
 
     @Override

@@ -68,19 +68,19 @@ public class EventDAOPG extends EventDAO {
     @Override
     public Event update(Event event) {
         try {
-            String query = "UPDATE event SET title = ? ," +
-                    "subTitle = ? ," +
-                    "place = ? ," +
-                    "description = ? ," +
-                    "beginningTime = ? ," +
-                    "registrationDeadline = ? ," +
-                    "duration = ? ," +
-                    "\"constraints\" = ? ," +
-                    "placesNumber = ? ," +
-                    "price = ? ," +
-                    "delayToPay = ? ," +
-                    "status = ? ," +
-                    "providerid = ? " +
+            String query = "UPDATE event SET title = ?," +
+                    "subtitle = ?," +
+                    "location = ?," +
+                    "description = ?," +
+                    "begining_time = ?," +
+                    "registration_deadline = ?," +
+                    "\"duration\" = ?," +
+                    "event_constraints = ?," +
+                    "max_number_of_places = ?," +
+                    "price = ?," +
+                    "delay_to_pay = ?," +
+                    "status = ?::Event_status," +
+                    "providerID = ? " +
                     "WHERE  id = ?";
             Connection connection = Connector.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(query);

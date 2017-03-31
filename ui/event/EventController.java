@@ -1,7 +1,5 @@
 package ui.event;
 
-import bl.facade.EventFacade;
-import bl.facade.NotificationFacade;
 import bl.facade.RegistrationFacade;
 import bl.model.Consumer;
 import bl.model.Event;
@@ -12,7 +10,6 @@ import javafx.scene.control.Label;
 import ui.Controller;
 import ui.OnLoad;
 import ui.View;
-import ui.helper.AlertHelper;
 
 import java.util.Date;
 import java.util.List;
@@ -179,9 +176,9 @@ public class EventController implements OnLoad {
         for (Registration registration : list){
 
         }
-        Notification notif = new Notification(false,);
+        /*Notification notif = new Notification(false);
         NotificationFacade.getInstance().create(notif);
-        AlertHelper.getInstance().showConfirmationDeleteAlert("Do you really want to delete this event ?",this.currentEvent);
+        AlertHelper.getInstance().showConfirmationDeleteAlert("Do you really want to delete this event ?",this.currentEvent);*/
     }
     /**
      * On "Report" button click, go to the reportation interface

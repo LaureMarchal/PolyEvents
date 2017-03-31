@@ -4,16 +4,12 @@ import bl.dao.EventReviewDAO;
 import bl.model.Consumer;
 import bl.model.Event;
 import bl.model.EventReview;
-import bl.model.Registration;
 import persistence.connector.Connector;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
 /**
  * PostgreSQL DAO for the provider review model
@@ -40,19 +36,22 @@ public class EventReviewDAOPG extends EventReviewDAO {
     }
 
     @Override
-    public EventReview getReviewByEventID(int eventID, String userID){
+    public EventReview getReviewByEventID(int eventID, String consumerID) {
 
         try {
-            String query = "SELECT * FROM Event_review WHERE consumerID = ? AND userID = ?";
+            String query = "SELECT * FROM event_review WHERE consumerID = ? AND eventID = ?";
             Connection connection = Connector.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, userID);
+            ps.setString(1, consumerID);
             ps.setInt(2, eventID);
-            ResultSet rs = ps.executeQuery(query);
-            String content = rs.getString("content");
-            int rate = rs.getInt("rate");
-            EventReview eventReview = new EventReview(content, rate);
-            return eventReview;
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                String content = rs.getString("content");
+                int rate = rs.getInt("rate");
+                EventReview eventReview = new EventReview(content, rate);
+                return eventReview;
+            } else
+                return null;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

@@ -6,7 +6,7 @@ import bl.model.Message;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import ui.Controller;
-import ui.OnInit;
+import ui.OnLoad;
 import ui.View;
 
 import java.util.Date;
@@ -14,7 +14,7 @@ import java.util.Date;
 /**
  * Controller for the event's message interface
  */
-public class MessageController implements OnInit{
+public class MessageController implements OnLoad {
 
     private Event currentEvent;
 
@@ -41,7 +41,7 @@ public class MessageController implements OnInit{
     }
 
     @Override
-    public void onInit(Object data) {
+    public void onLoad(Object data) {
         this.currentEvent = (Event) data;
     }
 }

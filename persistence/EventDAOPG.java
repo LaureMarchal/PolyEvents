@@ -18,7 +18,7 @@ public class EventDAOPG extends EventDAO {
     @Override
     public Event create(Event event) {
         try {
-            String query = "INSERT INTO \"Event\" (title,subtitle, location, description, begining_time, registration_deadline, duration, event_constraints, max_number_of_places, price, delay_to_pay, status, providerID) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String query = "INSERT INTO Event (title,subtitle, location, description, begining_time, registration_deadline, \"duration\", event_constraints, max_number_of_places, price, delay_to_pay, status, providerID) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
             Connection connection = Connector.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, event.getTitle());
@@ -35,9 +35,9 @@ public class EventDAOPG extends EventDAO {
             ps.setString(12, event.getStatus());
             ps.setString(13, event.getProvider().getPseudo());
             ps.execute();
-            String queryID = "SELECT id FROM Message WHERE id=LAST_INSERT_ID()";
-            PreparedStatement psID = connection.prepareStatement(queryID);
-            ResultSet rs = psID.executeQuery(queryID);
+            String queryID = "SELECT MAX(id) FROM Event ";
+            Statement s = connection.createStatement();
+            ResultSet rs = s.executeQuery(queryID);
             connection.close();
             event.setId(rs.getInt("id"));
             return event;
@@ -88,7 +88,7 @@ public class EventDAOPG extends EventDAO {
             ps.setString(4, event.getDescription());
             ps.setString(5, String.valueOf(event.getBeginningTime()));
             ps.setString(6, String.valueOf(event.getRegistrationDeadline()));
-            ps.setFloat(7, Float.valueOf(event.getDuration()));
+            ps.setFloat(7, event.getDuration());
             ps.setString(8, event.getConstraints());
             ps.setInt(9, event.getPlacesNumber());
             ps.setFloat(10, event.getPrice());

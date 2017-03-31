@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import ui.Controller;
 import ui.View;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -130,7 +131,10 @@ public class EventCreationController {
         LocalDateTime localDateTime = localDate.atTime(Integer.parseInt(beginningTimeHourField.getText()), Integer.parseInt(beginningTimeMinField.getText()));
         Date time = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
         //assign deadline registration
-        Date deadline = new Date(registerDeadlinePicker.toString());
+        //OLD : Date deadline = new Date(registerDeadlinePicker.toString());
+        LocalDate localDateDeadline = datePicker.getValue();
+        LocalDateTime localDateTimeDeadline = localDate.atTime(0, 0);
+        Date deadline = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
         //assign the price
         Float price = Float.valueOf(priceField.getText());
         //assign tag
@@ -164,9 +168,9 @@ public class EventCreationController {
                 deadline,
                 Float.valueOf(durationField.getText()),
                 restriction,
-                Integer.getInteger(placesField.getText()),
+                Integer.valueOf(placesField.getText()),
                 price,
-                Integer.getInteger(delayPayementField.getText()),
+                Integer.valueOf(delayPayementField.getText()),
                 "AVAILABLE",
                 provider);
         event.setTags(listTags);

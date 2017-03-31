@@ -3,27 +3,19 @@ package ui.event;
 import bl.facade.EventFacade;
 import bl.model.Event;
 import bl.model.Provider;
-import bl.model.Tag;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import ui.Controller;
-import ui.OnInit;
+import ui.OnLoad;
 import ui.View;
 import ui.helper.AlertHelper;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 /**
  * Controller for the event's edition interface
  */
-public class EventEditionController implements OnInit{
+public class EventEditionController implements OnLoad {
 
     /**
      * The event the provider wants to change
@@ -156,7 +148,7 @@ public class EventEditionController implements OnInit{
     }
 
     @Override
-    public void onInit(Object data) {
+    public void onLoad(Object data) {
         this.currentEvent = (Event) data;
     }
 }

@@ -10,9 +10,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import ui.Controller;
-import ui.OnInit;
+import ui.OnLoad;
 import ui.View;
-import ui.helper.AlertHelper;
 
 import java.util.Date;
 
@@ -20,7 +19,7 @@ import java.util.Date;
 /**
  * Controller for the event interface
  */
-public class EventController implements OnInit{
+public class EventController implements OnLoad {
 
     /**
      * The event to see
@@ -223,7 +222,7 @@ public class EventController implements OnInit{
     }
 
     @Override
-    public void onInit(Object data) {
+    public void onLoad(Object data) {
         this.currentEvent = (Event) data;
         //assign all the label
         this.titleLabel.setText(this.currentEvent.getTitle());

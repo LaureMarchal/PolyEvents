@@ -50,7 +50,7 @@
             </font>
         </Button>
         <ScrollBar layoutX="578.0" layoutY="102.0" orientation="VERTICAL" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="127.0" />
-        <TableView fx:id="eventsTable" layoutX="30.0" layoutY="88.0" maxHeight="-Infinity" prefHeight="230.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="127.0">
+        <TableView fx:id="eventsTable" layoutX="30.0" layoutY="88.0" maxHeight="-Infinity" onMouseClicked="#handleDetailClick" prefHeight="230.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="127.0">
             <columns>
                 <TableColumn fx:id="beginnigDateEvent" prefWidth="100.0" text="Beginnig Date" />
                 <TableColumn fx:id="titleEvent" prefWidth="200.0" text="Title of the event" />

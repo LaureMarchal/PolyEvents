@@ -132,6 +132,10 @@ public class EventListController {
         init();
     }
 
+    public void handleDetailClick() {
+        Controller.getInstance().goTo(View.SEE_EVENT, this.selectedEvent);
+    }
+
     public void init() {
         setEvents(EventFacade.getInstance().getAllEvent());
         initializeEventsTableView();

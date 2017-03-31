@@ -13,6 +13,7 @@ import ui.helper.AlertHelper;
 import java.util.Date;
 
 /**
+ * Written by Laure Marchal
  * Controller for the event's message interface
  */
 public class MessageController implements OnLoad {

@@ -14,6 +14,7 @@ import ui.View;
 import ui.helper.PropertyConverter;
 
 /**
+ * Written by Laure Marchal
  * Controller for the messages interface
  */
 public class MessagesListController implements OnLoad{

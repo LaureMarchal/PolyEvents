@@ -4,7 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by lauremarchal on 30/03/2017.
+ * Written by Laure Marchal
+ * Format date
  */
 public class DateHelper {
     private static DateHelper ourInstance = new DateHelper();

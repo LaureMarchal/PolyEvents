@@ -1,6 +1,6 @@
 package ui.event;
 /**
- * Created by Laure
+ * Written by Laure Marchal
  */
 import bl.facade.EventFacade;
 import bl.model.Event;

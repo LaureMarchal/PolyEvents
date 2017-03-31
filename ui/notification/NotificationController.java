@@ -12,6 +12,7 @@ import ui.View;
 import ui.helper.PropertyConverter;
 
 /**
+ * Written by Laure Marchal
  * Controller for the notification's list interface
  */
 public class NotificationController {

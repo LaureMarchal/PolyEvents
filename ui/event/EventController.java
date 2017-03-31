@@ -209,9 +209,7 @@ public class EventController implements OnInit{
      * On "Delete" button click, delete the event and go back to main view
      */
     public void onDelete() {
-        //Controller.getInstance().showInfoAlert("Do you really want to delete this event ?");
-        EventFacade.getInstance().delete(this.currentEvent);
-        Controller.getInstance().goTo(View.MAIN);
+        AlertHelper.getInstance().showConfirmationDeleteAlert("Do you really want to delete this event ?",this.currentEvent);
     }
     /**
      * On "Report" button click, go to the reportation interface

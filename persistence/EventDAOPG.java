@@ -18,15 +18,15 @@ public class EventDAOPG extends EventDAO {
     @Override
     public Event create(Event event) {
         try {
-            String query = "INSERT INTO Event (title,subtitle, location, description, begining_time, registration_deadline, \"duration\", event_constraints, max_number_of_places, price, delay_to_pay, status, providerID) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String query = "INSERT INTO Event (title,subtitle, location, description, begining_time, registration_deadline, \"duration\", event_constraints, max_number_of_places, price, delay_to_pay, status, providerID) VALUES (?,?,?,?,?,?,?,?,?,?,?,?::Event_status,?)";
             Connection connection = Connector.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, event.getTitle());
             ps.setString(2, event.getSubTitle());
             ps.setString(3, event.getPlace());
             ps.setString(4, event.getDescription());
-            ps.setTimestamp(5, new java.sql.Timestamp(event.getBeginningTime().getDate()));
-            ps.setTimestamp(6, new java.sql.Timestamp(event.getRegistrationDeadline().getDate()));
+            ps.setTimestamp(5, new java.sql.Timestamp(event.getBeginningTime().getTime()));
+            ps.setTimestamp(6, new java.sql.Timestamp(event.getRegistrationDeadline().getTime()));
             ps.setFloat(7, event.getDuration());
             ps.setString(8, event.getConstraints());
             ps.setInt(9, event.getPlacesNumber());
@@ -35,11 +35,13 @@ public class EventDAOPG extends EventDAO {
             ps.setString(12, event.getStatus());
             ps.setString(13, event.getProvider().getPseudo());
             ps.execute();
-            String queryID = "SELECT MAX(id) FROM Event ";
+
+            String queryID = "SELECT MAX(id) AS id FROM event ";
             Statement s = connection.createStatement();
             ResultSet rs = s.executeQuery(queryID);
-            connection.close();
+            rs.next();
             event.setId(rs.getInt("id"));
+            connection.close();
             return event;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -86,8 +88,8 @@ public class EventDAOPG extends EventDAO {
             ps.setString(2, event.getSubTitle());
             ps.setString(3, event.getPlace());
             ps.setString(4, event.getDescription());
-            ps.setString(5, String.valueOf(event.getBeginningTime()));
-            ps.setString(6, String.valueOf(event.getRegistrationDeadline()));
+            ps.setTimestamp(5, new java.sql.Timestamp(event.getBeginningTime().getTime()));
+            ps.setTimestamp(6, new java.sql.Timestamp(event.getRegistrationDeadline().getTime()));
             ps.setFloat(7, event.getDuration());
             ps.setString(8, event.getConstraints());
             ps.setInt(9, event.getPlacesNumber());

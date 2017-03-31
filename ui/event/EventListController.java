@@ -115,7 +115,7 @@ public class EventListController {
     }
 
     public void setEvents(List<Event> events) {
-        //this.eventsList = FXCollections.observableList(events);
+        this.eventsList = FXCollections.observableList(events);
 
     }
 
@@ -130,7 +130,7 @@ public class EventListController {
     }
 
     public void init() {
-        //setEvents(EventFacade.getInstance().getAllEvent());
+        setEvents(EventFacade.getInstance().getAllEvent());
         initializeEventsTableView();
     }
 

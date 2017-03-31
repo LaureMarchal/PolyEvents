@@ -65,28 +65,10 @@ public class NotificationDAOPG extends NotificationDAO {
                 return null;
             } else {
                 int notifID = id;
-                Boolean isRead = rs.getBoolean("isRead");
-                User user = DAOFactory.getInstance().createUserDAO().read(rs.getString("userID"));
-                int relatedTo;
-                switch (rs.getString("relatedTo")){
-                    case "MESSAGE":
-                        relatedTo = rs.getInt("relatedToMessageID");
-                        break;
-                    case "EVENT":
-                        relatedTo = rs.getInt("relatedToEventID");
-                        break;
-                    case "REGISTRATION":
-                        relatedTo = rs.getInt("relatedToEventID");
-                        break;
-                    case "PROVIDER_REVIEW":
-                        Notification notif = new Notification(notifID, isRead, user, null, 0, null);
-                        connection.close();
-                        return notif;
-                    case "EVENT_REVIEW":
-                        relatedTo = rs.getInt("relatedToEventID");
-                        break;
-                }
-                Notification notif = new Notification(notifID, isRead, user, null, 0, null);
+                Boolean isRead = rs.getBoolean("isread");
+                User user = DAOFactory.getInstance().createUserDAO().read(rs.getString("userid"));
+                Event event = DAOFactory.getInstance().createEventDAO().getOne(rs.getInt("relatedtoeventid"));
+                Notification notif = new Notification(notifID, isRead, user, RelatedTo.EVENT, event.getId(), event);
                 connection.close();
                 return notif;
             }
@@ -102,7 +84,7 @@ public class NotificationDAOPG extends NotificationDAO {
     public List<Notification> getAllForUser(User user) {
         List<Notification> notificationSearchResult = new ArrayList<Notification>();
         try{
-            String query = "SELECT id FROM Notification WHERE userID = ?";
+            String query = "SELECT id FROM Notification WHERE userid = ?";
             Connection connection = Connector.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, user.getPseudo());

@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Written by Théo Gauchoux
  * Controller for the provider interface
  */
 public class ProviderController implements OnLoad {

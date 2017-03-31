@@ -1,7 +1,7 @@
 package persistence.connector;
 
 /**
- * Created by Theo on 31/03/2017.
+ * Written by Théo Gauchoux
  */
 public enum DBMode {
     PROD,

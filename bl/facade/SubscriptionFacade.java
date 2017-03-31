@@ -4,6 +4,7 @@ import bl.model.ProviderSubscription;
 import bl.model.TagSubscription;
 
 /**
+ * Written by Théo Gauchoux
  * Entry point to the business behaviour about subscription
  */
 public class SubscriptionFacade {

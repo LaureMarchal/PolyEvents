@@ -8,6 +8,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Written by Théo Gauchoux
+ * Controller providing helpful methods to sub controllers
+ */
 public class Controller {
 
     private static final String APP_NAME = "PolyEvents";
@@ -16,7 +20,14 @@ public class Controller {
 
     private static Controller instance = new Controller();
 
+    /**
+     * The current stage of javafx
+     */
     private Stage stage;
+
+    /**
+     * The user currently logged
+     */
     private User userLogged;
 
     private Controller() {
@@ -26,11 +37,19 @@ public class Controller {
         return instance;
     }
 
+    /**
+     * Set a new stage
+     *
+     * @param stage
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
-
+    /**
+     * Go to a specific view
+     * @param view
+     */
     public void goTo(View view) {
         if (stage != null) {
             try {
@@ -45,6 +64,11 @@ public class Controller {
         }
     }
 
+    /**
+     * Go to a specific view and passing data
+     * @param view
+     * @param data
+     */
     public void goTo(View view, Object data) {
         if (stage != null) {
             try {
@@ -62,10 +86,18 @@ public class Controller {
         }
     }
 
+    /**
+     * Retrieve the user logged
+     * @return User
+     */
     public User getUserLogged() {
         return userLogged;
     }
 
+    /**
+     * Set a logged user
+     * @param userLogged
+     */
     public void setUserLogged(User userLogged) {
         this.userLogged = userLogged;
     }

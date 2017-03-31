@@ -1,6 +1,7 @@
 package bl.exception;
 
 /**
+ * Written by Théo Gauchoux
  * Define a login exception
  */
 public class UserException extends Exception {

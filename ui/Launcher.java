@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 /**
+ * Written by Théo Gauchoux
  * Launcher for the PolyEvents application
  */
 public class Launcher extends Application {

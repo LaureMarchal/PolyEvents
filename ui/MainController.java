@@ -2,6 +2,7 @@ package ui;
 
 
 /**
+ * Written by Théo Gauchoux
  * Controller for the main interface
  */
 public class MainController {

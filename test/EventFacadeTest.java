@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Created by Théo Gauchoux on 31/03/2017.
+ * Created by Tom on 31/03/2017.
  */
 class EventFacadeTest {
 

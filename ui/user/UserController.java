@@ -13,6 +13,7 @@ import ui.Controller;
 import ui.helper.AlertHelper;
 
 /**
+ * Written by Théo Gauchoux
  * Controller for the user interface
  */
 public class UserController {

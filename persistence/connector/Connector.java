@@ -3,6 +3,7 @@ package persistence.connector;
 import java.sql.Connection;
 
 /**
+ * Written by Théo Gauchoux
  * An abstract connector to a database
  */
 public abstract class Connector {

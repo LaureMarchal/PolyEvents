@@ -11,6 +11,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import ui.Controller;
 import ui.View;
+import ui.helper.AlertHelper;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -98,11 +99,6 @@ public class EventCreationController {
     @FXML
     private TextField delayPayementField;
 
-    /**
-     * The field to write the list of tags
-     */
-    @FXML
-    private TextField tagsField;
 
     /**
      * The Box to write the restriction on students
@@ -131,20 +127,11 @@ public class EventCreationController {
         LocalDateTime localDateTime = localDate.atTime(Integer.parseInt(beginningTimeHourField.getText()), Integer.parseInt(beginningTimeMinField.getText()));
         Date time = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
         //assign deadline registration
-        //OLD : Date deadline = new Date(registerDeadlinePicker.toString());
-        LocalDate localDateDeadline = datePicker.getValue();
+        LocalDate localDateDeadline = registerDeadlinePicker.getValue();
         LocalDateTime localDateTimeDeadline = localDate.atTime(0, 0);
         Date deadline = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
         //assign the price
         Float price = Float.valueOf(priceField.getText());
-        //assign tag
-        List<Tag> listTags = new ArrayList<>();
-        //TODO split not ok be careful about spaces
-        String[] tags = tagsField.getText().split("#");
-        for (String t : tags ){
-            Tag tag = new Tag(t);
-            listTags.add(tag);
-        }
         //assign eventcontraints
         String restriction = "";
         if (studentsRestrictionBox.isSelected()){
@@ -173,8 +160,9 @@ public class EventCreationController {
                 Integer.valueOf(delayPayementField.getText()),
                 "AVAILABLE",
                 provider);
-        event.setTags(listTags);
         EventFacade.getInstance().create(event);
+        AlertHelper.getInstance().showInfoAlert("Your event has been saved");
+        Controller.getInstance().goTo(View.MAIN);
     }
 
     /**

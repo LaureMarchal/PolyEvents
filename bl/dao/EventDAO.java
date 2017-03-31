@@ -1,8 +1,9 @@
 package bl.dao;
-
+/**
+ * Created by Tom on 31/03/2017.
+ */
 import bl.model.Event;
 import bl.model.Tag;
-
 import java.util.List;
 
 public abstract class EventDAO {

@@ -137,13 +137,6 @@ class EventFacadeTest {
                 new java.util.Date(),
                 1.5f,
                 "Restriction",
-                100,
-                15.0f,
-                0,
-                "AVAILABLE",
-                provider);
-        eventTest = EventFacade.getInstance().create(test);
-        boolean deleted = EventFacade.getInstance().delete(eventTest);
-        Assertions.assertTrue(deleted);
+                10 ;
     }
 }

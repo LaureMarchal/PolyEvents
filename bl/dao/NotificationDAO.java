@@ -1,5 +1,7 @@
 package bl.dao;
-
+/**
+ * Created by Tom
+ */
 import bl.model.Notification;
 import bl.model.User;
 

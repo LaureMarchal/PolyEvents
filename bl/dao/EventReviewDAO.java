@@ -1,5 +1,7 @@
 package bl.dao;
-
+/**
+ * Created by Tom
+ */
 import bl.model.Consumer;
 import bl.model.Event;
 import bl.model.EventReview;

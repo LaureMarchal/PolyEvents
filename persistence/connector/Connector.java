@@ -12,10 +12,13 @@ public abstract class Connector {
      */
     private static Connector instance;
 
+    protected DBMode dbmode;
+
     /**
      * Empty constructor for singleton
      */
     protected Connector() {
+        this.dbmode = DBMode.PROD;
     }
 
     /**
@@ -37,4 +40,7 @@ public abstract class Connector {
      */
     public abstract Connection getConnection();
 
+    public void setDBMde(DBMode dbmode) {
+        this.dbmode = dbmode;
+    }
 }

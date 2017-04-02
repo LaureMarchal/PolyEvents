@@ -32,6 +32,10 @@ public class NotificationFacade {
 
     }
 
+    public Notification update(Notification notification){
+        return DAOFactory.getInstance().createNotificationDAO().updateRead(notification,true);
+    }
+
     public Notification create(Notification notif) {
         Notification potentialNotification = DAOFactory.getInstance().createNotificationDAO().createEventNotification(notif);
         return potentialNotification;

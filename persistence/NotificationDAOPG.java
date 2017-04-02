@@ -32,21 +32,33 @@ public class NotificationDAOPG extends NotificationDAO {
     }
 
     @Override
+    public boolean delete(Notification notification) {
+        try {
+            String query = "DELETE FROM notification WHERE userid = ? AND relatedtoeventid = ?";
+            Connection connection = Connector.getInstance().getConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, notification.getTarget().getPseudo());
+            Event event = (Event) notification.getContent();
+            ps.setInt(2, event.getId());
+            ps.execute();
+            connection.close();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
     public Notification updateRead(Notification notification, Boolean read) {
         try {
-            String query = "UPDATE Notification SET isRead = ?";
+            String query = "UPDATE Notification SET isRead = ? WHERE id =?";
             Connection connection = Connector.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setBoolean(1, read);
+            ps.setInt(2,notification.getId());
             ps.execute();
             connection.close();
-
-            // fetch back the last inserted ID to complete de notification Object.
-            String queryID = "SELECT id FROM Notification WHERE id=LAST_INSERT_ID()";
-            PreparedStatement psID = connection.prepareStatement(queryID);
-            ResultSet rs = psID.executeQuery(queryID);
-            connection.close();
-            notification.setId(rs.getInt("id"));
             return notification;
         } catch (SQLException e) {
             e.printStackTrace();

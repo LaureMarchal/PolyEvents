@@ -13,6 +13,8 @@ public abstract class NotificationDAO {
 
     public abstract Notification createEventNotification(Notification notification);
 
+    public abstract boolean delete(Notification notification);
+
     public abstract Notification updateRead(Notification notification, Boolean read);
 
     public abstract List<Notification> getAllForUser(User user);

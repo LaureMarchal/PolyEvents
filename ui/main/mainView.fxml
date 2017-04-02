@@ -6,13 +6,13 @@
 <?import javafx.scene.text.Font?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity" prefHeight="650" prefWidth="800" xmlns="http://javafx.com/javafx/8.0.111"
-            fx:controller="ui.MainController">
+            fx:controller="ui.main.MainController">
     <center>
         <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
             <tabs>
                 <Tab text="Events">
                     <content>
-                        <fx:include fx:id="eventsTab" source="event/eventListView.fxml" />
+                        <fx:include fx:id="eventsTab" source="../event/eventListView.fxml"/>
                     </content>
                 </Tab>
                 <Tab text="Providers">
@@ -22,12 +22,12 @@
                 </Tab>
                 <Tab text="Notifications">
                     <content>
-                        <fx:include fx:id="notificationsTab" source="notification/notificationsView.fxml" />
+                        <fx:include fx:id="notificationsTab" source="../notification/notificationsView.fxml"/>
                     </content>
                 </Tab>
                 <Tab text="Profile">
                     <content>
-                        <fx:include fx:id="profileTab" source="user/userView.fxml" />
+                        <fx:include fx:id="profileTab" source="../user/userView.fxml"/>
                     </content>
                 </Tab>
             </tabs>

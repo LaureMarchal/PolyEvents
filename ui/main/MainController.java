@@ -1,5 +1,8 @@
-package ui;
+package ui.main;
 
+
+import ui.Controller;
+import ui.View;
 
 /**
  * Written by Théo Gauchoux
